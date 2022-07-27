@@ -6,12 +6,6 @@
       ".ts",
       ".tsx"
     ],
-    "import/parser": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
-    },
     "import/resolver": {
       "node": {
         "extensions": [
@@ -33,7 +27,6 @@
     "plugin:storybook/recommended",
     "airbnb"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -43,11 +36,11 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
     "jest"
   ],
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off",
     "react/function-component-definition": [
       2,
       {
