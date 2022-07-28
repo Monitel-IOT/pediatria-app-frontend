@@ -25,6 +25,7 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:storybook/recommended",
+    "plugin:cypress/recommended",
     "airbnb"
   ],
   "parserOptions": {
@@ -36,7 +37,8 @@
   },
   "plugins": [
     "react",
-    "jest"
+    "jest",
+    "cypress"
   ],
   "rules": {
     "react/jsx-props-no-spreading": "off",
