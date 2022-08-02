@@ -2,11 +2,15 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import store from '../state/store';
 
 const RootWrapper = ({ children }) => (
-  <Router>
-    {children}
-  </Router>
+  <Provider store={store}>
+    <Router>
+      {children}
+    </Router>
+  </Provider>
 );
 
 RootWrapper.propTypes = {
