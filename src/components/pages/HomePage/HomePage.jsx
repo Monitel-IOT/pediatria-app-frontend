@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/rickAndMortyThunk';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const rickAndMorty = useSelector((state) => state.charactersRickAndMortyReducer);
+  // const rickAndMorty = useSelector((state) => state.charactersRickAndMortyReducer);
   // const loading = useSelector((state) => state.charactersRickAndMortyReducer.loading);
 
-  console.log('characters', rickAndMorty.results);
+  // console.log('characters', rickAndMorty.results);
 
   useEffect(() => {
     dispatch(getCharactersRickAndMorty());
