@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/rickAndMortyThunk';
+import Button from '../../UI/atoms/Button/Button';
+import IconButton from '../../UI/atoms/IconButton/IconButton';
+// import { ReactComponent as Trash } from '../../../assets/svg/Trash.svg';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,12 +20,24 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Gestion Clinica</h1>
-      <ul>
-        <li>
-          <NavLink to="login">Go to Login</NavLink>
-        </li>
-      </ul>
+      <h1 className="text-primary">Button</h1>
+      <Button
+        disabled
+        iconLeft={<FontAwesomeIcon icon={faTrashCan} />}
+        onClick={() => console.log('Removing...')}
+      >
+        Remove
+      </Button>
+      <br />
+      <br />
+      <hr />
+      <h2>IconButton</h2>
+      <IconButton
+        outline="danger"
+        icon={<FontAwesomeIcon icon={faTrashCan} />}
+        onClick={() => console.log('Removing...')}
+      />
+      <IconButton outline="blue" icon={<FontAwesomeIcon icon={faPaperPlane} />} />
     </div>
   );
 };

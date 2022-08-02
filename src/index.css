@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 255 115 179;
+    --color-secondary: 111 114 185;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply bg-cyan-500 text-white text-sm rounded-full font-bold hover:bg-cyan-600 hover:opacity-80;
+  }
+  .btn-outline {
+    @apply bg-white text-gray-600 text-sm rounded-full font-bold border border-gray-600 hover:opacity-80;
+  }
+  .btn-outline-blue {
+    @apply text-cyan-600 border-cyan-600;
+  }
+  .btn-outline-danger {
+    @apply bg-white text-rose-600 text-sm rounded-full font-bold border border-rose-600 hover:opacity-80;
+  }
+}
