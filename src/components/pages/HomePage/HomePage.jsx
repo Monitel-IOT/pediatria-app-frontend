@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/rickAndMortyThunk';
 
 const HomePage = () => {
@@ -16,6 +17,11 @@ const HomePage = () => {
   return (
     <div>
       <h1>Gestion Clinica</h1>
+      <ul>
+        <li>
+          <NavLink to="login">Go to Login</NavLink>
+        </li>
+      </ul>
     </div>
   );
 };
