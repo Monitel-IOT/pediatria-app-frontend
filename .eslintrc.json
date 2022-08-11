@@ -42,6 +42,7 @@
   ],
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "linebreak-style": "off",
     "import/no-extraneous-dependencies": "off",
     "react/function-component-definition": [
       2,
