@@ -48,7 +48,7 @@ const HomePage = () => {
       </div>
       <div className="p-5">
         <h2>FormInput Component</h2>
-        <FormInput label="Name" type="text" placeholder="Name..." />
+        <FormInput label="Name" type="text" placeholder="Name..." id="mi" />
         <FormInput label="Password" type="password" placeholder="Password..." />
         <FormInput label="Email" type="email" placeholder="Email..." />
         <Stack horizontal="right">

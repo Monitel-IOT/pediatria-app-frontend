@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Label = ({ children, htmlFor, ...props }) => (
-  <label htmlFor={htmlFor} {...props} className="text-sm font-bold mb-2">{children}</label>
+  <label htmlFor={htmlFor} {...props} className="text-base font-bold mb-2">{children}</label>
 );
 
 Label.propTypes = {

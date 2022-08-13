@@ -3,18 +3,17 @@ import Header from '../../UI/molecules/Header';
 import FormInput from '../../UI/molecules/FormInput';
 import Stack from '../../UI/organisms/Stack/Stack';
 import Button from '../../UI/atoms/Button/Button';
-import RouteLink from '../../UI/atoms/RouteLink/RouteLink';
 import FormContainer from '../../UI/organisms/FormContainer/FormContainer';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const headerMoleculeObj = {
     title: {
-      text: 'Its great to see you!',
+      text: 'Create your account',
       size: '2xl',
       color: 'grey-main',
     },
     subtitle: {
-      text: 'Login here',
+      text: 'Lets roll!',
       size: 'base',
       color: 'blue-main',
     },
@@ -24,12 +23,13 @@ const LoginPage = () => {
       <div className="w-full pt-6 md:w-1/2 xl:w-1/3">
         <Header {...headerMoleculeObj} />
         <FormContainer action="#">
+          <FormInput label="Nombres" type="text" placeholder="John" />
+          <FormInput label="Apellidos" type="text" placeholder="Doe" />
           <FormInput label="Email" type="email" placeholder="example@example.com" />
           <FormInput label="Contraseña" type="password" placeholder="Contraseña" />
-          <RouteLink to="/forgotPassword">¿Olvidaste tu contraseña?</RouteLink>
           <Stack horizontal="right">
             <Button primary>
-              Iniciar Sesión
+              Registarse
             </Button>
           </Stack>
         </FormContainer>
@@ -38,4 +38,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
