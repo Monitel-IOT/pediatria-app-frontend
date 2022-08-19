@@ -7,7 +7,7 @@ const FormInput = ({
   label, placeholder, type, ...props
 }) => (
   <div {...props} className="flex flex-col mb-5">
-    <Label htmlFor={label}>{label}</Label>
+    <Label htmlFor={label} className="mb-2">{label}</Label>
     <Input id={label} placeholder={placeholder} type={type} />
   </div>
 );

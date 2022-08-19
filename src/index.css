@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-family: Roboto, sans-serif;
+  }
   :root {
     --color-primary: 255 115 179;
     --color-secondary: 111 114 185;
