@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/rickAndMortyThunk';
 import Button from '../../UI/atoms/Button/Button';
 import IconButton from '../../UI/atoms/IconButton/IconButton';
@@ -24,7 +25,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       <div className="p-5">
         <h1 className="text-primary">Button Component</h1>
         <Button
@@ -58,9 +59,14 @@ const HomePage = () => {
           </Button>
         </Stack>
       </div>
-      <div>
-        <Link to="/login">Login</Link>
-        <Link to="/registro">Register</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/registro">Register</Link>
+      <div className="p-5">
+        <ul>
+          <li>
+            <NavLink to="nuevo-paciente" className="underline underline-offset-1 text-blue-500">Go to Nuevo paciente</NavLink>
+          </li>
+        </ul>
       </div>
     </div>
   );
