@@ -61,6 +61,12 @@ const HomePage = () => {
       <div className="p-5">
         <ul>
           <li>
+            <NavLink to="login" className="underline underline-offset-1 text-blue-500">Go to Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="registro" className="underline underline-offset-1 text-blue-500">Go to Register</NavLink>
+          </li>
+          <li>
             <NavLink to="nuevo-paciente" className="underline underline-offset-1 text-blue-500">Go to Nuevo paciente</NavLink>
           </li>
         </ul>
