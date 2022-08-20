@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -56,6 +57,10 @@ const HomePage = () => {
             Register
           </Button>
         </Stack>
+      </div>
+      <div>
+        <Link to="/login">Login</Link>
+        <Link to="/registro">Register</Link>
       </div>
     </div>
   );
