@@ -6,7 +6,7 @@ const Button = ({
   children, iconLeft, iconRigth, outline, primary, danger, disabled, uppercase, ...props
 }) => {
   const [styles] = useButtonStyle({
-    primary, outline, danger, disabled, uppercase,
+    primary, outline, danger, disabled, uppercase, ...props,
   });
 
   if (!children) {
@@ -31,6 +31,7 @@ Button.propTypes = {
   danger: PropTypes.bool,
   disabled: PropTypes.bool,
   uppercase: PropTypes.bool,
+  size: PropTypes.string,
 };
 
 export default Button;
