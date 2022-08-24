@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import Input from '../../UI/atoms/Input/Input';
 import Label from '../../UI/atoms/Label/Label';
 import FormInput from '../../UI/molecules/FormInput';
 import Stack from '../../UI/organisms/Stack/Stack';
+import Pager from '../../UI/molecules/Pager/Pager';
 // import { ReactComponent as Trash } from '../../../assets/svg/Trash.svg';
 
 const HomePage = () => {
@@ -17,11 +18,17 @@ const HomePage = () => {
   // const rickAndMorty = useSelector((state) => state.charactersRickAndMortyReducer);
   // const loading = useSelector((state) => state.charactersRickAndMortyReducer.loading);
 
+  const [pageIndex, setPageIndex] = useState(0);
+
   // console.log('characters', rickAndMorty.results);
 
   useEffect(() => {
     dispatch(getCharactersRickAndMorty());
   }, []);
+
+  const changeIndex = (page) => {
+    setPageIndex(page - 1);
+  };
 
   return (
     <div className="flex flex-wrap">
@@ -70,6 +77,9 @@ const HomePage = () => {
             <NavLink to="nuevo-paciente" className="underline underline-offset-1 text-blue-500">Go to Nuevo paciente</NavLink>
           </li>
         </ul>
+      </div>
+      <div className="p-5">
+        <Pager maxPages={6} index={pageIndex} onChange={changeIndex} />
       </div>
     </div>
   );
