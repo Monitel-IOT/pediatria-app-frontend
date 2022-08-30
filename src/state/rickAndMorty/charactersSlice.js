@@ -1,12 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { getCharactersRickAndMorty } from '../../thunkAction/rickAndMorty/rickAndMortyThunk';
+import { sortLists, flatByPages } from '../../utils';
 
 const initialState = {
   loading: false,
   error: null,
   info: null,
+  toggleSort: true,
+  page: 0,
   results: [],
+  sortedResults: [],
   resultsByPage: [],
 };
 
@@ -14,24 +18,15 @@ const charactersSlice = createSlice({
   name: 'rickAndMorty',
   initialState,
   reducers: {
-    getByPages: (state, action) => {
-      if (action.payload.cutIndex) {
-        const { cutIndex } = action.payload;
-        const pages = [];
-        let page = [];
-        state.results.forEach((v, i) => {
-          if (i === 0 || i % cutIndex !== 0) {
-            page.push(v);
-          } else {
-            pages.push([...page]);
-            page = [v];
-          }
-        });
-        if (page.length > 1) {
-          pages.push([...page]);
-        }
-        state.resultsByPage = pages;
-      }
+    orderById: (state) => {
+      const sortedResults = sortLists('id', state.results, state.toggleSort);
+      const pages = flatByPages(sortedResults, 5);
+      state.toggleSort = !state.toggleSort;
+      state.sortedResults = sortedResults;
+      state.resultsByPage = pages;
+    },
+    changePage: (state, action) => {
+      state.page = action.payload - 1;
     },
     initialState: () => initialState,
   },
@@ -42,6 +37,8 @@ const charactersSlice = createSlice({
     builder.addCase(getCharactersRickAndMorty.fulfilled, (state, action) => {
       state.info = action.payload.info;
       state.results = action.payload.results;
+      state.sortedResults = action.payload.results;
+      state.resultsByPage = flatByPages(action.payload.results, 5);
       state.loading = false;
     });
     builder.addCase(getCharactersRickAndMorty.rejected, (state) => {
@@ -51,5 +48,5 @@ const charactersSlice = createSlice({
   },
 });
 
-export const { getByPages } = charactersSlice.actions;
+export const { orderById, changePage } = charactersSlice.actions;
 export default charactersSlice.reducer;
