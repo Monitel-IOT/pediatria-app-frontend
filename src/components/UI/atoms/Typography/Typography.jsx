@@ -9,11 +9,39 @@ const Typography = ({ children, component, ...props }) => {
       </h1>
     );
   }
+  if (component === 'h2') {
+    return (
+      <h3 className={`text-2xl font-bold ${props.className}`}>
+        {children}
+      </h3>
+    );
+  }
   if (component === 'h3') {
     return (
       <h3 className={`text-xl font-bold ${props.className}`}>
         {children}
       </h3>
+    );
+  }
+  if (component === 'h4') {
+    return (
+      <h4 className={`text-l font-bold ${props.className}`}>
+        {children}
+      </h4>
+    );
+  }
+  if (component === 'h5') {
+    return (
+      <h5 className={`text-sm font-bold ${props.className}`}>
+        {children}
+      </h5>
+    );
+  }
+  if (component === 'p') {
+    return (
+      <p className={`${props.className}`}>
+        {children}
+      </p>
     );
   }
   return (
