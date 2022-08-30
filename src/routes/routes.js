@@ -4,6 +4,7 @@ const routes = {
   register: '/registro',
   forgotPassword: '/recuperarContraseña',
   dashboard: '/dashboard',
+  searchPatient: '/searchPatient',
   newPatient: '/nuevo-paciente',
   viewPatient: '/paciente/:id',
   newAtention: '/nueva-atencion',

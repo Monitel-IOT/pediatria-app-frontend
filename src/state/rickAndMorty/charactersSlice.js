@@ -6,13 +6,33 @@ const initialState = {
   loading: false,
   error: null,
   info: null,
-  results: null,
+  results: [],
+  resultsByPage: [],
 };
 
 const charactersSlice = createSlice({
   name: 'rickAndMorty',
   initialState,
   reducers: {
+    getByPages: (state, action) => {
+      if (action.payload.cutIndex) {
+        const { cutIndex } = action.payload;
+        const pages = [];
+        let page = [];
+        state.results.forEach((v, i) => {
+          if (i === 0 || i % cutIndex !== 0) {
+            page.push(v);
+          } else {
+            pages.push([...page]);
+            page = [v];
+          }
+        });
+        if (page.length > 1) {
+          pages.push([...page]);
+        }
+        state.resultsByPage = pages;
+      }
+    },
     initialState: () => initialState,
   },
   extraReducers: (builder) => {
@@ -31,4 +51,5 @@ const charactersSlice = createSlice({
   },
 });
 
+export const { getByPages } = charactersSlice.actions;
 export default charactersSlice.reducer;

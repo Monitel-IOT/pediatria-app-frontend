@@ -76,6 +76,9 @@ const HomePage = () => {
           <li>
             <NavLink to="nuevo-paciente" className="underline underline-offset-1 text-blue-500">Go to Nuevo paciente</NavLink>
           </li>
+          <li>
+            <NavLink to="searchPatient" className="underline underline-offset-1 text-blue-500">Go to Buscar Paciente</NavLink>
+          </li>
         </ul>
       </div>
       <div className="p-5">

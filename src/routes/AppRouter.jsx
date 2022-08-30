@@ -15,6 +15,7 @@ import NewAtentionPage from '../components/pages/NewAtentionPage/NewAtentionPage
 import ViewAtentionPage from '../components/pages/ViewAtentionPage/ViewAtentionPage';
 import ViewProfilePage from '../components/pages/ViewProfilePage/ViewProfilePage';
 import EditProfilePage from '../components/pages/EditProfilePage/EditProfilePage';
+import SearchPatientPage from '../components/pages/SearchPatientPage/SearchPatientPage';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ const AppRouter = () => (
       <Route path={routes.home} element={<HomePage />} />
       <Route path={routes.login} element={<LoginPage />} />
       <Route path={routes.register} element={<RegisterPage />} />
+      <Route path={routes.searchPatient} element={<SearchPatientPage />} />
       <Route element={<PrivateRoutes />}>
         <Route path={routes.dashboard} element={<DashboardPage />} />
         <Route path={routes.newPatient} element={<NewPatientPage />} />

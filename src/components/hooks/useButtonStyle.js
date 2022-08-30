@@ -52,7 +52,7 @@ const useButtonStyle = ({
       main: handleStyle(),
       uppercase: handleUppercase(),
     });
-  }, [primary, outline, danger, disabled, uppercase, props]);
+  }, [primary, outline, danger, disabled, uppercase, props.size]);
 
   return [styles];
 };

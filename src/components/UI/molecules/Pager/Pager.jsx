@@ -6,12 +6,15 @@ import Button from '../../atoms/Button/Button';
 
 const Pager = ({ size, ...props }) => {
   const page = props.index + 1;
+
   const previousPage = () => {
     if (page > 1) props.onChange(page - 1);
   };
+
   const nextPage = () => {
     if (page < props.maxPages) props.onChange(page + 1);
   };
+
   const renderPagesIcons = () => {
     if (props.maxPages > 5) {
       return (
@@ -49,13 +52,15 @@ const Pager = ({ size, ...props }) => {
     const items = [];
     for (let i = 0; i < props.maxPages; i += 1) {
       items.push(
-        <span
+        <Button
+          outline={!(i === props.index)}
           key={i}
           onClick={() => props.onChange(i + 1)}
           className={i === props.index && 'active'}
+          primary={i === props.index}
         >
           {i + 1}
-        </span>,
+        </Button>,
       );
     }
     return items;
