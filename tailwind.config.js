@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'], /* Parrafos y texto interno */
+        poppins: ['Poppins', 'sans-serif'],
         calibre: ['sans-serif', 'Calibre'], /* General, titulos y subtitulos */
       },
       colors: {
