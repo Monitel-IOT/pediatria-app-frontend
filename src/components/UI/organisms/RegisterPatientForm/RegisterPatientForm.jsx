@@ -8,7 +8,9 @@ import Typography from '../../atoms/Typography/Typography';
 
 const RegisterPatientForm = () => (
   <div className="max-w-prose">
-    <Typography component="h1">Registro Paciente</Typography>
+    <Typography component="h1">
+      Registro Paciente
+    </Typography>
     <Card className="mt-4">
       <form action="">
         <FormInput label="Dni/Codigo" type="text" />

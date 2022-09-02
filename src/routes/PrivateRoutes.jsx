@@ -1,11 +1,17 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Navigate } from 'react-router-dom';
+import Auth from '../utils/auth';
 
-const PrivateRoutes = () => {
-  const auth = true;
-  // Posteriormente se obtendrá el valor real por ahora solo es true
-  return (
-    auth ? <Outlet /> : <Navigate to="/" />
-  );
+const PrivateRoutes = ({ children }) => {
+  if (Auth.isLogin()) {
+    return children;
+  }
+
+  return <Navigate to="/login" />;
+};
+
+PrivateRoutes.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 export default PrivateRoutes;

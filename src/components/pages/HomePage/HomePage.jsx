@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { signOut } from '../../../thunkAction/auth/authThunk';
 import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/rickAndMortyThunk';
+import Auth from '../../../utils/auth';
 import Button from '../../UI/atoms/Button/Button';
-import IconButton from '../../UI/atoms/IconButton/IconButton';
-import Input from '../../UI/atoms/Input/Input';
-import Label from '../../UI/atoms/Label/Label';
-import FormInput from '../../UI/molecules/FormInput';
-import Stack from '../../UI/organisms/Stack/Stack';
-import Pager from '../../UI/molecules/Pager/Pager';
+import Typography from '../../UI/atoms/Typography/Typography';
 // import { ReactComponent as Trash } from '../../../assets/svg/Trash.svg';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const rickAndMorty = useSelector((state) => state.charactersRickAndMortyReducer);
-  // const loading = useSelector((state) => state.charactersRickAndMortyReducer.loading);
-
-  const [pageIndex, setPageIndex] = useState(0);
+  // const error = useSelector((state) => state.authReducer.error);
 
   // console.log('characters', rickAndMorty.results);
+
+  const handleSignOut = async () => {
+    await dispatch(signOut());
+    navigate('/login');
+    Auth.deleteSession();
+  };
 
   useEffect(() => {
     dispatch(getCharactersRickAndMorty());
   }, []);
 
-  const changeIndex = (page) => {
-    setPageIndex(page - 1);
-  };
-
   return (
-    <div className="flex flex-wrap">
-      <div className="p-5">
+    <div>
+      {/* <div className="p-5">
         <h1 className="text-primary">Button Component</h1>
         <Button
           disabled
@@ -66,6 +62,19 @@ const HomePage = () => {
         </Stack>
       </div>
       <div className="p-5">
+        <Pager maxPages={6} index={pageIndex} onChange={changeIndex} />
+  </div> */}
+      <div className="flex flex-wrap p-4">
+        <Typography component="h1">
+          Hello,
+          {' '}
+          {Auth.getSession().email}
+        </Typography>
+        <div className="ml-auto">
+          <Button primary onClick={handleSignOut}>Cerrar Sesion</Button>
+        </div>
+      </div>
+      <div className="p-5">
         <ul>
           <li>
             <NavLink to="login" className="underline underline-offset-1 text-blue-500">Go to Login</NavLink>
@@ -80,9 +89,6 @@ const HomePage = () => {
             <NavLink to="searchPatient" className="underline underline-offset-1 text-blue-500">Go to Buscar Paciente</NavLink>
           </li>
         </ul>
-      </div>
-      <div className="p-5">
-        <Pager maxPages={6} index={pageIndex} onChange={changeIndex} />
       </div>
     </div>
   );
