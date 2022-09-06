@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-
 import Td from '../../atoms/Td/Td';
+import IconButton from '../../atoms/IconButton/IconButton';
 
 const TableBodyList = ({ data }) => (
   <tbody>
@@ -12,8 +12,8 @@ const TableBodyList = ({ data }) => (
         {Object.entries(row).map(([key, value]) => (
           <Td key={key}>{value}</Td>
         ))}
-        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><FontAwesomeIcon icon={faCircleInfo} size="xl" /></td>
-        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><FontAwesomeIcon icon={faTrash} size="xl" /></td>
+        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><IconButton outline="blue" icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />} /></td>
+        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><IconButton outline="danger" icon={<FontAwesomeIcon size="lg" icon={faTrash} />} /></td>
       </tr>
     ))}
   </tbody>

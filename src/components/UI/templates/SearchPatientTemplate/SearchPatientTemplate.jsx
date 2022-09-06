@@ -14,7 +14,7 @@ const data = {
     {
       dni: '6',
       nombre: 't',
-      apellidos: '3 años',
+      apellidos: 'suarez',
       fechaNacimiento: '14/05/20',
     },
     {
@@ -24,15 +24,15 @@ const data = {
       fechaNacimiento: '14/05/22',
     },
     {
-      dni: 'p',
+      dni: '11123',
       nombre: 'eeeeeee',
-      apellidos: '2 años',
+      apellidos: 'perez',
       fechaNacimiento: '14/05/96',
     },
     {
       dni: '1111',
       nombre: '1t',
-      apellidos: '2 años',
+      apellidos: 'ger',
       fechaNacimiento: '14/09/22',
     },
     {

@@ -10,6 +10,7 @@ import RegisterPage from '../components/pages/RegisterPage/RegisterPage';
 import PrivateRoutes from './PrivateRoutes';
 import NewPatientPage from '../components/pages/NewPatientPage/NewPatientPage';
 import SearchPatientPage from '../components/pages/SearchPatientPage/SearchPatientPage';
+import DashboardPage from '../components/pages/DashboardPage/DashboardPage';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -40,8 +41,15 @@ const AppRouter = () => (
           </PrivateRoutes>
         )}
       />
+      <Route
+        path={routes.dashboard}
+        element={(
+          <PrivateRoutes>
+            <DashboardPage />
+          </PrivateRoutes>
+          )}
+      />
       {/* <Route element={<PrivateRoutes />}>
-        <Route path={routes.dashboard} element={<DashboardPage />} />
         <Route path={routes.viewPatient} element={<ViewPatientPage />} />
         <Route path={routes.newAppointment} element={<NewAppointmentPage />} />
         <Route path={routes.viewAppointment} element={<ViewAppointmentPage />} />
