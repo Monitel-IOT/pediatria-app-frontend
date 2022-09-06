@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signOut, signUpWithEmailAndPassword } from '../../thunkAction/auth/authThunk';
+import { signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword } from '../../thunkAction/auth/authThunk';
 
 const initialState = {
   user: null,
@@ -16,21 +16,35 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(signUpWithEmailAndPassword.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
-      .addCase(signUpWithEmailAndPassword.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(signUpWithEmailAndPassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error;
-      })
-      .addCase(signOut.fulfilled, (state) => {
-        state.user = initialState.user;
-      });
+    builder.addCase(signUpWithEmailAndPassword.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+      state.error = false;
+    });
+    builder.addCase(signUpWithEmailAndPassword.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(signUpWithEmailAndPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(signInWithEmailAndPassword.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+      state.error = false;
+    });
+    builder.addCase(signInWithEmailAndPassword.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(signInWithEmailAndPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(signOut.fulfilled, (state) => {
+      state.user = initialState.user;
+    });
   },
 });
 

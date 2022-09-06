@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../../UI/molecules/Header';
 import FormInput from '../../UI/molecules/FormInput';
@@ -14,7 +14,9 @@ import GeneralHeader from '../../UI/organisms/GeneralHeader/GeneralHeader';
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+
+  const { error, loading, user } = useSelector((state) => state.authReducer);
+  const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
@@ -32,13 +34,16 @@ const LoginPage = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (user) {
+      Auth.saveSession(user);
+      navigate('/');
+    }
+  }, [user]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signInWithEmailAndPassword(user))
-      .then((action) => {
-        Auth.saveSession(action.payload);
-        navigate('/');
-      });
+    dispatch(signInWithEmailAndPassword(userInfo));
   };
 
   if (Auth.isLogin()) {
@@ -64,14 +69,16 @@ const LoginPage = () => {
                   label="Email"
                   type="email"
                   placeholder="example@example.com"
-                  onInputChange={(e) => setUser({ ...user, email: e.target.value })}
+                  onInputChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
                 />
                 <FormInput
                   label="Contraseña"
                   type="password"
                   placeholder="Contraseña"
-                  onInputChange={(e) => setUser({ ...user, password: e.target.value })}
+                  onInputChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
                 />
+                { loading && <div className="pb-2">Cargando...</div> }
+                { error && <div className="text-red-500 pb-2">{error.code}</div> }
                 <RouteLink to="/forgotPassword">¿Olvidaste tu contraseña?</RouteLink>
                 <Stack horizontal="right">
                   <Button primary type="submit">
