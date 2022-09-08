@@ -5,6 +5,7 @@ const initialState = {
   patients: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
+  // newPatient:{},
 };
 
 const patientsSlice = createSlice({
