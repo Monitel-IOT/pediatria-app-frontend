@@ -1,10 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPatientsRequest, postPatientRequest } from '../../api/patients/patientsRequest';
+import { postPatientRequest } from '../../api/patients/patientsRequest';
 
 // GET ALL PATIENTS BY DOCTOR
-export const fetchPatients = createAsyncThunk('patients/fetchPatients', async (id) => {
-  const response = await getPatientsRequest(id);
-  return response.data;
+// export const fetchPatients = createAsyncThunk('patients/fetchPatients', async (id) => {
+//   const response = await getPatientsRequest(id);
+//   return response.data;
+// });
+
+// GET ALL PATIENTS
+// Aún no operativo
+export const fetchPatients = createAsyncThunk('patients/fetchPatients', async () => {
+  // const response = await getPatientsRequest();
+  // return response.data;
 });
 
 // POST PATIENT
