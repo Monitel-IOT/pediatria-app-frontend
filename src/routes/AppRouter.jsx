@@ -29,7 +29,6 @@ const AppRouter = () => (
         path={routes.searchPatient}
         element={(
           <PrivateRoutes>
-            <DashboardPage />
             <SearchPatientPage />
           </PrivateRoutes>
         )}
@@ -38,7 +37,6 @@ const AppRouter = () => (
         path={routes.newPatient}
         element={(
           <PrivateRoutes>
-            <DashboardPage />
             <NewPatientPage />
           </PrivateRoutes>
         )}

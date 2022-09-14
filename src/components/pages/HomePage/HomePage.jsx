@@ -6,6 +6,7 @@ import { getCharactersRickAndMorty } from '../../../thunkAction/rickAndMorty/ric
 import Auth from '../../../utils/auth';
 import Button from '../../UI/atoms/Button/Button';
 import Typography from '../../UI/atoms/Typography/Typography';
+import NavbarTemplate from '../../UI/templates/NavbarTemplate/NavbarTemplate';
 // import { ReactComponent as Trash } from '../../../assets/svg/Trash.svg';
 
 const HomePage = () => {
@@ -28,6 +29,7 @@ const HomePage = () => {
 
   return (
     <div>
+      <NavbarTemplate />
       {/* <div className="p-5">
         <h1 className="text-primary">Button Component</h1>
         <Button

@@ -1,9 +1,9 @@
 import React from 'react';
-import DashboardTemplate from '../../UI/templates/DashboardTemplate/DashboardTemplate';
+import NavbarTemplate from '../../UI/templates/NavbarTemplate/NavbarTemplate';
 
 const DashboardPage = () => (
 
-  <DashboardTemplate />
+  <NavbarTemplate />
 
 );
 
