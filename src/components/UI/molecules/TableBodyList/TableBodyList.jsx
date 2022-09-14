@@ -12,8 +12,8 @@ const TableBodyList = ({ data }) => (
         {Object.entries(row).map(([key, value]) => (
           <Td key={key}>{value}</Td>
         ))}
-        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><IconButton outline="blue" icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />} /></td>
-        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"><IconButton outline="danger" icon={<FontAwesomeIcon size="lg" icon={faTrash} />} /></td>
+        <Td><IconButton outline="blue" icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />} /></Td>
+        <Td><IconButton outline="danger" icon={<FontAwesomeIcon size="lg" icon={faTrash} />} /></Td>
       </tr>
     ))}
   </tbody>
