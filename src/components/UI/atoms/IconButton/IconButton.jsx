@@ -9,7 +9,7 @@ const IconButton = ({
     primary, outline, danger, disabled, uppercase,
   });
   return (
-    <button {...props} type="button" className={`${styles.main} ${styles.uppercase} px-3 py-2`}>
+    <button {...props} type="button" className={`${styles.main} ${styles.uppercase} px-2.5 py-1 sm:px-3 sm:py-2`}>
       {icon && <span>{icon}</span>}
     </button>
   );

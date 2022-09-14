@@ -2,9 +2,9 @@ import React from 'react';
 import DashboardTemplate from '../../UI/templates/DashboardTemplate/DashboardTemplate';
 
 const DashboardPage = () => (
-  <div>
-    <DashboardTemplate />
-  </div>
+
+  <DashboardTemplate />
+
 );
 
 export default DashboardPage;

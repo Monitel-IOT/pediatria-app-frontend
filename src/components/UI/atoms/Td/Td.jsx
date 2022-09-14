@@ -6,7 +6,7 @@ const Td = ({ children }) => (
 );
 
 Td.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Td;
