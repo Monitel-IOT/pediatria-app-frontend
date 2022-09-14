@@ -27,7 +27,7 @@ const UserDropdown = () => {
         Dr. Bernalesssss
       </Button>
       <div className={`${isDropdownActive ? 'active' : 'hidden'}`}>
-        <DropdownList data={data} />
+        <DropdownList size="small" data={data} />
       </div>
     </div>
   );
