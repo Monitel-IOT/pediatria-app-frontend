@@ -14,7 +14,7 @@ const Button = ({
   }
 
   return (
-    <button type="button" {...props} className={`${styles.main} ${styles.uppercase} px-2 sm:px-5 py-2`}>
+    <button type="button" {...props} className={`${styles.main} ${styles.uppercase} px-5 py-2`}>
       {iconLeft && <span className="pr-2">{iconLeft}</span>}
       {children}
       {iconRigth && <span className="pl-2">{iconRigth}</span>}

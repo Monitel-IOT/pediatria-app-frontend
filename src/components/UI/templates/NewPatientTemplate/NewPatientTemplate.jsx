@@ -1,10 +1,11 @@
 import React from 'react';
+import Wrapper from '../../../layout/Wrapper/Wrapper';
 import RegisterPatientForm from '../../organisms/RegisterPatientForm/RegisterPatientForm';
 
 const NewPatientTemplate = () => (
-  <main className="p-5 bg-gray-100">
+  <Wrapper>
     <RegisterPatientForm />
-  </main>
+  </Wrapper>
 );
 
 export default NewPatientTemplate;
