@@ -15,7 +15,7 @@ const GeneralHeader = () => {
   };
 
   return (
-    <div className="bg-white w-full flex h-20 items-center px-10 fixed">
+    <div className="bg-white w-full flex h-20 items-center px-10 fixed shadow-lg">
       <Typography component="h2">PEDIATRIA</Typography>
       <div className="ml-auto w-30">
         { location.pathname === '/registro' && <Button primary uppercase onClick={handleClickLogin}>Login</Button> }
