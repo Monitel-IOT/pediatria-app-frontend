@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import NavbarTemplate from '../../UI/templates/NavbarTemplate/NavbarTemplate';
+import Navbar from '../../UI/organisms/Navbar/Navbar';
 import MainBar from '../../UI/organisms/MainBar/MainBar';
 
 const Wrapper = ({ children }) => {
   const [toggleMainBar, setToggleMainBar] = useState(false);
   return (
     <div>
-      <NavbarTemplate setToggleMainBar={setToggleMainBar} />
+      <Navbar setToggleMainBar={setToggleMainBar} />
       <main className="grid grid-cols-[auto_1fr]">
         <aside
           className={classNames(
