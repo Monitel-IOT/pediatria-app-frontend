@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../../UI/molecules/Header';
@@ -7,12 +7,13 @@ import Stack from '../../UI/organisms/Stack/Stack';
 import Button from '../../UI/atoms/Button/Button';
 import FormContainer from '../../UI/organisms/FormContainer/FormContainer';
 import { signUpWithEmailAndPassword } from '../../../thunkAction/auth/authThunk';
-import Auth from '../../../utils/auth';
 import GeneralHeader from '../../UI/organisms/GeneralHeader/GeneralHeader';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
-  const { error, loading, user } = useSelector((state) => state.authReducer);
+  const {
+    error, loading, isUserAuthorized,
+  } = useSelector((state) => state.authReducer);
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -32,19 +33,20 @@ const RegisterPage = () => {
     },
   };
 
-  useEffect(() => {
-    if (user) {
-      Auth.saveSession(user);
-      navigate('/');
-    }
-  }, [user]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signUpWithEmailAndPassword(userInfo));
+    dispatch(signUpWithEmailAndPassword(userInfo))
+      .then((res) => {
+        const message = res?.payload?.success;
+        navigate('/login', {
+          state: {
+            message,
+          },
+        });
+      });
   };
 
-  if (Auth.isLogin()) {
+  if (isUserAuthorized) {
     return <Navigate to="/" />;
   }
 

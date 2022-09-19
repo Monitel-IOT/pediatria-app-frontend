@@ -1,6 +1,9 @@
 import environment from './environment.config';
 
 const environmentRootPaths = {
+  local: {
+    backendPediatria: 'http://127.0.0.1:5000/api/v1',
+  },
   dev: {
     backendPediatria: 'https://pediatria-dev.herokuapp.com/api/v1',
   },

@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
+  isUserAuthorized: false,
 };
 
 export const authSlice = createSlice({
@@ -13,6 +14,12 @@ export const authSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.user = action.payload;
+    },
+    authorizeUser: (state) => {
+      state.isUserAuthorized = true;
+    },
+    unauthorizeUser: (state) => {
+      state.isUserAuthorized = false;
     },
   },
   extraReducers: (builder) => {
@@ -48,5 +55,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { addUser } = authSlice.actions;
+export const { addUser, authorizeUser, unauthorizeUser } = authSlice.actions;
 export default authSlice.reducer;

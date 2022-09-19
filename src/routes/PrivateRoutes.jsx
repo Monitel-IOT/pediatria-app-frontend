@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import Auth from '../utils/auth';
 
 const PrivateRoutes = ({ children }) => {
-  if (Auth.isLogin()) {
+  const isUserAuthorized = useSelector((state) => state.authReducer.isUserAuthorized);
+  if (isUserAuthorized) {
     return children;
   }
 
