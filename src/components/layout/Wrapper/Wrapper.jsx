@@ -5,7 +5,7 @@ import Navbar from '../../UI/organisms/Navbar/Navbar';
 import MainBar from '../../UI/organisms/MainBar/MainBar';
 
 const Wrapper = ({ children }) => {
-  const [toggleMainBar, setToggleMainBar] = useState(false);
+  const [toggleMainBar, setToggleMainBar] = useState(true);
   return (
     <div>
       <Navbar setToggleMainBar={setToggleMainBar} />
