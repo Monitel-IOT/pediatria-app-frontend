@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import Auth from '../../../utils/auth';
 import LoginTemplate from '../../UI/templates/LoginTemplate/LoginTemplate';
 
 const LoginPage = () => {
-  if (Auth.isLogin()) {
+  const isUserAuthorized = useSelector((state) => state.authReducer.isUserAuthorized);
+  if (isUserAuthorized) {
     return <Navigate to="/" />;
   }
 

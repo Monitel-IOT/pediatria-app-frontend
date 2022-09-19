@@ -1,19 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { signOut } from '../../../../thunkAction/auth/authThunk';
-import Auth from '../../../../utils/auth';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 
 const HomeTemplate = () => {
+  const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await dispatch(signOut());
-    await Auth.deleteSession();
     await navigate('/login');
   };
 
@@ -25,7 +24,7 @@ const HomeTemplate = () => {
           <Typography component="h1">
             Hello,
             {' '}
-            {Auth.getSession().email}
+            {user.email}
           </Typography>
           <div className="ml-auto">
             <Button primary onClick={handleSignOut}>Cerrar Sesion</Button>

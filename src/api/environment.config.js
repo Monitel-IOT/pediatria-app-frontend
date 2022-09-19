@@ -1,6 +1,6 @@
 // Enviroment configuration
 
-// Possible values: dev - qa - prod
+// Possible values: local - dev - qa - prod
 
 const environment = 'dev';
 
