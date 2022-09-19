@@ -19,32 +19,32 @@ const Pager = ({ size, ...props }) => {
     if (props.maxPages > 5) {
       return (
         <>
-          {page > 2 && <Button outline onClick={() => props.onChange(1)}>1</Button>}
-          {page > 3 && <p className="font-bold">...</p>}
+          {page > 2 && <Button className="hidden sm:block" outline onClick={() => props.onChange(1)}>1</Button>}
+          {page > 3 && <p className="hidden sm:block sm:font-bold">...</p>}
           {page > props.maxPages - 1 && (
-          <Button outline onClick={() => props.onChange(page - 3)}>{page - 3}</Button>
+            <Button className="hidden sm:block" outline onClick={() => props.onChange(page - 3)}>{page - 3}</Button>
           )}
           {page > props.maxPages - 2 && (
-          <Button outline onClick={() => props.onChange(page - 2)}>{page - 2}</Button>
+            <Button className="hidden sm:block" outline onClick={() => props.onChange(page - 2)}>{page - 2}</Button>
           )}
           {page > 1 && (
-          <Button outline onClick={() => props.onChange(page - 1)}>{page - 1}</Button>
+            <Button className="hidden sm:block" outline onClick={() => props.onChange(page - 1)}>{page - 1}</Button>
           )}
           <Button primary className="active">{page}</Button>
           {page < props.maxPages - 1 && (
-          <Button outline onClick={() => props.onChange(page + 1)}>{page + 1}</Button>
+            <Button outline className="hidden sm:block" onClick={() => props.onChange(page + 1)}>{page + 1}</Button>
           )}
           {page < 3 && (
-          <Button outline onClick={() => props.onChange(page + 2)}>{page + 2}</Button>
+            <Button outline className="hidden sm:block" onClick={() => props.onChange(page + 2)}>{page + 2}</Button>
           )}
           {page < 2 && (
-          <Button outline onClick={() => props.onChange(page + 3)}>{page + 3}</Button>
+            <Button outline className="hidden sm:block" onClick={() => props.onChange(page + 3)}>{page + 3}</Button>
           )}
-          {page < props.maxPages - 2 && <p className="font-bold">...</p>}
+          {page < props.maxPages - 2 && <p className="hidden sm:block sm:font-bold">...</p>}
           {page < props.maxPages && (
-          <Button outline onClick={() => props.onChange(props.maxPages)}>
-            {props.maxPages}
-          </Button>
+            <Button outline className="hidden sm:block" onClick={() => props.onChange(props.maxPages)}>
+              {props.maxPages}
+            </Button>
           )}
         </>
       );
@@ -56,7 +56,7 @@ const Pager = ({ size, ...props }) => {
           outline={!(i === props.index)}
           key={i}
           onClick={() => props.onChange(i + 1)}
-          className={i === props.index && 'active'}
+          className={i === props.index ? 'active' : 'hidden sm:block'}
           primary={i === props.index}
         >
           {i + 1}
@@ -93,6 +93,7 @@ Pager.propTypes = {
   size: PropTypes.string,
   index: PropTypes.number.isRequired,
   maxPages: PropTypes.number.isRequired,
+  compressed: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 

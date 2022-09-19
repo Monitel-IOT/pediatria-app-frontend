@@ -13,12 +13,12 @@ const useButtonStyle = ({
         case 'big':
           return 'text-lg px-5 py-2';
         default:
-          return 'text-sm px-5 py-2';
+          return 'text-xs sm:text-sm px-5 py-2';
       }
     };
     const handleStyle = () => {
       if (primary) {
-        return `bg-blue-main-500 text-white rounded-full font-semibold border border-blue-main-500 hover:bg-blue-main-600 hover:opacity-80 ${handleSize(props.size)}`;
+        return `bg-blue-main-500 text-white rounded-full sm:font-semibold border border-blue-main-500 hover:bg-blue-main-600 hover:opacity-80 ${handleSize(props.size)}`;
       }
       if (outline) {
         if (outline === 'blue') {
@@ -33,7 +33,7 @@ const useButtonStyle = ({
         return 'bg-rose-600 text-white text-sm rounded-full font-semibold hover:opacity-80';
       }
       if (disabled) {
-        return `bg-gray-600 rounded-full font-semibold text-white cursor-auto ${handleSize(props.size)}`;
+        return `bg-gray-600 rounded-full sm:font-semibold text-white cursor-auto ${handleSize(props.size)}`;
       }
       return 'text-gray-600 hover:text-cyan-600 hover:opacity-80';
     };
