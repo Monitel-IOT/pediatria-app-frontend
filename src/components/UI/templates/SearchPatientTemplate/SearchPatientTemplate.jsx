@@ -8,6 +8,9 @@ import Pager from '../../molecules/Pager/Pager';
 import Card from '../../organisms/Card/Card';
 import TableList from '../../organisms/TableList/TableList';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
+import PatientCard from '../../organisms/PatientCard/PatientCard';
+import Container from '../../../layout/Container/Container';
+import PageHeader from '../../organisms/PageHeader/PageHeader';
 
 const data = {
   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -85,39 +88,48 @@ const SearchPatientTemplate = () => {
 
   return (
     <Wrapper>
-      <main className="p-5 bg-gray-100">
-        <Card className="mt-4">
-          <Typography component="h4" className="mb-0">
-            Busque por DNI, Nombre, Apellido o Fecha de Nacimiento:
-          </Typography>
-          <Input placeholder="Buscar..." type="text" onChange={(e) => setQuery(e.target.value)} />
+      <Container>
+        <main className="py-4 bg-gray-100">
+          <PageHeader title="Pacientes" />
+          <Card className="mt-4">
+            <Typography component="h4" className="mb-0">
+              Busque por DNI, Nombre, Apellido o Fecha de Nacimiento:
+            </Typography>
+            <Input placeholder="Buscar..." type="text" onChange={(e) => setQuery(e.target.value)} />
 
-          <div className="ml-auto">
-            <span className="mr-2">Ordenar: </span>
-            <Button primary onClick={() => dispatch(orderById())}>
-              {toggleSort ? 'Descendente' : 'Ascendente'}
-            </Button>
-          </div>
-        </Card>
-        <Card className="mt-4">
-          <Typography component="h3" className="mb-2">
-            Lista de Pacientes
-          </Typography>
-          <TableList data={{ head: data.head, body: filter(data.body, query) }} />
+            <div className="ml-auto">
+              <span className="mr-2">Ordenar: </span>
+              <Button primary onClick={() => dispatch(orderById())}>
+                {toggleSort ? 'Descendente' : 'Ascendente'}
+              </Button>
+            </div>
+          </Card>
+          <PatientCard />
+          <PatientCard />
+          <PatientCard />
+          <PatientCard />
+          <PatientCard />
+          <PatientCard />
+          <Card className="mt-4">
+            <Typography component="h3" className="mb-2">
+              Lista de Pacientes
+            </Typography>
+            <TableList data={{ head: data.head, body: filter(data.body, query) }} />
+          </Card>
           {/* {resultsByPage[page]?.map((character) => (
           <div key={character.id}>
             <h2>{`${character.id}.- ${character.name}`}</h2>
           </div>
         ))} */}
-        </Card>
-        <Card className="mt-4">
-          <Pager
-            maxPages={resultsByPage.length}
-            index={page}
-            onChange={(pageIndex) => dispatch(changePage(pageIndex))}
-          />
-        </Card>
-      </main>
+          <Card className="mt-4">
+            <Pager
+              maxPages={resultsByPage.length}
+              index={page}
+              onChange={(pageIndex) => dispatch(changePage(pageIndex))}
+            />
+          </Card>
+        </main>
+      </Container>
     </Wrapper>
   );
 };

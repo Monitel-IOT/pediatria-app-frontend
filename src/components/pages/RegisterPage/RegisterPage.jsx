@@ -8,6 +8,7 @@ import Button from '../../UI/atoms/Button/Button';
 import FormContainer from '../../UI/organisms/FormContainer/FormContainer';
 import { signUpWithEmailAndPassword } from '../../../thunkAction/auth/authThunk';
 import GeneralHeader from '../../UI/organisms/GeneralHeader/GeneralHeader';
+import Container from '../../layout/Container/Container';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -52,37 +53,39 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <main>
+      <main className="bg-gray-100">
         <GeneralHeader />
-        <div className="flex items-center justify-center bg-gray-100 pt-16 h-screen">
-          <div className="bg-white w-full pt-8 md:w-1/2 xl:w-1/3 rounded-lg">
-            <Header {...headerMoleculeObj} />
-            <FormContainer>
-              <form onSubmit={handleSubmit}>
-                <FormInput label="Nombres" type="text" placeholder="John" />
-                <FormInput
-                  label="Email"
-                  type="email"
-                  placeholder="example@example.com"
-                  onInputChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-                />
-                <FormInput
-                  label="Contraseña"
-                  type="password"
-                  placeholder="Contraseña"
-                  onInputChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
-                />
-                { loading && <div className="pb-2">Cargando...</div> }
-                { error && <div className="text-red-500 pb-2">{error.code}</div> }
-                <Stack horizontal="right">
-                  <Button primary type="submit">
-                    Registarse
-                  </Button>
-                </Stack>
-              </form>
-            </FormContainer>
+        <Container>
+          <div className="flex items-center justify-center bg-gray-100 pt-16 h-screen">
+            <div className="bg-white w-full pt-8 md:w-1/2 xl:w-1/3 rounded-lg">
+              <Header {...headerMoleculeObj} />
+              <FormContainer>
+                <form onSubmit={handleSubmit}>
+                  <FormInput label="Nombres" type="text" placeholder="John" />
+                  <FormInput
+                    label="Email"
+                    type="email"
+                    placeholder="example@example.com"
+                    onInputChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                  />
+                  <FormInput
+                    label="Contraseña"
+                    type="password"
+                    placeholder="Contraseña"
+                    onInputChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
+                  />
+                  { loading && <div className="pb-2">Cargando...</div> }
+                  { error && <div className="text-red-500 pb-2">{error.code}</div> }
+                  <Stack horizontal="right">
+                    <Button primary type="submit">
+                      Registarse
+                    </Button>
+                  </Stack>
+                </form>
+              </FormContainer>
+            </div>
           </div>
-        </div>
+        </Container>
       </main>
     </div>
   );

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Typography = ({ children, component, ...props }) => {
   if (component === 'h1') {
     return (
-      <h1 className={`text-3xl text-gray-600 font-bold ${props.className}`}>
+      <h1 className={`text-2xl sm:text-3xl text-gray-600 ${props.className}`}>
         {children}
       </h1>
     );
@@ -32,14 +32,21 @@ const Typography = ({ children, component, ...props }) => {
   }
   if (component === 'h5') {
     return (
-      <h5 className={`text-sm font-bold ${props.className}`}>
+      <h5 className={`text-base ${props.className}`}>
+        {children}
+      </h5>
+    );
+  }
+  if (component === 'h6') {
+    return (
+      <h5 className={`text-xs sm:text-sm ${props.className}`}>
         {children}
       </h5>
     );
   }
   if (component === 'p') {
     return (
-      <p className={`${props.className}`}>
+      <p className={`text-sm sm:text-base ${props.className}`}>
         {children}
       </p>
     );

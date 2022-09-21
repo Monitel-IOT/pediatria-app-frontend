@@ -22,10 +22,13 @@ const useButtonStyle = ({
       }
       if (outline) {
         if (outline === 'blue') {
-          return `bg-white text-cyan-600 rounded-full font-semibold border border-cyan-600 hover:opacity-80 ${handleSize(props.size)}`;
+          return `bg-transparent text-cyan-600 rounded-full font-semibold border border-cyan-600 hover:opacity-80 ${handleSize(props.size)}`;
+        }
+        if (outline === 'gray') {
+          return `bg-transparent text-gray-600 rounded-full font-semibold border border-gray-600 hover:opacity-80 ${handleSize(props.size)}`;
         }
         if (outline === 'danger') {
-          return `bg-white text-rose-600 rounded-full font-semibold border border-rose-600 hover:opacity-80 ${handleSize(props.size)}`;
+          return `bg-transparent text-rose-600 rounded-full font-semibold border border-rose-600 hover:opacity-80 ${handleSize(props.size)}`;
         }
         return `bg-white text-gray-600 rounded-full font-semibold border border-gray-600 hover:opacity-80 ${handleSize(props.size)}`;
       }
