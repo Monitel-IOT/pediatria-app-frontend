@@ -1,10 +1,13 @@
 import React from 'react';
+import Container from '../../../layout/Container/Container';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import RegisterPatientForm from '../../organisms/RegisterPatientForm/RegisterPatientForm';
 
 const NewPatientTemplate = () => (
   <Wrapper>
-    <RegisterPatientForm />
+    <Container>
+      <RegisterPatientForm />
+    </Container>
   </Wrapper>
 );
 
