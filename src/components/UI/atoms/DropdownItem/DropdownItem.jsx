@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Typography from '../Typography/Typography';
 
-const LiLink = ({
-  linkTo, children, iconLeft, size, ...props
+const DropdownItem = ({
+  link, children, icon, size, ...props
 }) => {
   let style = {};
   if (size === 'small') {
@@ -28,8 +28,8 @@ const LiLink = ({
   }
   return (
     <li className={`border-b-2 ${style.li} relative bg-white shadow-2xl px-0 sm:px-1 ${props.className}`}>
-      <Link to={linkTo} className={`flex items-center py-4 ${style.Link} overflow-hidden text-gray-700 text-ellipsis rounded hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out`}>
-        {iconLeft && <span className="px-1.5">{iconLeft}</span>}
+      <Link to={link} className={`flex items-center py-4 ${style.Link} overflow-hidden text-gray-700 text-ellipsis rounded hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out`}>
+        {icon && <span className="px-1.5">{icon}</span>}
         <Typography component="p" className="px-1.5">
           {children}
         </Typography>
@@ -38,12 +38,12 @@ const LiLink = ({
   );
 };
 
-LiLink.propTypes = {
+DropdownItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  iconLeft: PropTypes.node,
+  icon: PropTypes.node,
   className: PropTypes.string,
-  linkTo: PropTypes.string,
+  link: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'big']),
 };
 
-export default LiLink;
+export default DropdownItem;

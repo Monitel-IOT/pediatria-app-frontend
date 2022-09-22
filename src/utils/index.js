@@ -24,3 +24,11 @@ export const flatByPages = (list, cutIndex) => {
   }
   return null;
 };
+
+export const filterSearch = (array, queryToFilter, listFieldToSearch) => {
+  const cs = listFieldToSearch; // por ej: ['id','name','status']
+  // const cs = Object.keys(rs[0]);
+  const queryLower = queryToFilter.toLowerCase();
+  const findQuery = (r) => cs.some((c) => r[c].toString().toLowerCase().indexOf(queryLower) > -1);
+  return array.filter(findQuery);
+};

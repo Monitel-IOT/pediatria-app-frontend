@@ -1,19 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LiLink from '../../atoms/LiLink/LiLink';
+import DropdownItem from '../../atoms/DropdownItem/DropdownItem';
 
 const DropdownList = ({ data, size }) => (
   <ul className="absolute z-40">
-    {data.map((x) => <LiLink size={size} linkTo={x.linkTo} iconLeft={x.iconLeft}>{x.text}</LiLink>)}
+    {data.map((x) => (
+      <DropdownItem
+        key={x.text}
+        size={size}
+        link={x.link}
+        icon={x.icon}
+      >
+        {x.text}
+      </DropdownItem>
+    ))}
   </ul>
 );
 
 DropdownList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      linkTo: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
-      iconLeft: PropTypes.node,
+      icon: PropTypes.node,
     }),
   ).isRequired,
   size: PropTypes.oneOf(['small', 'medium']),

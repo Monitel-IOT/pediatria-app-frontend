@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePage, orderById } from '../../../../state/rickAndMorty/charactersSlice';
+import { changePage, orderById } from '../../../../state/patients/patientsSlice';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
@@ -11,81 +11,23 @@ import Wrapper from '../../../layout/Wrapper/Wrapper';
 import PatientCard from '../../organisms/PatientCard/PatientCard';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
+import { filterSearch } from '../../../../utils';
 
-const data = {
-  head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
-  body: [
-    {
-      dni: '6',
-      nombre: 't',
-      apellidos: 'suarez',
-      fechaNacimiento: '14/05/20',
-    },
-    {
-      dni: '00000',
-      nombre: 'ttttrrrr',
-      apellidos: 'r',
-      fechaNacimiento: '14/05/22',
-    },
-    {
-      dni: '11123',
-      nombre: 'eeeeeee',
-      apellidos: 'perez',
-      fechaNacimiento: '14/05/96',
-    },
-    {
-      dni: '1111',
-      nombre: '1t',
-      apellidos: 'ger',
-      fechaNacimiento: '14/09/22',
-    },
-    {
-      dni: '5555r',
-      nombre: 'y',
-      apellidos: 'x',
-      fechaNacimiento: '10/01/22',
-    },
-    {
-      dni: '73049941',
-      nombre: 'cristian',
-      apellidos: 'benites',
-      fechaNacimiento: '30/05/22',
-    },
-    {
-      dni: '5555555',
-      nombre: 'taer',
-      apellidos: 'os',
-      fechaNacimiento: '14/05/22',
-    },
-    {
-      dni: 'rgfhfh6666',
-      nombre: 'ereee',
-      apellidos: '7',
-      fechaNacimiento: '14/05/22',
-    },
-    {
-      dni: 'oooooooo',
-      nombre: 'oowww',
-      apellidos: 't',
-      fechaNacimiento: '14/05/22',
-    },
-  ],
-};
+// const data = {
+//   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
+//   body: [],
+// };
 
 const SearchPatientTemplate = () => {
   const [query, setQuery] = useState('');
-  const cs = Object.keys(data.body[0]);
 
-  function filter(rs, filt) {
-    return rs.filter((r) => cs.some((c) => r[c].toLowerCase().indexOf(filt.toLowerCase()) > -1));
-  }
   const {
     resultsByPage,
     page,
     toggleSort,
-  } = useSelector((state) => state.charactersRickAndMortyReducer);
+  } = useSelector((state) => state.patientsReducer);
+  const { patientsFiltered } = useSelector((state) => state.patientsReducer);
   const dispatch = useDispatch();
-
   return (
     <Wrapper>
       <Container>
@@ -114,7 +56,13 @@ const SearchPatientTemplate = () => {
             <Typography component="h3" className="mb-2">
               Lista de Pacientes
             </Typography>
-            <TableList data={{ head: data.head, body: filter(data.body, query) }} />
+            {resultsByPage[page] ? (
+              <TableList data={{
+                head: Object.keys(patientsFiltered[0]),
+                body: filterSearch(resultsByPage[page], query, ['nombre']),
+              }}
+              />
+            ) : <div>Cargando Data...</div>}
           </Card>
           {/* {resultsByPage[page]?.map((character) => (
           <div key={character.id}>
