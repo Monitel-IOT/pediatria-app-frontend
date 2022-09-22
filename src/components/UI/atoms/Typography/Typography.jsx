@@ -51,6 +51,13 @@ const Typography = ({ children, component, ...props }) => {
       </p>
     );
   }
+  if (component === 'small') {
+    return (
+      <small className={`text-xs ${props.className}`}>
+        {children}
+      </small>
+    );
+  }
   return (
     <div className={`${props.className}`}>{children}</div>
   );
