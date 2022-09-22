@@ -14,10 +14,10 @@ const Step = ({
       'text-gray-600': index !== activeStep,
     })}
   >
-    Step
+    Paso
     {' '}
-    {item}
-    <small className="text-xs mt-2 font-normal text-gray-500 hover:text-gray-500">First Step description</small>
+    {index + 1}
+    <small className="text-xs mt-2 font-normal text-gray-500 hover:text-gray-500">{item}</small>
   </button>
 );
 

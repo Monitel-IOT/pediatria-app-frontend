@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../atoms/Input/Input';
 import Label from '../atoms/Label/Label';
+import Typography from '../atoms/Typography/Typography';
 
 const FormInput = ({ label, ...props }) => {
   const [focused, setFocused] = useState(false);
@@ -29,6 +30,7 @@ const FormInput = ({ label, ...props }) => {
         onBlur={handleFocus}
         {...props}
       />
+      {props.error && <Typography component="small" className="text-rose-500">{props.error}</Typography>}
       <span className="text-red-600" data-error="true">{props.errorMessage}</span>
     </div>
   );
@@ -42,6 +44,7 @@ FormInput.propTypes = {
   name: PropTypes.string,
   value: PropTypes.node,
   pattern: PropTypes.string,
+  error: PropTypes.bool,
   errorMessage: PropTypes.string,
   r: PropTypes.bool,
 };

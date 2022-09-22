@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-const Input = ({ onChange, ...props }) => (
-  <input {...props} onChange={(e) => onChange(e)} className="border-gray-300 py-2 px-0 sm:px-4 border rounded leading-none focus:border-cyan-600 outline-0 my-2" />
+const Input = ({ onChange, error, ...props }) => (
+  <input
+    {...props}
+    onChange={(e) => onChange(e)}
+    className={classNames('border-gray-300 p-2 sm:px-4 border rounded leading-none focus:border-cyan-600 outline-0 my-2', {
+      'border-rose-500 focus:border-rose-500': error,
+    })}
+  />
 );
 
 Input.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
+  error: PropTypes.bool,
 };
 
 export default Input;

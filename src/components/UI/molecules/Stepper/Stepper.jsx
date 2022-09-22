@@ -8,10 +8,12 @@ const Stepper = ({ activeStep, steps, ...props }) => (
   <div className="mb-4 flex border-b-2 justify-between">
     {steps.map((item, index) => (
       <Step
+        key={item}
         index={index}
         activeStep={activeStep}
         item={item}
         onClick={() => props.onChange(index)}
+        disabled
       />
     ))}
   </div>
