@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { getCharactersRickAndMorty } from '../../thunkAction/rickAndMorty/rickAndMortyThunk';
-import { sortLists, flatByPages } from '../../utils';
+import { sortLists, flatByPages, filterSearch } from '../../utils';
 
 const initialState = {
   loading: false,
@@ -12,12 +12,17 @@ const initialState = {
   results: [],
   sortedResults: [],
   resultsByPage: [],
+  resultsFiltered: [],
 };
 
 const charactersSlice = createSlice({
   name: 'rickAndMorty',
   initialState,
   reducers: {
+    filterByQuery: (state, action) => {
+      const filteredList = filterSearch(state.results, action.payload, ['name']);
+      state.resultsFiltered = filteredList;
+    },
     orderById: (state) => {
       const sortedResults = sortLists('id', state.results, state.toggleSort);
       const pages = flatByPages(sortedResults, 5);
@@ -48,5 +53,7 @@ const charactersSlice = createSlice({
   },
 });
 
-export const { orderById, changePage } = charactersSlice.actions;
+export const {
+  orderById, changePage, exampleFunction, filterByQuery,
+} = charactersSlice.actions;
 export default charactersSlice.reducer;

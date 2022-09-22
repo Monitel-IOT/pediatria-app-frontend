@@ -7,15 +7,15 @@ import DropdownList from '../../molecules/DropdownList/DropdownList';
 const UserDropdown = () => {
   const data = [
     {
-      linkTo: '/',
+      link: '/',
       text: 'Ver perfil',
     },
     {
-      linkTo: '/',
+      link: '/',
       text: 'Cambiar contraseña',
     },
     {
-      linkTo: '/',
+      link: '/',
       text: 'Log out',
     }];
   const [isDropdownActive, setisDropdownActive] = useState(false);
