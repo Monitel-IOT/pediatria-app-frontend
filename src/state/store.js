@@ -3,6 +3,7 @@ import charactersRickAndMortyReducer from './rickAndMorty/charactersSlice';
 import patientsReducer from './patients/patientsSlice';
 import authReducer from './auth/authSlice';
 import newPatientFormReducer from './newPatientForm/newPatientFormSlice';
+import registerFormReducer from './registerForm/registerFormSlice';
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     patientsReducer,
     authReducer,
     newPatientFormReducer,
+    registerFormReducer,
   },
 });

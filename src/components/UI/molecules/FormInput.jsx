@@ -16,7 +16,7 @@ const FormInput = ({ label, ...props }) => {
   };
   return (
     <div className="flex flex-col mb-5">
-      <Label htmlFor={label} className="mb-2">{label}</Label>
+      <Label htmlFor={label} className="mb-1">{label}</Label>
       <Input
         id={label}
         name={props.name}
@@ -44,7 +44,7 @@ FormInput.propTypes = {
   name: PropTypes.string,
   value: PropTypes.node,
   pattern: PropTypes.string,
-  error: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   errorMessage: PropTypes.string,
   r: PropTypes.bool,
 };
