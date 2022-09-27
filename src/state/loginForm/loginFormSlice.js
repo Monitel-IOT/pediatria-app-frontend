@@ -2,16 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const validationsForm = (form) => {
   const errors = {};
-  const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+  // const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
   const regexPassword = /^.{1,6}$/;
   // const regexComments = /^.{1,255}$/;
-
-  if (!form.name.trim()) {
-    errors.name = "El campo 'Nombres' es requerido.";
-  } else if (!regexName.test(form.name.trim())) {
-    errors.name = "El campo 'Nombres' solo acepta letras y espacios en blanco.";
-  }
 
   if (!form.email.trim()) {
     errors.email = "El campo 'Email' es requerido.";
@@ -28,10 +22,9 @@ const validationsForm = (form) => {
   return errors;
 };
 
-const hasErrors = (errors) => errors.name || errors.email || errors.password;
+const hasErrors = (errors) => errors.email || errors.password;
 
 const initialFormState = {
-  name: '',
   email: '',
   password: '',
 };
@@ -42,15 +35,15 @@ const initialState = {
   isDisabled: true,
 };
 
-const registerFormSlice = createSlice({
-  name: 'registerForm',
+const loginFormSlice = createSlice({
+  name: 'loginForm',
   initialState,
   reducers: {
     handleChange: (state, action) => {
       const { name, value } = action.payload;
       state.form = { ...state.form, [name]: value };
       state.errors = validationsForm(state.form);
-      state.isDisabled = state.form.name.length === 0 || (hasErrors(state.errors));
+      state.isDisabled = state.form.email.length === 0 || (hasErrors(state.errors));
     },
     handleBlur: (state, action) => {
       const { name, value } = action.payload;
@@ -61,5 +54,5 @@ const registerFormSlice = createSlice({
   },
 });
 
-export const { handleChange, handleBlur, initialStateForm } = registerFormSlice.actions;
-export default registerFormSlice.reducer;
+export const { handleChange, handleBlur, initialStateForm } = loginFormSlice.actions;
+export default loginFormSlice.reducer;

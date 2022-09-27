@@ -1,55 +1,49 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { handleChange, initialStateForm } from '../../../../state/registerForm/registerFormSlice';
-import { signUpWithEmailAndPassword } from '../../../../thunkAction/auth/authThunk';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { handleChange, initialStateForm } from '../../../../state/loginForm/loginFormSlice';
+import { signInWithEmailAndPassword } from '../../../../thunkAction/auth/authThunk';
 import Button from '../../atoms/Button/Button';
+import RouteLink from '../../atoms/RouteLink/RouteLink';
 import Typography from '../../atoms/Typography/Typography';
 import FormInput from '../../molecules/FormInput';
 import Card from '../Card/Card';
-import Stack from '../Stack/Stack';
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.authReducer);
-  const { form, errors, isDisabled } = useSelector((state) => state.registerFormReducer);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { form, errors, isDisabled } = useSelector((state) => state.loginFormReducer);
+  const { error, loading } = useSelector((state) => state.authReducer);
 
+  /* const headerMoleculeObj = {
+    title: {
+      text: 'Its great to see you!',
+      size: '2xl',
+      color: 'grey-main',
+    },
+    subtitle: {
+      text: 'Login here',
+      size: 'base',
+      color: 'blue-main',
+    },
+  }; */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signUpWithEmailAndPassword(form))
-      .then((res) => {
-        const message = res?.payload?.success;
-        navigate('/login', {
-          state: {
-            message,
-          },
-        });
-        dispatch(initialStateForm());
-      });
+    await dispatch(signInWithEmailAndPassword(form));
+    navigate('/');
+    dispatch(initialStateForm());
   };
-
   return (
-    <div className="bg-gray-100 sm:max-w-md pt-28 m-auto h-screen">
+    <div className="bg-gray-100 m-auto sm:max-w-md pt-40 sm:pt-32 h-screen">
       <Typography component="h2" className="uppercase font-bold">
-        Crea tu cuenta
+        Es genial verte!
       </Typography>
       <Typography component="h4" className="uppercase text-cyan-600">
-        {'Let\'s Roll'}
+        Ingrese Aquí
       </Typography>
       <Card className="mt-4">
         <form onSubmit={handleSubmit}>
-          <FormInput
-            label="Nombres"
-            type="text"
-            placeholder="Nombres"
-            name="name"
-            value={form.name}
-            onChange={(e) => dispatch(handleChange(
-              { name: e.target.name, value: e.target.value },
-            ))}
-            error={errors.name}
-          />
           <FormInput
             label="Email"
             type="email"
@@ -74,19 +68,21 @@ const RegisterForm = () => {
           />
           { loading && <div className="pb-2">Cargando...</div> }
           { error && <div className="text-red-500 pb-2">{error.code}</div> }
-          <Stack horizontal="right">
+          { location?.state?.message && <div className="text-green-500 pb-2">{location.state.message}</div> }
+          <div className="flex items-center justify-between flex-wrap">
+            <RouteLink to="/forgotPassword">¿Olvidaste tu contraseña?</RouteLink>
             <Button
               primary={!isDisabled}
               disabled={isDisabled}
               type="submit"
             >
-              Registrarse
+              Iniciar Sesión
             </Button>
-          </Stack>
+          </div>
         </form>
       </Card>
     </div>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

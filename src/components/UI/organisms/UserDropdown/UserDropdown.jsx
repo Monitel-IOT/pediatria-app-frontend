@@ -21,7 +21,7 @@ const UserDropdown = () => {
   const [isDropdownActive, setisDropdownActive] = useState(false);
   return (
 
-    <div className="items-center relative p-1">
+    <div className="items-center relative">
       {/* <!-- Icon --> */}
       <Button outline onClick={() => setisDropdownActive(!isDropdownActive)} iconRigth={<FontAwesomeIcon size="lg" icon={faCaretDown} />}>
         Dr. Bernalesssss
