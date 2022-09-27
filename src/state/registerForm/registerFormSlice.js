@@ -4,6 +4,7 @@ const validationsForm = (form) => {
   const errors = {};
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+  const regexPassword = /^.{1,6}$/;
   // const regexComments = /^.{1,255}$/;
 
   if (!form.name.trim()) {
@@ -20,6 +21,8 @@ const validationsForm = (form) => {
 
   if (!form.password.trim()) {
     errors.password = "El campo 'Contraseña' es requerido.";
+  } else if (regexPassword.test(form.password.trim())) {
+    errors.password = "El campo 'Contraseña' requiere minimo 7 caracteres.";
   }
 
   return errors;
