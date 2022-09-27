@@ -5,6 +5,7 @@ import LoginTemplate from '../../UI/templates/LoginTemplate/LoginTemplate';
 
 const LoginPage = () => {
   const isUserAuthorized = useSelector((state) => state.authReducer.isUserAuthorized);
+
   if (isUserAuthorized) {
     return <Navigate to="/" />;
   }
