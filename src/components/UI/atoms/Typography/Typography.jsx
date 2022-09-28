@@ -11,7 +11,7 @@ const Typography = ({ children, component, ...props }) => {
   }
   if (component === 'h2') {
     return (
-      <h3 className={`text-2xl text-gray-600 font-bold ${props.className}`}>
+      <h3 className={`text-xl text-gray-600 ${props.className}`}>
         {children}
       </h3>
     );

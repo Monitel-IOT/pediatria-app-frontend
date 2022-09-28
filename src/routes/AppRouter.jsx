@@ -11,6 +11,7 @@ import PrivateRoutes from './PrivateRoutes';
 import NewPatientPage from '../components/pages/NewPatientPage/NewPatientPage';
 import SearchPatientPage from '../components/pages/SearchPatientPage/SearchPatientPage';
 import DashboardPage from '../components/pages/DashboardPage/DashboardPage';
+import AppointmentDetailsPage from '../components/pages/AppointmentDetailsPage/AppointmentDetailsPage';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -46,6 +47,14 @@ const AppRouter = () => (
         element={(
           <PrivateRoutes>
             <DashboardPage />
+          </PrivateRoutes>
+          )}
+      />
+      <Route
+        path={routes.appointmentDetails}
+        element={(
+          <PrivateRoutes>
+            <AppointmentDetailsPage />
           </PrivateRoutes>
           )}
       />
