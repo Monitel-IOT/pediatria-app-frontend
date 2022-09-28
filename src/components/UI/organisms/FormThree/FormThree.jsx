@@ -30,7 +30,7 @@ const FormThree = () => {
       </form>
       <div>
         <Button primary onClick={() => dispatch(prevStep())}>
-          Atras
+          Atrás
         </Button>
         <Button
           primary={!(errors.surname || errors.birthWeight)}
