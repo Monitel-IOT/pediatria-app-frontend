@@ -26,11 +26,7 @@ const validationsForm = (form) => {
   }
 
   if (!form.gender.trim()) {
-    errors.age = "El campo 'Género' es requerido.";
-  }
-
-  if (!form.gender.trim()) {
-    errors.age = "El campo 'Género' es requerido.";
+    errors.gender = "El campo 'Género' es requerido.";
   }
 
   if (!regexText.test(form.childBirth.trim())) {

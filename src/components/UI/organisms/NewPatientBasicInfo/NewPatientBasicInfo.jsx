@@ -5,6 +5,7 @@ import {
 } from '../../../../state/newPatientForm/newPatientFormSlice';
 import Button from '../../atoms/Button/Button';
 import FormInput from '../../molecules/FormInput';
+import GenderRadio from '../../molecules/GenderRadio/GenderRadio';
 
 const NewPatientBasicInfo = () => {
   const { form, errors, step } = useSelector((state) => state.newPatientFormReducer);
@@ -45,12 +46,9 @@ const NewPatientBasicInfo = () => {
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
           error={errors.birthDate}
         />
-        <FormInput
-          type="text"
-          label="Género"
-          name="gender"
-          value={form.gender}
+        <GenderRadio
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+          value={form.gender}
           error={errors.gender}
         />
       </form>
@@ -64,9 +62,9 @@ const NewPatientBasicInfo = () => {
         </Button>
         <Button
         // eslint-disable-next-line max-len
-          primary={!(errors.name || errors.lastname || errors.birthDate || errors.gender || errors.birthWeight) && form.name.length !== 0 && form.lastname.length !== 0 && form.birthDate.length !== 0 && form.gender.length !== 0 && form.birthWeight.length !== 0}
+          primary={!(errors.name || errors.lastname || errors.birthDate || errors.gender) && (form.name.length !== 0 && form.lastname.length !== 0 && form.birthDate.length !== 0 && form.gender.length !== 0)}
           // eslint-disable-next-line max-len
-          disabled={(errors.name || errors.lastname || errors.birthDate || errors.gender || errors.birthWeight) || form.name.length === 0 || form.lastname.length === 0 || form.birthDate.length === 0 || form.gender.length === 0 || form.birthWeight.length === 0}
+          disabled={(errors.name || errors.lastname || errors.birthDate || errors.gender) || (form.name.length === 0 || form.lastname.length === 0 || form.birthDate.length === 0 || form.gender.length === 0)}
           onClick={() => dispatch(nextStep(3))}
           className="ml-2"
         >
