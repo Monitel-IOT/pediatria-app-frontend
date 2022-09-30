@@ -17,7 +17,7 @@ export const flatByPages = (list, cutIndex) => {
         page = [v];
       }
     });
-    if (page.length > 1) {
+    if (page.length >= 1) {
       pages.push([...page]);
     }
     return pages;
