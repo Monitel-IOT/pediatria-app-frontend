@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePage, orderById } from '../../../../state/patients/patientsSlice';
+import { changePage, orderById, filterBy } from '../../../../state/patients/patientsSlice';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
@@ -8,10 +8,10 @@ import Pager from '../../molecules/Pager/Pager';
 import Card from '../../organisms/Card/Card';
 import TableList from '../../organisms/TableList/TableList';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
-import PatientCard from '../../organisms/PatientCard/PatientCard';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
-import { filterSearch } from '../../../../utils';
+import PatientCard from '../../organisms/PatientCard/PatientCard';
+// import { filterSearch } from '../../../../utils';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -19,14 +19,12 @@ import { filterSearch } from '../../../../utils';
 // };
 
 const SearchPatientTemplate = () => {
-  const [query, setQuery] = useState('');
-
   const {
     resultsByPage,
     page,
     toggleSort,
   } = useSelector((state) => state.patientsReducer);
-  const { patientsFiltered } = useSelector((state) => state.patientsReducer);
+  const { patients } = useSelector((state) => state.patientsReducer);
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -37,12 +35,19 @@ const SearchPatientTemplate = () => {
             <Typography component="h4" className="mb-0">
               Busque por DNI, Nombre, Apellido o Fecha de Nacimiento:
             </Typography>
-            <Input placeholder="Buscar..." type="text" onChange={(e) => setQuery(e.target.value)} />
+            <Input
+              placeholder="Buscar..."
+              type="text"
+              onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
+            />
 
             <div className="ml-auto">
               <span className="mr-2">Ordenar: </span>
               <Button primary onClick={() => dispatch(orderById())}>
                 {toggleSort ? 'Descendente' : 'Ascendente'}
+              </Button>
+              <Button primary onClick={() => dispatch(filterBy(['t', ['nombre']]))}>
+                wqw
               </Button>
             </div>
           </Card>
@@ -52,14 +57,15 @@ const SearchPatientTemplate = () => {
           <PatientCard />
           <PatientCard />
           <PatientCard />
+
           <Card className="mt-4">
             <Typography component="h3" className="mb-2">
               Lista de Pacientes
             </Typography>
             {resultsByPage[page] ? (
               <TableList data={{
-                head: Object.keys(patientsFiltered[0]),
-                body: filterSearch(resultsByPage[page], query, ['nombre']),
+                head: Object.keys(patients[0]),
+                body: resultsByPage[page],
               }}
               />
             ) : <div>Cargando Data...</div>}
