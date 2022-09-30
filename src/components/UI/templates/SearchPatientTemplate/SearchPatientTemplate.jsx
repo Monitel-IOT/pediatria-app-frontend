@@ -46,9 +46,6 @@ const SearchPatientTemplate = () => {
               <Button primary onClick={() => dispatch(orderById())}>
                 {toggleSort ? 'Descendente' : 'Ascendente'}
               </Button>
-              <Button primary onClick={() => dispatch(filterBy(['t', ['nombre']]))}>
-                wqw
-              </Button>
             </div>
           </Card>
           <PatientCard />
