@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStep } from '../../../../state/newPatientForm/newPatientFormSlice';
 import Stepper from '../../molecules/Stepper/Stepper';
-import Card from '../Card/Card';
+import Card from '../../../layout/Card/Card';
 import FormOne from '../FormOne/FormOne';
 import FormThree from '../FormThree/FormThree';
 import FormTwo from '../FormTwo/FormTwo';

@@ -5,13 +5,12 @@ import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
 import Pager from '../../molecules/Pager/Pager';
-import Card from '../../organisms/Card/Card';
+import Card from '../../../layout/Card/Card';
 import TableList from '../../organisms/TableList/TableList';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
 import PatientCard from '../../organisms/PatientCard/PatientCard';
-// import { filterSearch } from '../../../../utils';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -24,7 +23,6 @@ const SearchPatientTemplate = () => {
     page,
     toggleSort,
   } = useSelector((state) => state.patientsReducer);
-  const { patients } = useSelector((state) => state.patientsReducer);
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -61,7 +59,7 @@ const SearchPatientTemplate = () => {
             </Typography>
             {resultsByPage[page] ? (
               <TableList data={{
-                head: Object.keys(patients[0]),
+                head: Object.keys(resultsByPage[page][0]),
                 body: resultsByPage[page],
               }}
               />

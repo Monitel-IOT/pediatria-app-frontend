@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // import { addNewPatient } from '../../../../thunkAction/patients/patientsThunk';
 import FormInput from '../../molecules/FormInput';
 import GenderRadio from '../../molecules/GenderRadio/GenderRadio';
-import Card from '../Card/Card';
+import Card from '../../../layout/Card/Card';
 import VaccinesCheckBox from '../../molecules/VaccinesCheckBox/VaccinesCheckBox';
 import Typography from '../../atoms/Typography/Typography';
 import Button from '../../atoms/Button/Button';
