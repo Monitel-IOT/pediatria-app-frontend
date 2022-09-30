@@ -6,8 +6,8 @@ import { signUpWithEmailAndPassword } from '../../../../thunkAction/auth/authThu
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
 import FormInput from '../../molecules/FormInput';
-import Card from '../Card/Card';
-import Stack from '../Stack/Stack';
+import Card from '../../../layout/Card/Card';
+import Stack from '../../../layout/Stack/Stack';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import Button from '../../atoms/Button/Button';
 import RouteLink from '../../atoms/RouteLink/RouteLink';
 import Typography from '../../atoms/Typography/Typography';
 import FormInput from '../../molecules/FormInput';
-import Card from '../Card/Card';
+import Card from '../../../layout/Card/Card';
 
 const LoginForm = () => {
   const dispatch = useDispatch();

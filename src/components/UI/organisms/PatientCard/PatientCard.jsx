@@ -4,7 +4,7 @@ import { faTrashCan, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '../../atoms/IconButton/IconButton';
 import Typography from '../../atoms/Typography/Typography';
 
-import Card from '../Card/Card';
+import Card from '../../../layout/Card/Card';
 
 const PatientCard = () => (
   <Card className="mt-4 hover:bg-blue-50">

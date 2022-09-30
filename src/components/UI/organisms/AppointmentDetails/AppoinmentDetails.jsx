@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Typography from '../../atoms/Typography/Typography';
-import Card from '../Card/Card';
+import Card from '../../../layout/Card/Card';
 
 const AppoinmentDetails = () => {
   const { idAppointment } = useParams();
