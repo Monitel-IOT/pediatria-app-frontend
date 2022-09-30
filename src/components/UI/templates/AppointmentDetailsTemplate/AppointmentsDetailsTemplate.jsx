@@ -5,10 +5,10 @@ import PageHeader from '../../organisms/PageHeader/PageHeader';
 import PatientDetails from '../../organisms/PatientDetails/PatientDetails';
 
 const AppointmentsDetailsTemplate = () => (
-  <div className="h-[calc(100vh-5rem)]">
+  <div className="">
     <Container>
       <PageHeader title="Atención" />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <PatientDetails />
         <AppoinmentDetails />
       </div>
