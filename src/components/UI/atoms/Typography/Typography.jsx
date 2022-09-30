@@ -59,7 +59,7 @@ const Typography = ({ children, component, ...props }) => {
     );
   }
   return (
-    <div className={`${props.className}`}>{children}</div>
+    <h1 className={`${props.className}`}>{children}</h1>
   );
 };
 
