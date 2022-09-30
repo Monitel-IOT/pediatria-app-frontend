@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '../../atoms/Typography/Typography';
 import CheckBox from '../../atoms/CheckBox/CheckBox';
-import Card from '../../organisms/Card/Card';
+import Card from '../../../layout/Card/Card';
 
 const VaccinesCheckBox = ({ onChange }) => (
   <Card className="mt-4">
