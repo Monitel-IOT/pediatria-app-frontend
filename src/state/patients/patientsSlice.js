@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPatients, addNewPatient } from '../../thunkAction/patients/patientsThunk';
-import { sortLists, flatByPages, filterSearch } from '../../utils';
+import {
+  sortLists, flatByPages, filterSearch, deleteFromArrayId,
+} from '../../utils';
 
 const initialState = {
   results: [],
@@ -19,6 +21,21 @@ const patientsSlice = createSlice({
   name: 'patients',
   initialState,
   reducers: {
+    deleteById: (state, action) => {
+      const newResults = deleteFromArrayId(state.results, action.payload);
+      state.results = newResults;
+      const newPatients = newResults.map((patient) => ({
+        // eslint-disable-next-line no-underscore-dangle
+        id: patient._id,
+        nombre: patient.Name,
+        apellidos: patient.LastName,
+        dni: patient.DNI,
+        fechaNacimiento: patient.DateBirth,
+      }));
+      state.patients = newPatients;
+      const pages = flatByPages(newPatients, 4);
+      state.resultsByPage = pages;
+    },
     filterBy: (state, action) => {
       const filteredPatients = filterSearch(state.patients, action.payload[0], action.payload[1]);
       const pages = flatByPages(filteredPatients, 4);
@@ -50,6 +67,8 @@ const patientsSlice = createSlice({
         // const newArray = action.payload.data.map(({ DNI, Name, ...keepAttrs }) => keepAttrs);
         // console.log(newArray);
         const newArray = action.payload.data.map((patient) => ({
+          // eslint-disable-next-line no-underscore-dangle
+          id: patient._id,
           nombre: patient.Name,
           apellidos: patient.LastName,
           dni: patient.DNI,
@@ -89,6 +108,6 @@ export const getPatientByDni = (state, dni) => {
 };
 
 export const {
-  orderById, changePage, filterBy,
+  orderById, changePage, filterBy, deleteById,
 } = patientsSlice.actions;
 export default patientsSlice.reducer;
