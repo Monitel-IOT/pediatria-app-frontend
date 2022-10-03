@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePage, orderById, filterBy } from '../../../../state/patients/patientsSlice';
+import {
+  changePage, orderById, filterBy,
+} from '../../../../state/patients/patientsSlice';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
@@ -10,7 +12,7 @@ import TableList from '../../organisms/TableList/TableList';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
-import PatientCard from '../../organisms/PatientCard/PatientCard';
+// import PatientCard from '../../organisms/PatientCard/PatientCard';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -31,7 +33,7 @@ const SearchPatientTemplate = () => {
           <PageHeader title="Pacientes" />
           <Card className="mt-4">
             <Typography component="h4" className="mb-0">
-              Busque por DNI, Nombre, Apellido o Fecha de Nacimiento:
+              Busque por Nombre:
             </Typography>
             <Input
               placeholder="Buscar..."
@@ -46,12 +48,12 @@ const SearchPatientTemplate = () => {
               </Button>
             </div>
           </Card>
+          {/* <PatientCard />
           <PatientCard />
           <PatientCard />
           <PatientCard />
           <PatientCard />
-          <PatientCard />
-          <PatientCard />
+          <PatientCard /> */}
 
           <Card className="mt-4">
             <Typography component="h3" className="mb-2">
@@ -59,7 +61,8 @@ const SearchPatientTemplate = () => {
             </Typography>
             {resultsByPage[page] ? (
               <TableList data={{
-                head: Object.keys(resultsByPage[page][0]),
+                // head: Object.keys(resultsByPage[page][0]),
+                head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
                 body: resultsByPage[page],
               }}
               />
