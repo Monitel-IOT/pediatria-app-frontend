@@ -17,13 +17,11 @@ const TableBodyList = ({ data }) => {
           <Td>{row.nombre}</Td>
           <Td>{row.apellidos}</Td>
           <Td>{row.fechaNacimiento}</Td>
-
           <Td>
             <IconButton
               outline="blue"
               icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />}
             />
-
           </Td>
           <Td>
             <IconButton
@@ -31,7 +29,6 @@ const TableBodyList = ({ data }) => {
               icon={<FontAwesomeIcon size="lg" icon={faTrash} />}
               onClick={() => dispatch(deleteById(row.id))}
             />
-
           </Td>
         </tr>
       ))}
