@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  changePage, orderById, filterBy,
-} from '../../../../state/patients/patientsSlice';
+import { changePage, orderById, filterBy } from '../../../../state/patients/patientsSlice';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';

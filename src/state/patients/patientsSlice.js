@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPatients, addNewPatient } from '../../thunkAction/patients/patientsThunk';
+import { fetchPatients, addNewPatient, fetchPatientsById } from '../../thunkAction/patients/patientsThunk';
 import {
   sortLists, flatByPages, filterSearch, deleteFromArrayId,
 } from '../../utils';
 
 const initialState = {
+  patient: {},
   results: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
@@ -81,6 +82,18 @@ const patientsSlice = createSlice({
         state.resultsByPage = flatByPages(newArray, 4);
       })
       .addCase(fetchPatients.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      // GET PATIENT BY ID
+      .addCase(fetchPatientsById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchPatientsById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.patient = action.payload.data;
+      })
+      .addCase(fetchPatientsById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
