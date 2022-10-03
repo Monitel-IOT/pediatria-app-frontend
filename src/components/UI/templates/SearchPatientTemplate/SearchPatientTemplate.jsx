@@ -12,7 +12,7 @@ import TableList from '../../organisms/TableList/TableList';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
-// import PatientCard from '../../organisms/PatientCard/PatientCard';
+import PatientCard from '../../organisms/PatientCard/PatientCard';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -48,12 +48,12 @@ const SearchPatientTemplate = () => {
               </Button>
             </div>
           </Card>
-          {/* <PatientCard />
           <PatientCard />
           <PatientCard />
           <PatientCard />
           <PatientCard />
-          <PatientCard /> */}
+          <PatientCard />
+          <PatientCard />
 
           <Card className="mt-4">
             <Typography component="h3" className="mb-2">
