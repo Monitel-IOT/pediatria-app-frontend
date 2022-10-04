@@ -5,6 +5,7 @@ import authReducer from './auth/authSlice';
 import newPatientFormReducer from './newPatientForm/newPatientFormSlice';
 import registerFormReducer from './registerForm/registerFormSlice';
 import loginFormReducer from './loginForm/loginFormSlice';
+import appointmentsReducer from './appointments/appointmentsSlice';
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     newPatientFormReducer,
     registerFormReducer,
     loginFormReducer,
+    appointmentsReducer,
   },
 });
