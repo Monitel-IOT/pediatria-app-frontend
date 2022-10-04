@@ -23,6 +23,13 @@ const services = {
       'Content-Type': 'application/json',
     },
   },
+  appointment: {
+    endpoint: `${environmentRootPaths[environment].backendPediatria}/appointment`,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  },
 };
 
 export const getServiceEndpointService = (service) => services[service].endpoint;
