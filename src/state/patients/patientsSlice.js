@@ -17,6 +17,7 @@ const initialState = {
   page: 0,
   toggleSort: true,
   filterPatients: [],
+  patientsAfterDelete: [],
   // newPatient:{},
 };
 
@@ -26,7 +27,7 @@ const patientsSlice = createSlice({
   reducers: {
     deletePatientStateBy: (state, action) => {
       const newPatients = deleteFromArrayId(state.patients, action.payload);
-      state.patients = newPatients;
+      state.patientsAfterDelete = newPatients;
       const pages = flatByPages(newPatients, 4);
       state.resultsByPage = pages;
     },
