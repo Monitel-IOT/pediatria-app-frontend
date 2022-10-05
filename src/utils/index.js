@@ -33,5 +33,4 @@ export const filterSearch = (array, queryToFilter, listFieldToSearch) => {
   return array.filter(findQuery);
 };
 
-// eslint-disable-next-line no-underscore-dangle
-export const deleteFromArrayId = (array, idToDelete) => array.filter((el) => el._id !== idToDelete);
+export const deleteFromArrayId = (array, idToDelete) => array.filter((el) => el.id !== idToDelete);
