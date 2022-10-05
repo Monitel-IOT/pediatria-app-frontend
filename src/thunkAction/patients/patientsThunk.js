@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPatientsRequest, postPatientRequest, getPatientsByIdRequest } from '../../api/patients/patientsRequest';
+import {
+  getPatientsRequest, postPatientRequest, getPatientsByIdRequest, deletePatientsByIdRequest,
+} from '../../api/patients/patientsRequest';
 
 // GET ALL PATIENTS BY DOCTOR
 // export const fetchPatients = createAsyncThunk('patients/fetchPatients', async (id) => {
@@ -16,6 +18,12 @@ export const fetchPatients = createAsyncThunk('patients/getPatients', async (id)
 // GET A PATIENT BY ID
 export const fetchPatientsById = createAsyncThunk('patients/getPatientById', async (id) => {
   const res = await getPatientsByIdRequest(id);
+  return res.json();
+});
+
+// deleTe A PATIENT BY ID
+export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (id) => {
+  const res = await deletePatientsByIdRequest(id);
   return res.json();
 });
 
