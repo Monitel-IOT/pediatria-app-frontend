@@ -61,7 +61,7 @@ const initialFormState = {
   lactation: '',
   gestation: '',
   vaccines: [],
-  state: '',
+  state: true,
 };
 
 const initialState = {
@@ -78,6 +78,16 @@ const newPatientFormSlice = createSlice({
       const { name, value } = action.payload;
       state.form = { ...state.form, [name]: value };
       state.errors = validationsForm(state.form);
+    },
+    handleVaccines: (state, action) => {
+      const { name, value } = action.payload;
+      const obj = { Nombre: name };
+      if (value) {
+        state.form.vaccines.push(obj);
+      } else {
+        const newVaccinesArray = state.form.vaccines.filter((item) => item.Nombre !== name);
+        state.form = { ...state.form, vaccines: newVaccinesArray };
+      }
     },
     handleBlur: (state, action) => {
       const { name, value } = action.payload;
@@ -101,6 +111,6 @@ const newPatientFormSlice = createSlice({
 });
 
 export const {
-  handleChange, prevStep, nextStep, setStep, handleBlur,
+  handleChange, handleVaccines, prevStep, nextStep, setStep, handleBlur,
 } = newPatientFormSlice.actions;
 export default newPatientFormSlice.reducer;

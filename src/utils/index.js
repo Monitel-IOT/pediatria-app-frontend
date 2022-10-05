@@ -32,3 +32,7 @@ export const filterSearch = (array, queryToFilter, listFieldToSearch) => {
   const findQuery = (r) => cs.some((c) => r[c].toString().toLowerCase().indexOf(queryLower) > -1);
   return array.filter(findQuery);
 };
+
+export const checkInArrayByName = (arr, name) => {
+  arr.some((el) => el.name === name);
+};
