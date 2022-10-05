@@ -62,7 +62,6 @@ const NewPatientDetailedInfo = () => {
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.checked }))}
           checked={form.supplementaryFeeding}
         />
-        <h1>{form.supplementaryFeeding ? 'true' : 'false'}</h1>
       </form>
       <div>
         <Button

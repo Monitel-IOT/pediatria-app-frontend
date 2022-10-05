@@ -106,7 +106,6 @@ const NewPatientVaccines = () => {
           Registrar Paciente
         </Button>
       </div>
-      <p>{console.log(form)}</p>
     </div>
   );
 };
