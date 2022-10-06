@@ -34,3 +34,7 @@ export const filterSearch = (array, queryToFilter, listFieldToSearch) => {
 };
 
 export const deleteFromArrayId = (array, idToDelete) => array.filter((el) => el.id !== idToDelete);
+
+export const checkInArrayByName = (arr, name) => {
+  arr.some((el) => el.name === name);
+};
