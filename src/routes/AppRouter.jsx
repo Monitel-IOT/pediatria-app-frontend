@@ -1,5 +1,5 @@
 import {
-  BrowserRouter, Routes, Route, Navigate,
+  Routes, Route, Navigate, HashRouter,
 } from 'react-router-dom';
 
 import React from 'react';
@@ -14,7 +14,7 @@ import DashboardPage from '../components/pages/DashboardPage/DashboardPage';
 import AppointmentDetailsPage from '../components/pages/AppointmentDetailsPage/AppointmentDetailsPage';
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path={routes.login} element={<LoginPage />} />
       <Route path={routes.register} element={<RegisterPage />} />
@@ -67,7 +67,7 @@ const AppRouter = () => (
         </Route> */}
       <Route path="*" element={<Navigate replace to="/login" />} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default AppRouter;
