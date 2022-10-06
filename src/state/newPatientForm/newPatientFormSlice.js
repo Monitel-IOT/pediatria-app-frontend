@@ -2,53 +2,66 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const validationsForm = (form) => {
   const errors = {};
-  const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-  const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-  // const regexComments = /^.{1,255}$/;
+  const regexDni = /[0-9]{8}$/;
+  const regexText = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+
+  if (!regexDni.test(form.dni.trim())) {
+    errors.dni = "El campo 'DNI/Código' solo acepta números de 8 dígitos";
+  }
 
   if (!form.name.trim()) {
     errors.name = "El campo 'Nombre' es requerido.";
-  } else if (!regexName.test(form.name.trim())) {
+  } else if (!regexText.test(form.name.trim())) {
     errors.name = "El campo 'Nombre' solo acepta letras y espacios en blanco.";
   }
 
-  if (!form.email.trim()) {
-    errors.email = "El campo 'Email' es requerido.";
-  } else if (!regexEmail.test(form.email.trim())) {
-    errors.email = "El campo 'Email' es incorrecto.";
+  if (!form.lastname.trim()) {
+    errors.lastname = "El campo 'Apellidos' es requerido.";
+  } else if (!regexText.test(form.lastname.trim())) {
+    errors.lastname = "El campo 'Apellidos' solo acepta letras y espacios en blanco";
   }
 
-  if (!form.password.trim()) {
-    errors.password = "El campo 'Password' es requerido.";
+  if (!form.birthDate.trim()) {
+    errors.birthDate = "El campo 'Fecha de nacimiento' es requerido.";
   }
 
-  if (!form.age.trim()) {
-    errors.age = "El campo 'Edad' es requerido.";
+  if (!form.gender.trim()) {
+    errors.gender = "El campo 'Género' es requerido.";
   }
 
-  if (!form.dni.trim()) {
-    errors.dni = "El campo 'DNI' es requerido.";
+  if (!regexText.test(form.childBirth.trim())) {
+    errors.childBirth = "El campo 'Nacimiento' solo acepta letras y espacios en blanco";
   }
 
-  if (!form.surname.trim()) {
-    errors.surname = "El campo 'Apellidos' es requerido.";
+  if (!regexText.test(form.apgar.trim())) {
+    errors.apgar = "El campo 'Apgar' solo acepta letras y espacios en blanco";
   }
 
-  if (!form.birthWeight.trim()) {
-    errors.birthWeight = "El campo 'Peso de Nacimiento' es requerido.";
+  if (!regexText.test(form.lactation.trim())) {
+    errors.lactation = "El campo 'Lactancia' solo acepta letras y espacios en blanco";
+  }
+
+  if (!regexText.test(form.gestation.trim())) {
+    errors.gestation = "El campo 'Gestación' solo acepta letras y espacios en blanco";
   }
 
   return errors;
 };
 
 const initialFormState = {
-  name: '',
-  email: '',
-  password: '',
-  age: '',
   dni: '',
-  surname: '',
+  name: '',
+  lastname: '',
+  birthDate: '',
+  gender: '',
   birthWeight: '',
+  childBirth: '',
+  apgar: '',
+  supplementaryFeeding: '',
+  lactation: '',
+  gestation: '',
+  vaccines: [],
+  state: true,
 };
 
 const initialState = {
@@ -65,6 +78,16 @@ const newPatientFormSlice = createSlice({
       const { name, value } = action.payload;
       state.form = { ...state.form, [name]: value };
       state.errors = validationsForm(state.form);
+    },
+    handleVaccines: (state, action) => {
+      const { name, value } = action.payload;
+      const obj = { Nombre: name };
+      if (value) {
+        state.form.vaccines.push(obj);
+      } else {
+        const newVaccinesArray = state.form.vaccines.filter((item) => item.Nombre !== name);
+        state.form = { ...state.form, vaccines: newVaccinesArray };
+      }
     },
     handleBlur: (state, action) => {
       const { name, value } = action.payload;
@@ -88,6 +111,6 @@ const newPatientFormSlice = createSlice({
 });
 
 export const {
-  handleChange, prevStep, nextStep, setStep, handleBlur,
+  handleChange, handleVaccines, prevStep, nextStep, setStep, handleBlur,
 } = newPatientFormSlice.actions;
 export default newPatientFormSlice.reducer;

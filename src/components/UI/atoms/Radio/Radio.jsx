@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import Input from '../Input/Input';
 import Label from '../Label/Label';
 
-const Radio = ({ label, value, ...props }) => (
+const Radio = ({
+  label, value, checked, ...props
+}) => (
   <div className={`flex items-center mb-4 ${props.className}`}>
-    <Input id={label} type="radio" value={value} name={props.name} onChange={props.onChange} disabled={props.disabled} required={props.required} />
+    <Input id={label} type="radio" value={value} name={props.name} onChange={props.onChange} disabled={props.disabled} required={props.required} checked={checked} />
     <Label htmlFor={label} className={`ml-2 !font-normal ${props.disabled && '!text-gray-400'}`}>{label}</Label>
   </div>
 );
