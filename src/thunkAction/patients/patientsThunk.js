@@ -27,9 +27,9 @@ export const deletePatientsById = createAsyncThunk('patients/deletePatientById',
   return res.json();
 });
 
-// Aún no operativo
+// OPERATIVO
 // POST PATIENT
-export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (newPatient) => {
-  const response = await postPatientRequest(newPatient);
+export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (newPatient, id) => {
+  const response = await postPatientRequest(newPatient, id);
   return response.data;
 });

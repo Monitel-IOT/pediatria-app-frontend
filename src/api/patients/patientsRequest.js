@@ -19,5 +19,5 @@ export const deletePatientsByIdRequest = (id) => {
   };
   return (fetch(endpoint, requestOptions));
 };
-// Aún no operativo
-export const postPatientRequest = (newPatient) => axios.post(`${PATIENTS_URL}patient`, newPatient);
+
+export const postPatientRequest = (newPatient, id) => axios.post(`${PATIENTS_URL}/${id}`, newPatient);

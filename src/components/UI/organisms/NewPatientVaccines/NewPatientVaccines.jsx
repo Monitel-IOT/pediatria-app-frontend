@@ -11,6 +11,7 @@ import { postPatientRequest } from '../../../../api/patients/patientsRequest';
 
 const NewPatientVaccines = () => {
   const { form, step } = useSelector((state) => state.newPatientFormReducer);
+  const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   return (
@@ -100,7 +101,8 @@ const NewPatientVaccines = () => {
         <Button
           primary
           disabled={false}
-          onClick={() => postPatientRequest(form)}
+          // eslint-disable-next-line no-underscore-dangle
+          onClick={() => postPatientRequest(form, user.id)}
           className="ml-2"
         >
           Registrar Paciente
