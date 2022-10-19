@@ -46,14 +46,14 @@ const SearchPatientTemplate = () => {
               </Button>
             </div>
           </Card>
-          <PatientCard />
-          <PatientCard />
-          <PatientCard />
-          <PatientCard />
-          <PatientCard />
-          <PatientCard />
 
-          <Card className="mt-4">
+          <div className="sm:hidden">
+            {resultsByPage[page]?.map((patient) => (
+              <PatientCard key={patient.nombre} patient={patient} />
+            ))}
+          </div>
+
+          <Card className="mt-4 hidden sm:block">
             <Typography component="h3" className="mb-2">
               Lista de Pacientes
             </Typography>
@@ -71,6 +71,8 @@ const SearchPatientTemplate = () => {
             <h2>{`${character.id}.- ${character.name}`}</h2>
           </div>
         ))} */}
+          {resultsByPage.length > 1
+          && (
           <Card className="mt-4">
             <Pager
               maxPages={resultsByPage.length}
@@ -78,6 +80,7 @@ const SearchPatientTemplate = () => {
               onChange={(pageIndex) => dispatch(changePage(pageIndex))}
             />
           </Card>
+          )}
         </main>
       </Container>
     </Wrapper>

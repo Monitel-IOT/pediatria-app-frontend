@@ -3,7 +3,7 @@ import {
   fetchPatients, addNewPatient, fetchPatientsById, deletePatientsById,
 } from '../../thunkAction/patients/patientsThunk';
 import {
-  sortLists, flatByPages, filterSearch, deleteFromArrayId,
+  sortLists, flatByPages, filterSearch, deleteFromArrayId, getDDMMAA,
 } from '../../utils';
 
 const initialState = {
@@ -28,18 +28,18 @@ const patientsSlice = createSlice({
     deletePatientStateBy: (state, action) => {
       const newPatients = deleteFromArrayId(state.patients, action.payload);
       state.patientsAfterDelete = newPatients;
-      const pages = flatByPages(newPatients, 4);
+      const pages = flatByPages(newPatients, 10);
       state.resultsByPage = pages;
     },
     filterBy: (state, action) => {
       const filteredPatients = filterSearch(state.patients, action.payload[0], action.payload[1]);
-      const pages = flatByPages(filteredPatients, 4);
+      const pages = flatByPages(filteredPatients, 10);
       state.filterPatients = filteredPatients;
       state.resultsByPage = pages;
     },
     orderById: (state) => {
       const sortedResults = sortLists('nombre', state.patients, state.toggleSort);
-      const pages = flatByPages(sortedResults, 4);
+      const pages = flatByPages(sortedResults, 10);
       state.toggleSort = !state.toggleSort;
       state.sortedResults = sortedResults;
       state.resultsByPage = pages;
@@ -67,13 +67,14 @@ const patientsSlice = createSlice({
           nombre: patient.Name,
           apellidos: patient.LastName,
           dni: patient.DNI,
-          fechaNacimiento: patient.DateBirth,
+          fechaNacimiento: getDDMMAA(patient.DateBirth),
           estado: patient.Estate,
+          fechaCreacion: getDDMMAA(patient.createdAt),
         }));
         state.patients = newArray;
         state.sortedResults = newArray;
         state.filterPatients = newArray;
-        state.resultsByPage = flatByPages(newArray, 4);
+        state.resultsByPage = flatByPages(newArray, 10);
       })
       .addCase(fetchPatients.rejected, (state, action) => {
         state.status = 'failed';

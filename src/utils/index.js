@@ -38,3 +38,13 @@ export const deleteFromArrayId = (array, idToDelete) => array.filter((el) => el.
 export const checkInArrayByName = (arr, name) => {
   arr.some((el) => el.name === name);
 };
+
+export const getDDMMAA = (date) => {
+  const newDate = new Date(date);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const dateText = newDate.toLocaleDateString('es-ES', options);
+  const dateSplited = dateText.split(' de ');
+  return `${dateSplited[1].charAt(0).toUpperCase()}${dateSplited[1].slice(
+    1,
+  )} ${dateSplited[0]}, ${dateSplited[2]}`;
+};
