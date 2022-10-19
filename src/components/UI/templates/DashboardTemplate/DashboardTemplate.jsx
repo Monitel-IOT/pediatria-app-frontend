@@ -13,6 +13,11 @@ const DashboardTemplate = () => {
   const {
     patient,
   } = useSelector((state) => state.patientsReducer);
+  // const {
+  //   user,
+  // } = useSelector((state) => state.authReducer);
+
+  // console.log(user);
 
   return (
     <Wrapper>
