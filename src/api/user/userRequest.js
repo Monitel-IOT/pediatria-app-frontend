@@ -9,4 +9,6 @@ const createUser = (user) => fetch(Routes.fetchUser(), {
   body: JSON.stringify(user),
 });
 
+export const getUserByFirebaseId = (id) => fetch(Routes.fetchUserByFirebaseId(id));
+
 export default createUser;

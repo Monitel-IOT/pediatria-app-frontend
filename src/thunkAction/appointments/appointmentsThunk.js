@@ -18,7 +18,10 @@ export const deleteAppointmentByIdAPI = createAsyncThunk('appointments/deleteApp
   return res.json();
 });
 
-export const updateAppointmentByIdAPI = createAsyncThunk('appointments/updateAppointmentById', async (newAppointment, idAppointment) => {
-  const res = await updateAppointmentById(newAppointment, idAppointment);
+export const updateAppointmentByIdAPI = createAsyncThunk('appointments/updateAppointmentById', async (appointmentObject) => {
+  const res = await updateAppointmentById(
+    appointmentObject.newAppointment,
+    appointmentObject.idAppointment,
+  );
   return res.json();
 });
