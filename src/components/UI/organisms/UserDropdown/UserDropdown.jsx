@@ -14,7 +14,6 @@ const UserDropdown = () => {
   const {
     databaseUser,
   } = useSelector((state) => state.authReducer);
-  console.log(databaseUser);
   const data = [
     {
       link: '/',
