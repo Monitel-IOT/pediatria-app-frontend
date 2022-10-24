@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword } from '../../thunkAction/auth/authThunk';
+import {
+  signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword, getUserByFirebaseIdAPI,
+} from '../../thunkAction/auth/authThunk';
 
 const initialState = {
+  databaseUser: [],
   user: null,
   loading: false,
   error: null,
@@ -51,6 +54,20 @@ export const authSlice = createSlice({
     });
     builder.addCase(signOut.fulfilled, (state) => {
       state.user = initialState.user;
+    });
+    // GET user by FIrebase ID
+    builder.addCase(getUserByFirebaseIdAPI.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(getUserByFirebaseIdAPI.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(getUserByFirebaseIdAPI.fulfilled, (state, action) => {
+      state.databaseUser = action.payload;
+      state.loading = false;
+      state.error = false;
     });
   },
 });
