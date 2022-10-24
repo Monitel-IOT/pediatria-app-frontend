@@ -8,6 +8,7 @@ import Button from '../../atoms/Button/Button';
 import Measurement from '../../molecules/Measurement/Measurement';
 import Container from '../../../layout/Container/Container';
 import { updateAppointmentByIdAPI } from '../../../../thunkAction/appointments/appointmentsThunk';
+import Alert from '../../molecules/Alert/Alert';
 
 const DashboardTemplate = () => {
   const dispatch = useDispatch();
@@ -118,6 +119,26 @@ const DashboardTemplate = () => {
         <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-5 md:gird-cols-4">
           <Measurement icon={<FontAwesomeIcon icon={faUsers} />} text="Pacientes" value="20" />
           <Measurement icon={<FontAwesomeIcon icon={faCalendarCheck} />} text="Atenciones" value="14" />
+        </div>
+        <div className="mt-5">
+          <Alert>
+            HELLO! This is an alert message.
+          </Alert>
+          <Alert outline className="mt-3">
+            HELLO! This is an alert message.
+          </Alert>
+          <Alert type="success" className="mt-3">
+            HELLO! This is an alert message.
+          </Alert>
+          <Alert type="success" outline className="mt-3">
+            HELLO! This is an alert message.
+          </Alert>
+          <Alert type="danger" className="mt-3">
+            HELLO! This is an alert message.
+          </Alert>
+          <Alert type="danger" outline className="mt-3">
+            HELLO! This is an alert message.
+          </Alert>
         </div>
       </Container>
     </Wrapper>
