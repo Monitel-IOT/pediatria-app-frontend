@@ -1,8 +1,8 @@
 import React from 'react';
-import DashboardTemplae from '../../UI/templates/DashboardTemplate/DashboardTemplate';
+import DashboardTemplate from '../../UI/templates/DashboardTemplate/DashboardTemplate';
 
 const DashboardPage = () => (
-  <DashboardTemplae />
+  <DashboardTemplate />
 );
 
 export default DashboardPage;
