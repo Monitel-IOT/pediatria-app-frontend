@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Routes from '../routes';
+import { getServiceHeaders } from '../services';
 
 const PATIENTS_URL = 'https://pediatria-dev.herokuapp.com/api/v1/';
 
@@ -20,4 +22,14 @@ export const deletePatientsByIdRequest = (id) => {
   return (fetch(endpoint, requestOptions));
 };
 
-export const postPatientRequest = (newPatient, id) => axios.post(`${PATIENTS_URL}/${id}`, newPatient);
+export const postPatientRequest = (newPatient, token) => axios.post(
+  Routes.fetchPatient(),
+  newPatient,
+
+  {
+    headers: {
+      ...getServiceHeaders('patient'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);

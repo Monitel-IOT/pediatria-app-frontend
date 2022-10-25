@@ -5,6 +5,7 @@ const Routes = {
   fetchUser: () => `${getServiceEndpointService('user')}`,
   fetchAppointmentById: (idAppointment) => `${getServiceEndpointService('appointment')}/${idAppointment}`,
   fetchAppointments: () => `${getServiceEndpointService('appointment')}`,
+  fetchPatient: () => `${getServiceEndpointService('patient')}`,
 };
 
 export default Routes;

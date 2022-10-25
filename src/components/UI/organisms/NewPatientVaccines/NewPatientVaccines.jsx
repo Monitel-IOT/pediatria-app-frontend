@@ -7,11 +7,12 @@ import {
 import { checkInArrayByName } from '../../../../utils';
 import Button from '../../atoms/Button/Button';
 import CheckBox from '../../atoms/CheckBox/CheckBox';
-import { postPatientRequest } from '../../../../api/patients/patientsRequest';
+// import { postPatientRequest } from '../../../../api/patients/patientsRequest';
+import { addNewPatient } from '../../../../thunkAction/patients/patientsThunk';
 
 const NewPatientVaccines = () => {
   const { form, step } = useSelector((state) => state.newPatientFormReducer);
-  const { user } = useSelector((state) => state.authReducer);
+  // const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   return (
@@ -102,7 +103,8 @@ const NewPatientVaccines = () => {
           primary
           disabled={false}
           // eslint-disable-next-line no-underscore-dangle
-          onClick={() => postPatientRequest(form, user.id)}
+          // onClick={() => postPatientRequest(form, user.id)}
+          onClick={() => dispatch(addNewPatient(form))}
           className="ml-2"
         >
           Registrar Paciente
