@@ -30,6 +30,13 @@ const services = {
       'Content-Type': 'application/json',
     },
   },
+  patient: {
+    endpoint: `${environmentRootPaths[environment].backendPediatria}/patient`,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  },
 };
 
 export const getServiceEndpointService = (service) => services[service].endpoint;

@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getPatientsRequest, postPatientRequest, getPatientsByIdRequest, deletePatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
+import { auth } from '../../config/firebase/firebase.config';
 
 // GET ALL PATIENTS BY DOCTOR
 // export const fetchPatients = createAsyncThunk('patients/fetchPatients', async (id) => {
@@ -29,7 +30,8 @@ export const deletePatientsById = createAsyncThunk('patients/deletePatientById',
 
 // OPERATIVO
 // POST PATIENT
-export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (newPatient, id) => {
-  const response = await postPatientRequest(newPatient, id);
+export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (newPatient) => {
+  const token = await auth.currentUser.getIdToken(true);
+  const response = await postPatientRequest(newPatient, token);
   return response.data;
 });
