@@ -12,7 +12,7 @@ import { addNewPatient } from '../../../../thunkAction/patients/patientsThunk';
 
 const NewPatientVaccines = () => {
   const { form, step } = useSelector((state) => state.newPatientFormReducer);
-  // const { user } = useSelector((state) => state.authReducer);
+  const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   return (
@@ -104,7 +104,7 @@ const NewPatientVaccines = () => {
           disabled={false}
           // eslint-disable-next-line no-underscore-dangle
           // onClick={() => postPatientRequest(form, user.id)}
-          onClick={() => dispatch(addNewPatient(form))}
+          onClick={() => dispatch(addNewPatient({ form, token: user?.token }))}
           className="ml-2"
         >
           Registrar Paciente
