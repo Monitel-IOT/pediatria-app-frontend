@@ -25,7 +25,6 @@ export const deletePatientsByIdRequest = (id) => {
 export const postPatientRequest = (newPatient, token) => axios.post(
   Routes.fetchPatient(),
   newPatient,
-
   {
     headers: {
       ...getServiceHeaders('patient'),

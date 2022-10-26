@@ -22,10 +22,10 @@ const App = () => {
         setLoading(false);
         return dispatch(unauthorizeUser());
       }
-
       const data = await user.toJSON();
-
-      await dispatch(addUser(data));
+      const token = await auth.currentUser.getIdToken(true);
+      // add user & token to state
+      await dispatch(addUser({ ...data, token }));
       setLoading(false);
       return dispatch(authorizeUser());
     });
