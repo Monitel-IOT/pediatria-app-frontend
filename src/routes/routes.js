@@ -7,7 +7,7 @@ const routes = {
   searchPatient: '/searchPatient',
   newPatient: '/nuevo-paciente',
   viewPatient: '/paciente/:id',
-  newAtention: '/nueva-atencion',
+  newAppointment: '/nueva-atencion',
   appointmentDetails: '/paciente/:idPatient/atencion/:idAppointment',
   viewProfile: '/perfil/:id',
   editProfile: '/perfil/edit/:id',
