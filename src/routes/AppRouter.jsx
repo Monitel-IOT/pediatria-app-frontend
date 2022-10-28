@@ -13,6 +13,7 @@ import SearchPatientPage from '../components/pages/SearchPatientPage/SearchPatie
 import DashboardPage from '../components/pages/DashboardPage/DashboardPage';
 import AppointmentDetailsPage from '../components/pages/AppointmentDetailsPage/AppointmentDetailsPage';
 import ViewPatientPage from '../components/pages/ViewPatientPage/ViewPatientPage';
+import NewAppointmentPage from '../components/pages/NewAppointmentPage/NewAppointmentPage';
 
 const AppRouter = () => (
   <HashRouter>
@@ -64,6 +65,14 @@ const AppRouter = () => (
         element={(
           <PrivateRoutes>
             <ViewPatientPage />
+          </PrivateRoutes>
+          )}
+      />
+      <Route
+        path={routes.newAppointment}
+        element={(
+          <PrivateRoutes>
+            <NewAppointmentPage />
           </PrivateRoutes>
           )}
       />

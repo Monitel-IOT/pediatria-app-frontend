@@ -1,5 +1,10 @@
 import React from 'react';
+import NewAppointmentTemplate from '../../UI/templates/NewAppointmentTemplate/NewAppointmentTemplate';
 
-const NewAppointment = () => <div>NewAppointment</div>;
+const NewAppointmentPage = () => (
+  <div>
+    <NewAppointmentTemplate />
+  </div>
+);
 
-export default NewAppointment;
+export default NewAppointmentPage;
