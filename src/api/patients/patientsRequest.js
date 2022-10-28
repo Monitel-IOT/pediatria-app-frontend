@@ -6,7 +6,17 @@ const PATIENTS_URL = 'https://pediatria-dev.herokuapp.com/api/v1/';
 
 // export const getPatientsRequest = (id) => axios.get(`${PATIENTS_URL}${id}/patients`);
 export const getPatientsRequest = (id) => fetch(`${PATIENTS_URL}user/${id}/patients`);
-export const getPatientsByIdRequest = (id) => fetch(`${PATIENTS_URL}patient/${id}`);
+
+export const getPatientsByIdRequest = (idPatient, token) => axios.get(
+  `${PATIENTS_URL}patient/${idPatient}`,
+  {
+    headers: {
+      ...getServiceHeaders('patient'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
+
 export const deletePatientsByIdRequest = (id) => {
   const endpoint = `${PATIENTS_URL}patient/${id}`;
   // const csrfToken = Cookies.get('csrftoken');

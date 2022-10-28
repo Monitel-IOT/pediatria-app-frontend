@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Typography from '../../atoms/Typography/Typography';
 import Card from '../../../layout/Card/Card';
 
 const PatientDetails = () => {
-  const { idPatient } = useParams();
+  const { patient } = useSelector((state) => state.patientsReducer);
+  console.log('Patient', patient);
   return (
     <div>
       <Card className="my-4 divide-y">
@@ -20,7 +21,6 @@ const PatientDetails = () => {
             </Typography>
             <Typography component="h6" className="ml-1">
               HC-00
-              {idPatient}
             </Typography>
           </div>
           <div className="flex items-center">
@@ -63,9 +63,7 @@ const PatientDetails = () => {
             <Typography component="h6" className="font-bold">
               Parto:
             </Typography>
-            <Typography component="h6" className="ml-1">
-              {idPatient}
-            </Typography>
+            <Typography component="h6" className="ml-1" />
           </div>
           <div className="flex items-center justify-between">
             <Typography component="h6" className="font-bold">

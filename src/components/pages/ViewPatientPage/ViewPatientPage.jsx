@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchPatientsById } from '../../../thunkAction/patients/patientsThunk';
 import PatientTemplate from '../../UI/templates/PatientTemplate/PatientTemplate';
 
-const ViewPatientPage = () => (
-  <div>
-    <PatientTemplate />
-  </div>
-);
+const ViewPatientPage = () => {
+  const dispatch = useDispatch();
+
+  const { idPatient } = useParams();
+  const { user } = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    dispatch(fetchPatientsById({ idPatient, token: user?.token }));
+  }, []);
+
+  return (
+    <div>
+      <PatientTemplate />
+    </div>
+  );
+};
 export default ViewPatientPage;
