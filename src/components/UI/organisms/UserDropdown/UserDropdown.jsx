@@ -33,8 +33,7 @@ const UserDropdown = () => {
   if (databaseUser.data) {
     if (databaseUser.data.surname) {
       textAvatar = databaseUser.data.name[0] + databaseUser.data.surname[0];
-    }
-    if (databaseUser.data.name) {
+    } else if (databaseUser.data.name) {
       // eslint-disable-next-line prefer-destructuring
       textAvatar = databaseUser.data.name[0];
     }
