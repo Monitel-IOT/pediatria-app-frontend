@@ -6,7 +6,7 @@ const routes = {
   dashboard: '/dashboard',
   searchPatient: '/searchPatient',
   newPatient: '/nuevo-paciente',
-  viewPatient: '/paciente/:id',
+  viewPatient: '/paciente/:idPatient',
   newAtention: '/nueva-atencion',
   appointmentDetails: '/paciente/:idPatient/atencion/:idAppointment',
   viewProfile: '/perfil/:id',
