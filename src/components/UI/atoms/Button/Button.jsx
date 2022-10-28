@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import useButtonStyle from '../../../hooks/useButtonStyle';
 
 const Button = ({
-  children, iconLeft, iconRigth, outline, primary, danger, disabled, uppercase, ...props
+  children, iconLeft, iconRigth, outline, primary, danger, disabled, avatar, uppercase, ...props
 }) => {
   const [styles] = useButtonStyle({
-    primary, outline, danger, disabled, uppercase, ...props,
+    primary, outline, danger, disabled, avatar, uppercase, ...props,
   });
 
   if (!children) {
@@ -30,6 +30,7 @@ Button.propTypes = {
   primary: PropTypes.bool,
   danger: PropTypes.bool,
   disabled: PropTypes.bool,
+  avatar: PropTypes.bool,
   uppercase: PropTypes.bool,
   className: PropTypes.string,
   size: PropTypes.string,
