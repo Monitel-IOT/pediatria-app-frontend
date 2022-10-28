@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useButtonStyle = ({
-  primary, outline, danger, disabled, uppercase, small, ...props
+  primary, outline, danger, disabled, avatar, uppercase, small, ...props
 }) => {
   const [styles, setStyles] = useState({ main: '', uppercase: '' });
 
@@ -38,6 +38,9 @@ const useButtonStyle = ({
       if (disabled) {
         return `bg-gray-600 rounded-full sm:font-semibold text-white cursor-auto ${handleSize(props.size)}`;
       }
+      if (avatar) {
+        return 'm-1 mr-2 w-14 h-14 relative flex justify-center items-center rounded-full bg-gray-500 text-xl text-white uppercase font-semibold';
+      }
       return 'text-gray-600 hover:text-cyan-600 hover:opacity-80';
     };
 
@@ -55,7 +58,7 @@ const useButtonStyle = ({
       main: handleStyle(),
       uppercase: handleUppercase(),
     });
-  }, [primary, outline, danger, disabled, uppercase, props.size]);
+  }, [primary, outline, danger, disabled, avatar, uppercase, props.size]);
 
   return [styles];
 };

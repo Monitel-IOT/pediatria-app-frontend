@@ -62,8 +62,7 @@ const patientsSlice = createSlice({
         // const newArray = action.payload.data.map(({ DNI, Name, ...keepAttrs }) => keepAttrs);
         // console.log(newArray);
         const newArray = action.payload.data.filter((ob) => ob.Estate === true).map((patient) => ({
-          // eslint-disable-next-line no-underscore-dangle
-          id: patient._id,
+          id: patient.id,
           nombre: patient.Name,
           apellidos: patient.LastName,
           dni: patient.DNI,

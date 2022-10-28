@@ -8,12 +8,12 @@ import { getUserByFirebaseIdAPI } from '../../../../thunkAction/auth/authThunk';
 
 const UserDropdown = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUserByFirebaseIdAPI('47ogzKmeH2eHGvvalc5hgaTScei2'));
-  }, []);
   const {
-    databaseUser,
+    databaseUser, user,
   } = useSelector((state) => state.authReducer);
+  useEffect(() => {
+    dispatch(getUserByFirebaseIdAPI(user.uid));
+  }, []);
   const data = [
     {
       link: '/',
@@ -28,15 +28,27 @@ const UserDropdown = () => {
       text: 'Log out',
     }];
   const [isDropdownActive, setisDropdownActive] = useState(false);
+  // condicionales para mostrar iniciales del usuario en el avatar
+  let textAvatar;
+  if (databaseUser.data) {
+    if (databaseUser.data.surname) {
+      textAvatar = databaseUser.data.name[0] + databaseUser.data.surname[0];
+    } else {
+      // eslint-disable-next-line prefer-destructuring
+      textAvatar = databaseUser.data.name[0];
+    }
+  } else {
+    textAvatar = '...';
+  }
   return (
 
     <div className="items-center relative">
       {/* <!-- Icon --> */}
-      <Button outline onClick={() => setisDropdownActive(!isDropdownActive)} iconRigth={<FontAwesomeIcon size="lg" icon={faCaretDown} />}>
-        {`${databaseUser.data ? `Dr. ${databaseUser.data.name}` : '...'}`}
+      <Button avatar onClick={() => setisDropdownActive(!isDropdownActive)} iconRigth={<FontAwesomeIcon size="sm" icon={faCaretDown} />}>
+        {textAvatar}
       </Button>
       <div className={`${isDropdownActive ? 'active' : 'hidden'}`}>
-        <DropdownList size="small" data={data} />
+        <DropdownList size="small" data={data} side="left" />
       </div>
     </div>
   );
