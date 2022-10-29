@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Typography from '../Typography/Typography';
 
+// Dropdown item solo debe recibir o bien la prop link o bien la prop func, nunca ambos.
+// link cuando el DropdownItem se usa para redirigir, y func cuando se usa como un boton
+// programado con una funcion en un evento "OnClick".
 const DropdownItem = ({
-  link, children, icon, size, ...props
+  link, children, icon, size, func, ...props
 }) => {
   let style = {};
   if (size === 'small') {
@@ -28,12 +31,22 @@ const DropdownItem = ({
   }
   return (
     <li className={`border-b-2 ${style.li} relative bg-white shadow-2xl px-0 sm:px-1 ${props.className}`}>
+      {link && !func && (
       <Link to={link} className={`flex items-center py-4 ${style.Link} overflow-hidden text-gray-700 text-ellipsis rounded hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out`}>
         {icon && <span className="px-1.5">{icon}</span>}
         <Typography component="p" className="px-1.5">
           {children}
         </Typography>
       </Link>
+      )}
+      {func && !link && (
+      <div onClick={func} role="presentation" className={`cursor-pointer flex items-center py-4 ${style.Link} overflow-hidden text-gray-700 text-ellipsis rounded hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out`}>
+        {icon && <span className="px-1.5">{icon}</span>}
+        <Typography component="p" className="px-1.5">
+          {children}
+        </Typography>
+      </div>
+      )}
     </li>
   );
 };
@@ -44,6 +57,7 @@ DropdownItem.propTypes = {
   className: PropTypes.string,
   link: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'big']),
+  func: PropTypes.func,
 };
 
 export default DropdownItem;

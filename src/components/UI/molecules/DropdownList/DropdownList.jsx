@@ -10,6 +10,7 @@ const DropdownList = ({ data, size, side }) => (
         size={size}
         link={x.link}
         icon={x.icon}
+        func={x.func}
       >
         {x.text}
       </DropdownItem>
@@ -20,9 +21,10 @@ const DropdownList = ({ data, size, side }) => (
 DropdownList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      link: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       icon: PropTypes.node,
+      func: PropTypes.func,
+      link: PropTypes.string,
     }),
   ).isRequired,
   size: PropTypes.oneOf(['small', 'medium']),

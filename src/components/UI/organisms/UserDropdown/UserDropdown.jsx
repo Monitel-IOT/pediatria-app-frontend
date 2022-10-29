@@ -1,32 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown, faUser, faKey, faSignOut,
+} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../atoms/Button/Button';
 import DropdownList from '../../molecules/DropdownList/DropdownList';
-import { getUserByFirebaseIdAPI } from '../../../../thunkAction/auth/authThunk';
+import { getUserByFirebaseIdAPI, signOut } from '../../../../thunkAction/auth/authThunk';
 
 const UserDropdown = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     databaseUser, user,
   } = useSelector((state) => state.authReducer);
   useEffect(() => {
     dispatch(getUserByFirebaseIdAPI(user.uid));
   }, []);
-  const data = [
-    {
-      link: '/',
-      text: 'Ver perfil',
-    },
-    {
-      link: '/',
-      text: 'Cambiar contraseña',
-    },
-    {
-      link: '/',
-      text: 'Log out',
-    }];
+
   const [isDropdownActive, setisDropdownActive] = useState(false);
   // condicionales para mostrar iniciales del usuario en el avatar
   let textAvatar;
@@ -44,8 +36,27 @@ const UserDropdown = () => {
   } else {
     textAvatar = '...';
   }
+  const handleSignOut = async () => {
+    await dispatch(signOut());
+    await navigate('/login');
+  };
+  const data = [
+    {
+      link: '/',
+      text: 'Ver perfil',
+      icon: <FontAwesomeIcon size="lg" icon={faUser} />,
+    },
+    {
+      link: '/',
+      text: 'Cambiar contraseña',
+      icon: <FontAwesomeIcon size="lg" icon={faKey} />,
+    },
+    {
+      func: handleSignOut,
+      text: 'Cerrar sesión',
+      icon: <FontAwesomeIcon size="lg" icon={faSignOut} />,
+    }];
   return (
-
     <div className="items-center relative">
       {/* <!-- Icon --> */}
       <Button avatar onClick={() => setisDropdownActive(!isDropdownActive)} iconRigth={<FontAwesomeIcon size="sm" icon={faCaretDown} />}>
