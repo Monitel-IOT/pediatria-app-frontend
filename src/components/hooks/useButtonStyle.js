@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useButtonStyle = ({
-  primary, outline, danger, disabled, avatar, uppercase, small, ...props
+  primary, outline, danger, disabled, uppercase, small, ...props
 }) => {
   const [styles, setStyles] = useState({ main: '', uppercase: '' });
 
@@ -9,11 +9,15 @@ const useButtonStyle = ({
     const handleSize = (size) => {
       switch (size) {
         case 'small':
-          return 'text-xs px-4 py-1';
+          return 'text-xs px-8 py-2 sm:px-4 sm:py-1';
         case 'big':
-          return 'text-lg px-5 py-2';
+          return 'text-lg px-9 py-3 sm:px-5 sm:py-2';
+        case 'small no padding':
+          return 'text-xs';
+        case 'normal no padding':
+          return 'text-xs sm:text-sm';
         default:
-          return 'text-xs sm:text-sm px-5 py-2';
+          return ' px-9 py-3 sm:px-5 sm:py-2';
       }
     };
     const handleStyle = () => {
@@ -38,9 +42,6 @@ const useButtonStyle = ({
       if (disabled) {
         return `bg-gray-600 rounded-full sm:font-semibold text-white cursor-auto ${handleSize(props.size)}`;
       }
-      if (avatar) {
-        return 'm-1 mr-2 w-14 h-14 relative flex justify-center items-center rounded-full bg-gray-500 text-xl text-white uppercase font-semibold';
-      }
       return 'text-gray-600 hover:text-cyan-600 hover:opacity-80';
     };
 
@@ -58,7 +59,7 @@ const useButtonStyle = ({
       main: handleStyle(),
       uppercase: handleUppercase(),
     });
-  }, [primary, outline, danger, disabled, avatar, uppercase, props.size]);
+  }, [primary, outline, danger, disabled, uppercase, props.size]);
 
   return [styles];
 };

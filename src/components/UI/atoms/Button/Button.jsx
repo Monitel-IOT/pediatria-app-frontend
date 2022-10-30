@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import useButtonStyle from '../../../hooks/useButtonStyle';
 
 const Button = ({
-  children, iconLeft, iconRigth, outline, primary, danger, disabled, avatar, uppercase, ...props
+  children, iconLeft, iconRigth, outline, primary, danger, disabled, uppercase, ...props
 }) => {
   const [styles] = useButtonStyle({
-    primary, outline, danger, disabled, avatar, uppercase, ...props,
+    primary, outline, danger, disabled, uppercase, ...props,
   });
 
   if (!children) {
@@ -14,10 +14,11 @@ const Button = ({
   }
 
   return (
-    <button type="button" {...props} disabled={disabled} className={`${styles.main} ${styles.uppercase} px-4 py-1 sm:px-5 sm:py-2 ${props.className}`}>
+    <button type="button" {...props} disabled={disabled} className={`${styles.main} ${styles.uppercase} ${props.className}`}>
       {iconLeft && <span className="pr-2">{iconLeft}</span>}
       {children}
       {iconRigth && <span className="pl-2">{iconRigth}</span>}
+
     </button>
   );
 };
@@ -30,7 +31,6 @@ Button.propTypes = {
   primary: PropTypes.bool,
   danger: PropTypes.bool,
   disabled: PropTypes.bool,
-  avatar: PropTypes.bool,
   uppercase: PropTypes.bool,
   className: PropTypes.string,
   size: PropTypes.string,
