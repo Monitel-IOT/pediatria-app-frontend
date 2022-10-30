@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   error: null,
   isUserAuthorized: false,
+  nameSurnameLetters: '',
 };
 
 export const authSlice = createSlice({
@@ -66,6 +67,21 @@ export const authSlice = createSlice({
     });
     builder.addCase(getUserByFirebaseIdAPI.fulfilled, (state, action) => {
       state.databaseUser = action.payload;
+      // obtener las primeras letras del nombre y apelllido del user
+      if (action.payload.data.surname) {
+        state.nameSurnameLetters = action.payload.data.name[0] + action.payload.data.surname[0];
+      } else if (action.payload.data.name) {
+        // eslint-disable-next-line prefer-destructuring
+        state.nameSurnameLetters = action.payload.data.name[0];
+        state.databaseUser.data.surname = '';
+      }
+      if (action.payload.data.msg === 'Not found') {
+        // eslint-disable-next-line prefer-destructuring
+        state.nameSurnameLetters = '...';
+        state.databaseUser.data.name = 'user not found';
+        state.databaseUser.data.surname = '...';
+      }
+
       state.loading = false;
       state.error = false;
     });

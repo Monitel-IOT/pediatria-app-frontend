@@ -116,7 +116,7 @@ const DashboardTemplate = () => {
             {patient.LastName}
           </li>
         </ul>
-        <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-5 md:gird-cols-4">
+        <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-5 md:grid-cols-4">
           <Measurement icon={<FontAwesomeIcon icon={faUsers} />} text="Pacientes" value="20" />
           <Measurement icon={<FontAwesomeIcon icon={faCalendarCheck} />} text="Atenciones" value="14" />
         </div>

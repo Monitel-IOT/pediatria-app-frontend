@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  faCaretDown, faUser, faKey, faSignOut,
+  faUser, faKey, faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../atoms/Button/Button';
+import Avatar from '../../atoms/Avatar/Avatar';
 import DropdownList from '../../molecules/DropdownList/DropdownList';
 import { getUserByFirebaseIdAPI, signOut } from '../../../../thunkAction/auth/authThunk';
+import Button from '../../atoms/Button/Button';
 
 const UserDropdown = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    databaseUser, user,
+    nameSurnameLetters, user,
   } = useSelector((state) => state.authReducer);
   useEffect(() => {
     dispatch(getUserByFirebaseIdAPI(user.uid));
@@ -21,21 +22,7 @@ const UserDropdown = () => {
 
   const [isDropdownActive, setisDropdownActive] = useState(false);
   // condicionales para mostrar iniciales del usuario en el avatar
-  let textAvatar;
-  if (databaseUser.data) {
-    if (databaseUser.data.surname) {
-      textAvatar = databaseUser.data.name[0] + databaseUser.data.surname[0];
-    } else if (databaseUser.data.name) {
-      // eslint-disable-next-line prefer-destructuring
-      textAvatar = databaseUser.data.name[0];
-    }
-    if (databaseUser.data.msg === 'Not found') {
-      // eslint-disable-next-line prefer-destructuring
-      textAvatar = '...';
-    }
-  } else {
-    textAvatar = '...';
-  }
+
   const handleSignOut = async () => {
     await dispatch(signOut());
     await navigate('/login');
@@ -59,9 +46,12 @@ const UserDropdown = () => {
   return (
     <div className="items-center relative">
       {/* <!-- Icon --> */}
-      <Button avatar onClick={() => setisDropdownActive(!isDropdownActive)} iconRigth={<FontAwesomeIcon size="sm" icon={faCaretDown} />}>
-        {textAvatar}
+      <Button outline size="normal no padding" onClick={() => setisDropdownActive(!isDropdownActive)}>
+        <Avatar>
+          {nameSurnameLetters}
+        </Avatar>
       </Button>
+
       <div className={`${isDropdownActive ? 'active' : 'hidden'}`}>
         <DropdownList size="small" data={data} side="left" />
       </div>
