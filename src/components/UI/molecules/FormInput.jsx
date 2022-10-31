@@ -15,7 +15,7 @@ const FormInput = ({ label, ...props }) => {
     }
   };
   return (
-    <div className="flex flex-col mb-5">
+    <div className="flex flex-col mb-3">
       <Label htmlFor={label} className="mb-1">{label}</Label>
       <Input
         id={label}
@@ -41,6 +41,7 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   onInputChange: PropTypes.func,
   type: PropTypes.string,
+  addon: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.node,
   pattern: PropTypes.string,
