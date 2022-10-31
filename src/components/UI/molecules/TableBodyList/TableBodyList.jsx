@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Td from '../../atoms/Td/Td';
 import IconButton from '../../atoms/IconButton/IconButton';
 import { deletePatientStateBy } from '../../../../state/patients/patientsSlice';
@@ -23,10 +24,13 @@ const TableBodyList = ({ data }) => {
           <Td>{row.apellidos}</Td>
           <Td>{row.fechaNacimiento}</Td>
           <Td>
-            <IconButton
-              outline="blue"
-              icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />}
-            />
+            <Link to={`/paciente/${row.id}`}>
+              <IconButton
+                outline="blue"
+                icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />}
+              />
+
+            </Link>
           </Td>
           <Td>
             <IconButton
