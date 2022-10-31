@@ -6,7 +6,7 @@ import PageHeader from '../../organisms/PageHeader/PageHeader';
 
 const NewAppointmentTemplate = () => (
   <Wrapper>
-    <Container className="h-[calc(100vh-5rem)] pt-4">
+    <Container className="py-4">
       <PageHeader title="Nueva Atención" />
       <NewAppointmentForm />
     </Container>
