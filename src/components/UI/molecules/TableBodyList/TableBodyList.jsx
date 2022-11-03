@@ -26,6 +26,8 @@ const TableBodyList = ({ data }) => {
           <Td>
             <Link to={`/paciente/${row.id}`}>
               <IconButton
+                className="px-3 py-2"
+                size="normal no padding"
                 outline="blue"
                 icon={<FontAwesomeIcon size="lg" icon={faCircleInfo} />}
               />
@@ -34,7 +36,9 @@ const TableBodyList = ({ data }) => {
           </Td>
           <Td>
             <IconButton
+              className="px-3 py-2"
               outline="danger"
+              size="normal no padding"
               icon={<FontAwesomeIcon size="lg" icon={faTrash} />}
               onClick={() => handleDeletePatient(row.id)}
             />

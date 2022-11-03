@@ -28,25 +28,27 @@ const SearchPatientTemplate = () => {
     <Wrapper>
       <Container>
         <main className="py-4 bg-gray-100">
-          <PageHeader title="Pacientes" />
-          <Card className="mt-4">
-            <Typography component="h4" className="mb-0">
-              Busque por Nombre:
-            </Typography>
-            <Input
-              placeholder="Buscar..."
-              type="text"
-              onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
-            />
+          <section className="lg:flex items-stretch">
+            <PageHeader title="Pacientes" />
+            <div className="mt-2 ml-auto md:flex items-center">
+              <Typography component="h4" className="mx-2">
+                Búsqueda:
+              </Typography>
+              <Input
+                placeholder="Busque por nombre..."
+                type="text"
+                onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
+              />
 
-            <div className="ml-auto">
-              <span className="mr-2">Ordenar: </span>
+              <Typography component="h4" className="mx-2">
+                Ordenar:
+              </Typography>
               <Button primary onClick={() => dispatch(orderById())}>
                 {toggleSort ? 'Descendente' : 'Ascendente'}
               </Button>
             </div>
-          </Card>
 
+          </section>
           <div className="sm:hidden">
             {resultsByPage[page]?.map((patient) => (
               <PatientCard key={patient.nombre} patient={patient} />

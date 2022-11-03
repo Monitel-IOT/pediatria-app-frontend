@@ -9,15 +9,15 @@ const useButtonStyle = ({
     const handleSize = (size) => {
       switch (size) {
         case 'small':
-          return 'text-xs px-8 py-2 sm:px-4 sm:py-1';
+          return 'text-xs px-4 py-1 sm:px-6 sm:py-2';
         case 'big':
-          return 'text-lg px-9 py-3 sm:px-5 sm:py-2';
+          return 'text-lg px-5 py-2 sm:px-9 sm:py-3';
         case 'small no padding':
           return 'text-xs';
         case 'normal no padding':
           return 'text-xs sm:text-sm';
         default:
-          return ' px-9 py-3 sm:px-5 sm:py-2';
+          return 'px-4 py-1 sm:px-8 sm:py-2';
       }
     };
     const handleStyle = () => {

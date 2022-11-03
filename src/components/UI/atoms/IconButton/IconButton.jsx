@@ -6,10 +6,10 @@ const IconButton = ({
   icon, primary, outline, danger, disabled, uppercase, ...props
 }) => {
   const [styles] = useButtonStyle({
-    primary, outline, danger, disabled, uppercase,
+    primary, outline, danger, disabled, uppercase, ...props,
   });
   return (
-    <button {...props} type="button" className={`${styles.main} ${styles.uppercase} px-2.5 py-1 sm:px-3 sm:py-2 ${props.className}`}>
+    <button {...props} type="button" className={`${styles.main} ${styles.uppercase} ${props.className}`}>
       {icon && <span>{icon}</span>}
     </button>
   );
@@ -23,6 +23,7 @@ IconButton.propTypes = {
   uppercase: PropTypes.bool,
   className: PropTypes.string,
   icon: PropTypes.node,
+  size: PropTypes.string,
 };
 
 export default IconButton;
