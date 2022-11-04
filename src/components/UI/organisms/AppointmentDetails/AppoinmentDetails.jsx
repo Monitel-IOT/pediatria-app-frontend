@@ -1,17 +1,21 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Typography from '../../atoms/Typography/Typography';
 import Card from '../../../layout/Card/Card';
+import { getDDMMAA } from '../../../../utils';
 
 const AppoinmentDetails = () => {
-  const { idAppointment } = useParams();
+  // const { idAppointment } = useParams();
+  const { appointment } = useSelector((state) => state.appointmentsReducer);
+  // const { data } = appointment;
+  // const { vitalFunctions } = data;
+
   return (
     <div>
       <Card className="my-4 divide-y">
         <Typography component="h6" className="font-bold uppercase mr-2 mb-2 text-blue-main-500">
           Detalles de la Atención
-          {' '}
-          {idAppointment}
         </Typography>
         <div className="flex justify-between py-5 flex-wrap">
           <div className="flex items-center mr-2">
@@ -27,7 +31,7 @@ const AppoinmentDetails = () => {
               Fecha.:
             </Typography>
             <Typography component="h6" className="ml-1">
-              30/09/2022
+              {appointment?.data?.appointmentDate && getDDMMAA(appointment?.data?.appointmentDate)}
             </Typography>
           </div>
         </div>
@@ -38,7 +42,7 @@ const AppoinmentDetails = () => {
                 Peso:
               </Typography>
               <Typography component="h6" className="ml-1">
-                34 Kg / %
+                { `${appointment?.data?.weight} Kg` }
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -46,7 +50,7 @@ const AppoinmentDetails = () => {
                 Talla:
               </Typography>
               <Typography component="h6" className="ml-1">
-                72 cm / %
+                { `${appointment?.data?.size} cm` }
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -54,7 +58,7 @@ const AppoinmentDetails = () => {
                 PC:
               </Typography>
               <Typography component="h6" className="ml-1">
-                80 cm
+                {appointment?.data?.brainPerimeter}
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -62,7 +66,7 @@ const AppoinmentDetails = () => {
                 IMC:
               </Typography>
               <Typography component="h6" className="ml-1">
-                80 / %
+                {appointment?.data?.bodyMassIndex}
               </Typography>
             </div>
           </div>
@@ -72,7 +76,7 @@ const AppoinmentDetails = () => {
                 FR:
               </Typography>
               <Typography component="h6" className="ml-1">
-                34 x min
+                {`${appointment?.data?.vitalFunctions?.fr} x min`}
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -80,7 +84,7 @@ const AppoinmentDetails = () => {
                 FC:
               </Typography>
               <Typography component="h6" className="ml-1">
-                34 x min
+                {`${appointment?.data?.vitalFunctions?.fc} x min`}
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -88,7 +92,7 @@ const AppoinmentDetails = () => {
                 Sat:
               </Typography>
               <Typography component="h6" className="ml-1">
-                80 %
+                {`${appointment?.data?.vitalFunctions?.saturacion} %`}
               </Typography>
             </div>
             <div className="flex items-center justify-between">
@@ -96,7 +100,7 @@ const AppoinmentDetails = () => {
                 Temp:
               </Typography>
               <Typography component="h6" className="ml-1">
-                80 °C
+                {`${appointment?.data?.vitalFunctions?.t} °C`}
               </Typography>
             </div>
           </div>
@@ -132,24 +136,24 @@ const AppoinmentDetails = () => {
               iure facere repellendus ratione soluta ad ex tenetur delectus
             </Typography>
           </div>
+          {appointment?.data?.auxiliaryExams.length !== 0 && (
           <div className="mt-2">
             <Typography component="h6" className="font-bold mr-2 mb-1 text-gray-600">
               Exámenes Auxiliares:
             </Typography>
-            <Typography component="h6">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis distinctio excepturi
-              iure facere repellendus ratione soluta ad ex tenetur delectus
-            </Typography>
+              {appointment?.data?.auxiliaryExams.map((item) => <Typography component="h6" key={item?.exams}>{item?.exams}</Typography>)}
           </div>
+          )}
+          {appointment?.data?.treatment.length !== 0 && (
           <div className="mt-2">
             <Typography component="h6" className="font-bold mr-2 mb-1 text-gray-600">
               Tratamiento:
             </Typography>
-            <Typography component="h6">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis distinctio excepturi
-              iure facere repellendus ratione soluta ad ex tenetur delectus
-            </Typography>
+              {appointment?.data?.treatment.map(
+                (item) => <Typography component="h6" key={item?.nameTreatment}>{item?.nameTreatment}</Typography>,
+              )}
           </div>
+          )}
           <div className="mt-2">
             <Typography component="h6" className="font-bold mr-2 mb-1 text-gray-600">
               Reevaluación:
