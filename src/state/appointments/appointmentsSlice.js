@@ -37,7 +37,7 @@ export const appointmentsSlice = createSlice({
       state.error = false;
     });
     builder.addCase(getAppointmentsAPI.fulfilled, (state, action) => {
-      state.appointments = action.payload;
+      state.appointments = action.payload.data;
       state.loading = false;
       state.error = false;
     });

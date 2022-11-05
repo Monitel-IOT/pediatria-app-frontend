@@ -5,13 +5,13 @@ import Card from '../../../layout/Card/Card';
 
 const PatientDetails = () => {
   const { patient } = useSelector((state) => state.patientsReducer);
-  console.log('Patient', patient);
+
   return (
     <div>
       <Card className="my-4 divide-y">
         <div>
           <Typography className="text-2xl sm:text-3xl uppercase text-blue-main-500 mb-4 sm:mb-10 sm:mt-6 font-black">
-            Nombre del paciente
+            {`${patient.name} ${patient.lastname}`}
           </Typography>
         </div>
         <div className="flex justify-between py-5 flex-wrap">
@@ -28,7 +28,7 @@ const PatientDetails = () => {
               Fecha de creación.:
             </Typography>
             <Typography component="h6" className="ml-1">
-              30/09/2022
+              {patient.createdAt}
             </Typography>
           </div>
         </div>
@@ -38,7 +38,7 @@ const PatientDetails = () => {
               Dni/codigo:
             </Typography>
             <Typography component="h6" className="ml-1">
-              12345678
+              {patient.dni}
             </Typography>
           </div>
           <div className="flex items-center justify-between">
@@ -46,7 +46,7 @@ const PatientDetails = () => {
               Fecha de Nacimiento:
             </Typography>
             <Typography component="h6" className="ml-1">
-              30/09/2022
+              {patient.birthDate}
             </Typography>
           </div>
           <div className="flex items-center justify-between">
@@ -54,7 +54,7 @@ const PatientDetails = () => {
               Sexo:
             </Typography>
             <Typography component="h6" className="ml-1">
-              Masculino
+              {patient.gender}
             </Typography>
           </div>
         </div>
@@ -63,14 +63,18 @@ const PatientDetails = () => {
             <Typography component="h6" className="font-bold">
               Parto:
             </Typography>
-            <Typography component="h6" className="ml-1" />
+            <Typography component="h6" className="ml-1">
+              {patient.gestation}
+            </Typography>
           </div>
           <div className="flex items-center justify-between">
             <Typography component="h6" className="font-bold">
               Peso de Nacimiento:
             </Typography>
             <Typography component="h6" className="ml-1">
-              30 Kg
+              {patient.birthWeight}
+              {' '}
+              kg
             </Typography>
           </div>
           <div className="flex items-center justify-between">
@@ -78,7 +82,7 @@ const PatientDetails = () => {
               Apgar:
             </Typography>
             <Typography component="h6" className="ml-1">
-              Lorem ipsum
+              {patient.apgar}
             </Typography>
           </div>
           <div className="flex items-center justify-between">
@@ -86,7 +90,7 @@ const PatientDetails = () => {
               Tipo de Lactancia:
             </Typography>
             <Typography component="h6" className="ml-1">
-              Lorem ipsum
+              {patient.supplementaryFeeding ? 'true' : 'false'}
             </Typography>
           </div>
           <div className="flex items-center justify-between">

@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  getPatientsRequest, postPatientRequest, getPatientsByIdRequest, deletePatientsByIdRequest,
+  getPatientsRequest,
+  postPatientRequest,
+  getPatientsByIdRequest,
+  deletePatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
 // import { auth } from '../../config/firebase/firebase.config';
 
