@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  getPatientsRequest, postPatientRequest, getPatientsByIdRequest, deletePatientsByIdRequest,
+  getPatientsRequest,
+  postPatientRequest,
+  getPatientsByIdRequest,
+  deletePatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
 // import { auth } from '../../config/firebase/firebase.config';
 
@@ -17,9 +20,9 @@ export const fetchPatients = createAsyncThunk('patients/getPatients', async (id)
 });
 
 // GET A PATIENT BY ID
-export const fetchPatientsById = createAsyncThunk('patients/getPatientById', async (id) => {
-  const res = await getPatientsByIdRequest(id);
-  return res.json();
+export const fetchPatientsById = createAsyncThunk('patients/getPatientById', async (patient) => {
+  const res = await getPatientsByIdRequest(patient.idPatient, patient.token);
+  return res.data;
 });
 
 // deleTe A PATIENT BY ID

@@ -1,7 +1,19 @@
+import axios from 'axios';
 import Routes from '../routes';
+import { getServiceHeaders } from '../services';
 
 export const getAppointmentById = (id) => fetch(Routes.fetchAppointmentById(id));
-export const getAppointments = () => fetch(Routes.fetchAppointments());
+
+export const getAppointmentsByPatientId = (idPatient, token) => axios.get(
+  Routes.fetchAppointmentsByPatientId(idPatient),
+  {
+    headers: {
+      ...getServiceHeaders('patient'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
+
 export const deleteAppointmentById = (id) => {
   const endpoint = Routes.fetchAppointmentById(id);
   // const csrfToken = Cookies.get('csrftoken');

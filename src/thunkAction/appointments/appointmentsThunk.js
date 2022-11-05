@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  getAppointmentById, getAppointments, deleteAppointmentById, updateAppointmentById,
+  getAppointmentById,
+  deleteAppointmentById,
+  updateAppointmentById,
+  getAppointmentsByPatientId,
 } from '../../api/appointment/appointmentRequest';
 
 export const getAppointmentByIdAPI = createAsyncThunk('appointments/getAppointmentById', async (idAppointment) => {
@@ -8,9 +11,9 @@ export const getAppointmentByIdAPI = createAsyncThunk('appointments/getAppointme
   return res.json();
 });
 
-export const getAppointmentsAPI = createAsyncThunk('appointments/getAppointments', async () => {
-  const res = await getAppointments();
-  return res.json();
+export const getAppointmentsAPI = createAsyncThunk('appointments/getAppointmentsByPatientId', async (patient) => {
+  const res = await getAppointmentsByPatientId(patient.idPatient, patient.token);
+  return res.data;
 });
 
 export const deleteAppointmentByIdAPI = createAsyncThunk('appointments/deleteAppointmentById', async (idAppointment) => {
