@@ -1,21 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
-const IconInput = (props) => (
-  <label htmlFor="iconInput">
+const IconInput = ({
+  iconLeft, iconRigth, ...props
+}) => (
+  <div className={`flex border border-gray-300 rounded-full focus-within:outline focus-within:outline-2 focus-within:outline-blue-main-500 overflow-hidden ${props.className}`}>
+    {iconLeft && (
+    <label htmlFor="email" className="flex items-center pl-2 bg-white">
+      <span className="text-gray-500">{iconLeft}</span>
+    </label>
+    ) }
     <input
-      id="iconInput"
+      id="email"
       {...props}
-      className={classNames('border-gray-300 p-2 sm:px-4 border rounded leading-none text-sm placeholder:text-sm focus:border-cyan-600 outline-0 my-2')}
+      className="px-2 py-2 border-0 focus:outline-none w-full"
     />
-  </label>
+    {iconRigth && (
+    <label htmlFor="email" className="flex items-center pr-4 bg-white">
+      <span className="text-gray-500">{iconRigth}</span>
+    </label>
+    ) }
+  </div>
 );
 
 IconInput.propTypes = {
+  iconLeft: PropTypes.node,
+  iconRigth: PropTypes.node,
   type: PropTypes.string,
-  // onChange: PropTypes.func,
-  // error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  className: PropTypes.string,
 };
 
 export default IconInput;

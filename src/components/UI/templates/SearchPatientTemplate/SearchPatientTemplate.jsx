@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { changePage, orderById, filterBy } from '../../../../state/patients/patientsSlice';
-import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
 import Pager from '../../molecules/Pager/Pager';
@@ -11,6 +12,7 @@ import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
 import PatientCard from '../../organisms/PatientCard/PatientCard';
+import IconInput from '../../atoms/IconInput/IconInput';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -31,10 +33,9 @@ const SearchPatientTemplate = () => {
           <section className="lg:flex items-stretch">
             <PageHeader title="Pacientes" />
             <div className="mt-2 ml-auto md:flex items-center">
-              <Typography component="h4" className="mx-2">
-                Búsqueda:
-              </Typography>
-              <Input
+
+              <IconInput
+                iconLeft={<FontAwesomeIcon icon={faMagnifyingGlass} />}
                 placeholder="Busque por nombre..."
                 type="text"
                 onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
