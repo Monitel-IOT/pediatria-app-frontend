@@ -26,8 +26,8 @@ export const fetchPatientsById = createAsyncThunk('patients/getPatientById', asy
 });
 
 // deleTe A PATIENT BY ID
-export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (id) => {
-  const res = await deletePatientsByIdRequest(id);
+export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (patient) => {
+  const res = await deletePatientsByIdRequest(patient.id, patient.token);
   return res.json();
 });
 
