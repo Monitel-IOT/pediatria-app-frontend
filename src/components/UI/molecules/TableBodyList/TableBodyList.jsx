@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Td from '../../atoms/Td/Td';
 import IconButton from '../../atoms/IconButton/IconButton';
@@ -11,8 +11,9 @@ import { deletePatientsById } from '../../../../thunkAction/patients/patientsThu
 
 const TableBodyList = ({ data }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.authReducer);
   const handleDeletePatient = (id) => {
-    dispatch(deletePatientsById(id));
+    dispatch(deletePatientsById({ id, token: user?.token }));
     dispatch(deletePatientStateBy(id));
   };
   return (

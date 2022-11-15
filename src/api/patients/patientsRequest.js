@@ -17,12 +17,12 @@ export const getPatientsByIdRequest = (idPatient, token) => axios.get(
   },
 );
 
-export const deletePatientsByIdRequest = (id) => {
+export const deletePatientsByIdRequest = (id, token) => {
   const endpoint = `${PATIENTS_URL}patient/${id}`;
   // const csrfToken = Cookies.get('csrftoken');
   const headers = {
     'Content-Type': 'application/json',
-    // 'X-CSRFToken': csrfToken,
+    Authorization: `Bearer ${token}`,
   };
   const requestOptions = {
     method: 'DELETE',
