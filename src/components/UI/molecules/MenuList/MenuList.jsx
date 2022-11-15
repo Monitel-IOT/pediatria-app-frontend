@@ -1,21 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChartColumn, faMagnifyingGlass, faPlusSquare, // faUser, faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import MenuItem from '../../atoms/MenuItem/MenuItem';
 import UserCard from '../../organisms/UserCard/UserCard';
-import { getUserByFirebaseIdAPI } from '../../../../thunkAction/auth/authThunk';
 
 const MenuList = () => {
-  const dispatch = useDispatch();
   const {
-    nameSurnameLetters, user, databaseUser,
+    nameSurnameLetters, databaseUser,
   } = useSelector((state) => state.authReducer);
-  useEffect(() => {
-    dispatch(getUserByFirebaseIdAPI(user.uid));
-  }, []);
   return (
     <div>
 
