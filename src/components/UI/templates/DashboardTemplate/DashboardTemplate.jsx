@@ -10,6 +10,7 @@ import Container from '../../../layout/Container/Container';
 import { updateAppointmentByIdAPI } from '../../../../thunkAction/appointments/appointmentsThunk';
 import Alert from '../../molecules/Alert/Alert';
 import Modal from '../../molecules/Modal/Modal';
+import PageHeader from '../../organisms/PageHeader/PageHeader';
 
 const DashboardTemplate = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,11 @@ const DashboardTemplate = () => {
   // } = useSelector((state) => state.authReducer);
   const [isOpen, setIsOpen] = useState(false);
 
+  const dataPages = [
+    {
+      link: '/dashboard',
+      text: 'Dashboard',
+    }];
   // console.log(user);
   const appointmentObject = {
     idAppointment: '6351eb032e655955f5166c2d',
@@ -104,7 +110,7 @@ const DashboardTemplate = () => {
   return (
     <Wrapper>
       <Container className="h-[calc(100vh-5rem)]">
-        <h1>Dashboard Template</h1>
+        <PageHeader title="Dashboard" dataPages={dataPages} />
         <Button primary onClick={() => dispatch(updateAppointmentByIdAPI(appointmentObject))}>
           CLICK actualizar appointment con id:
           {` ${appointmentObject.idAppointment}`}
