@@ -26,12 +26,17 @@ const SearchPatientTemplate = () => {
     toggleSort,
   } = useSelector((state) => state.patientsReducer);
   const dispatch = useDispatch();
+  const dataPages = [
+    {
+      link: '/searchPatient',
+      text: 'Lista de Pacientes',
+    }];
   return (
     <Wrapper>
       <Container>
         <main className="py-4 bg-gray-100">
           <section className="lg:flex items-stretch">
-            <PageHeader title="Pacientes" />
+            <PageHeader title="Lista de Pacientes" dataPages={dataPages} />
             <div className="mt-2 ml-auto md:flex items-center">
 
               <IconInput
