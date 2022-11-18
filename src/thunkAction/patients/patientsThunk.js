@@ -4,6 +4,7 @@ import {
   postPatientRequest,
   getPatientsByIdRequest,
   deletePatientsByIdRequest,
+  editPatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
 // import { auth } from '../../config/firebase/firebase.config';
 
@@ -25,6 +26,12 @@ export const fetchPatientsById = createAsyncThunk('patients/getPatientById', asy
   return res.data;
 });
 
+// Put A PATIENT BY ID
+export const fetchEditPatientsById = createAsyncThunk('patients/fetchEditPatientsById', async (patient) => {
+  const res = await editPatientsByIdRequest(patient.idPatient, patient.form, patient.token);
+  return res.data;
+});
+
 // deleTe A PATIENT BY ID
 export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (patient) => {
   const res = await deletePatientsByIdRequest(patient.id, patient.token);
@@ -35,6 +42,7 @@ export const deletePatientsById = createAsyncThunk('patients/deletePatientById',
 // POST PATIENT
 export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (patient) => {
   // const token = await auth.currentUser.getIdToken(true);
+  console.log('registrando paciente');
   const response = await postPatientRequest(patient.form, patient.token);
   return response.data;
 });

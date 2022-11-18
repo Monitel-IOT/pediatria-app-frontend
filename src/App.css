@@ -36,10 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-span[data-error='true']{
-  display: none;
-}
-input:invalid[focused="true"] ~ span{
-  display: block;
-}
