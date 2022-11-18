@@ -6,9 +6,19 @@ export default {
   component: Button,
 };
 
-export const Template = (args) => <Button {...args}>Click Me!</Button>;
+export const Default = (args) => <Button {...args}>Click Me!</Button>;
 
-export const Primary = Template.bind({});
+export const Primary = Default.bind({});
 Primary.args = {
-  type: 'primary',
+  primary: true,
+};
+
+export const Outline = Default.bind({});
+Outline.args = {
+  outline: true,
+};
+
+export const Danger = Default.bind({});
+Danger.args = {
+  danger: true,
 };
