@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import {
   // eslint-disable-next-line import/named
   handleVaccines, prevStep,
@@ -8,12 +9,16 @@ import { checkInArrayByName } from '../../../../utils';
 import Button from '../../atoms/Button/Button';
 import CheckBox from '../../atoms/CheckBox/CheckBox';
 // import { postPatientRequest } from '../../../../api/patients/patientsRequest';
-import { addNewPatient } from '../../../../thunkAction/patients/patientsThunk';
+import { addNewPatient, fetchEditPatientsById } from '../../../../thunkAction/patients/patientsThunk';
 
 const NewPatientVaccines = () => {
   const { form, step } = useSelector((state) => state.newPatientFormReducer);
   const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
+
+  const [searchParams] = useSearchParams();
+  const edit = searchParams.get('edit');
+  const idPatient = searchParams.get('id');
 
   return (
     <div className="my-4">
@@ -99,19 +104,31 @@ const NewPatientVaccines = () => {
         >
           Atrás
         </Button>
-        <Button
-          primary
-          disabled={false}
-          // eslint-disable-next-line no-underscore-dangle
-          // onClick={() => postPatientRequest(form, user.id)}
-          onClick={() => dispatch(addNewPatient({ form, token: user?.token }))}
-          className="ml-2"
-        >
-          Registrar Paciente
-        </Button>
+        {(edit === 'true')
+          ? (
+            <Button
+              primary
+              disabled={false}
+              onClick={
+            () => dispatch(fetchEditPatientsById({ idPatient, form, token: user?.token }))
+          }
+              className="ml-2"
+            >
+              Editar paciente
+            </Button>
+          )
+          : (
+            <Button
+              primary
+              disabled={false}
+              onClick={() => dispatch(addNewPatient({ form, token: user?.token }))}
+              className="ml-2"
+            >
+              Registrar paciente
+            </Button>
+          )}
       </div>
     </div>
   );
 };
-
 export default NewPatientVaccines;

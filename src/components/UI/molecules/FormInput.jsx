@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../atoms/Input/Input';
 import Label from '../atoms/Label/Label';
 import Typography from '../atoms/Typography/Typography';
 
 const FormInput = ({ label, ...props }) => {
-  const [focused, setFocused] = useState(false);
-  const handleFocus = () => {
-    setFocused('true');
-  };
   const handleInputChange = (e) => {
     if (props.onInputChange) {
       props.onInputChange(e);
@@ -26,8 +21,6 @@ const FormInput = ({ label, ...props }) => {
         value={props.value}
         pattern={props.pattern}
         required={props.r}
-        focused={focused}
-        onBlur={handleFocus}
         {...props}
       />
       {props.error && <Typography component="small" className="text-rose-500">{props.error}</Typography>}

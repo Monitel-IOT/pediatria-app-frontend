@@ -4,6 +4,7 @@ import {
   postPatientRequest,
   getPatientsByIdRequest,
   deletePatientsByIdRequest,
+  editPatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
 // import { auth } from '../../config/firebase/firebase.config';
 
@@ -22,6 +23,12 @@ export const fetchPatients = createAsyncThunk('patients/getPatients', async (id)
 // GET A PATIENT BY ID
 export const fetchPatientsById = createAsyncThunk('patients/getPatientById', async (patient) => {
   const res = await getPatientsByIdRequest(patient.idPatient, patient.token);
+  return res.data;
+});
+
+// Put A PATIENT BY ID
+export const fetchEditPatientsById = createAsyncThunk('patients/fetchEditPatientsById', async (patient) => {
+  const res = await editPatientsByIdRequest(patient.idPatient, patient.form, patient.token);
   return res.data;
 });
 

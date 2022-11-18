@@ -17,6 +17,17 @@ export const getPatientsByIdRequest = (idPatient, token) => axios.get(
   },
 );
 
+export const editPatientsByIdRequest = (id, body, token) => axios.put(
+  Routes.fetchpatientEdit(id),
+  body,
+  {
+    headers: {
+      ...getServiceHeaders('patient'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
+
 export const deletePatientsByIdRequest = (id, token) => {
   const endpoint = `${PATIENTS_URL}patient/${id}`;
   // const csrfToken = Cookies.get('csrftoken');
