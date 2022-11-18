@@ -42,7 +42,6 @@ export const deletePatientsById = createAsyncThunk('patients/deletePatientById',
 // POST PATIENT
 export const addNewPatient = createAsyncThunk('patients/addNewPatient', async (patient) => {
   // const token = await auth.currentUser.getIdToken(true);
-  console.log('registrando paciente');
   const response = await postPatientRequest(patient.form, patient.token);
   return response.data;
 });
