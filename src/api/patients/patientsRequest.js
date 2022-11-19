@@ -5,7 +5,15 @@ import { getServiceHeaders } from '../services';
 const PATIENTS_URL = 'https://pediatria-dev.herokuapp.com/api/v1/';
 
 // export const getPatientsRequest = (id) => axios.get(`${PATIENTS_URL}${id}/patients`);
-export const getPatientsRequest = (id) => fetch(`${PATIENTS_URL}user/${id}/patients`);
+export const getPatientsRequest = (token) => axios.get(
+  `${PATIENTS_URL}patient/patients`,
+  {
+    headers: {
+      ...getServiceHeaders('patient'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
 
 export const getPatientsByIdRequest = (idPatient, token) => axios.get(
   `${PATIENTS_URL}patient/${idPatient}`,

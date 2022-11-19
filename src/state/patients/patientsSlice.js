@@ -65,10 +65,10 @@ const patientsSlice = createSlice({
           // este funciona temporalmente debido a que aun hay pacientes con los atributos con
           // la primera letra en mayusculas
           id: patient.id,
-          nombre: patient.Name,
-          apellidos: patient.LastName,
-          dni: patient.DNI,
-          fechaNacimiento: getDDMMAA(patient.DateBirth),
+          nombre: patient.name,
+          apellidos: patient.lastname,
+          dni: patient.dni,
+          fechaNacimiento: getDDMMAA(patient.birthDate),
           estado: patient.state, // solo se cambio state para que funcione el Delete
           fechaCreacion: getDDMMAA(patient.createdAt),
         }));
