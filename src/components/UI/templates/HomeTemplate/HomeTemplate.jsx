@@ -47,6 +47,9 @@ const HomeTemplate = () => {
             <li>
               <NavLink to="dashboard" className="underline underline-offset-1 text-blue-500">Go to Dashboard</NavLink>
             </li>
+            <li>
+              <NavLink to="nueva-atencion" className="underline underline-offset-1 text-blue-500">Go to Nueva Atención</NavLink>
+            </li>
           </ul>
         </div>
       </div>

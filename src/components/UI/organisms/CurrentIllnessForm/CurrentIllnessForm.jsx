@@ -1,6 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { nextStep, prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
+
+import { prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Button from '../../atoms/Button/Button';
 import Label from '../../atoms/Label/Label';
 import Radio from '../../atoms/Radio/Radio';
@@ -8,7 +10,9 @@ import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
 
 const CurrentIllnessForm = () => {
-  // const { step } = useSelector((state) => state.newAppointmentFormReducer);
+  const { form } = useSelector((state) => state.newAppointmentFormReducer);
+  const { user, databaseUser } = useSelector((state) => state.authReducer);
+
   const dispatch = useDispatch();
   return (
     <div>
@@ -50,7 +54,8 @@ const CurrentIllnessForm = () => {
         <Button
           primary
           className="ml-2"
-          onClick={() => dispatch(nextStep(4))}
+          // eslint-disable-next-line max-len
+          onClick={() => dispatch(addNewAppointment({ newAppointment: form, patientId: databaseUser?.data?.id, token: user?.token }))}
         >
           Terminar
         </Button>

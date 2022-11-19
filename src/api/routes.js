@@ -6,6 +6,7 @@ const Routes = {
   fetchAppointmentById: (idAppointment) => `${getServiceEndpointService('appointment')}/${idAppointment}`,
   fetchAppointmentsByPatientId: (idPatient) => `${getServiceEndpointService('patient')}/${idPatient}/appointments`,
   fetchPatient: () => `${getServiceEndpointService('patient')}`,
+  postAppointment: (patientId) => `${getServiceEndpointService('appointment')}/${patientId}`,
   fetchpatientEdit: (idPatient) => `${getServiceEndpointService('patient')}/${idPatient}`,
 };
 
