@@ -4,6 +4,7 @@ import {
   deleteAppointmentById,
   updateAppointmentById,
   getAppointmentsByPatientId,
+  createAppointmentRequest,
 } from '../../api/appointment/appointmentRequest';
 
 export const getAppointmentByIdAPI = createAsyncThunk('appointments/getAppointmentById', async (idAppointment) => {
@@ -27,4 +28,9 @@ export const updateAppointmentByIdAPI = createAsyncThunk('appointments/updateApp
     appointmentObject.idAppointment,
   );
   return res.json();
+});
+
+export const addNewAppointment = createAsyncThunk('patients/addNewAppointment', async (appointment, patientId, token) => {
+  const response = await createAppointmentRequest(appointment, patientId, token);
+  return response.data;
 });

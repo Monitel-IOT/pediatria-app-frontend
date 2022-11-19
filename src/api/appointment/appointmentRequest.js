@@ -44,3 +44,17 @@ export const updateAppointmentById = (newAppointment, id) => {
   };
   return fetch(endpoint, requestOptions);
 };
+
+export const createAppointmentRequest = (object) => {
+  const { newAppointment, patientId, token } = object;
+  axios.post(
+    Routes.postAppointment(patientId),
+    newAppointment,
+    {
+      headers: {
+        ...getServiceHeaders('appointment'),
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+};
