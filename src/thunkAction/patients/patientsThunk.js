@@ -4,6 +4,7 @@ import {
   postPatientRequest,
   getPatientsByIdRequest,
   deletePatientsByIdRequest,
+  editPatientsByIdRequest,
 } from '../../api/patients/patientsRequest';
 // import { auth } from '../../config/firebase/firebase.config';
 
@@ -14,9 +15,9 @@ import {
 // });
 
 // GET ALL PATIENTS by ID doctor
-export const fetchPatients = createAsyncThunk('patients/getPatients', async (id) => {
-  const res = await getPatientsRequest(id);
-  return res.json();
+export const fetchPatients = createAsyncThunk('patients/getPatients', async (token) => {
+  const res = await getPatientsRequest(token);
+  return res.data;
 });
 
 // GET A PATIENT BY ID
@@ -25,9 +26,15 @@ export const fetchPatientsById = createAsyncThunk('patients/getPatientById', asy
   return res.data;
 });
 
+// Put A PATIENT BY ID
+export const fetchEditPatientsById = createAsyncThunk('patients/fetchEditPatientsById', async (patient) => {
+  const res = await editPatientsByIdRequest(patient.idPatient, patient.form, patient.token);
+  return res.data;
+});
+
 // deleTe A PATIENT BY ID
-export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (id) => {
-  const res = await deletePatientsByIdRequest(id);
+export const deletePatientsById = createAsyncThunk('patients/deletePatientById', async (patient) => {
+  const res = await deletePatientsByIdRequest(patient.id, patient.token);
   return res.json();
 });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,8 @@ import Measurement from '../../molecules/Measurement/Measurement';
 import Container from '../../../layout/Container/Container';
 import { updateAppointmentByIdAPI } from '../../../../thunkAction/appointments/appointmentsThunk';
 import Alert from '../../molecules/Alert/Alert';
+import Modal from '../../molecules/Modal/Modal';
+import PageHeader from '../../organisms/PageHeader/PageHeader';
 
 const DashboardTemplate = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,13 @@ const DashboardTemplate = () => {
   // const {
   //   user,
   // } = useSelector((state) => state.authReducer);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const dataPages = [
+    {
+      link: '/dashboard',
+      text: 'Dashboard',
+    }];
   // console.log(user);
   const appointmentObject = {
     idAppointment: '6351eb032e655955f5166c2d',
@@ -91,10 +99,18 @@ const DashboardTemplate = () => {
     },
   };
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Wrapper>
       <Container className="h-[calc(100vh-5rem)]">
-        <h1>Dashboard Template</h1>
+        <PageHeader title="Dashboard" dataPages={dataPages} />
         <Button primary onClick={() => dispatch(updateAppointmentByIdAPI(appointmentObject))}>
           CLICK actualizar appointment con id:
           {` ${appointmentObject.idAppointment}`}
@@ -139,6 +155,15 @@ const DashboardTemplate = () => {
           <Alert type="danger" outline className="mt-3">
             HELLO! This is an alert message.
           </Alert>
+        </div>
+        <div className="mt-5">
+          <Button primary onClick={openModal}>Open Modal</Button>
+          <Modal isOpen={isOpen} closeModal={closeModal}>
+            <button type="button" className="absolute top-[1rem] right-[1rem]" onClick={closeModal}>
+              X
+            </button>
+            Hello this is a Modal
+          </Modal>
         </div>
       </Container>
     </Wrapper>

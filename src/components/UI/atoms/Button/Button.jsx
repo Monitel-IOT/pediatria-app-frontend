@@ -30,7 +30,7 @@ Button.propTypes = {
   iconRigth: PropTypes.node,
   primary: PropTypes.bool,
   danger: PropTypes.bool,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   uppercase: PropTypes.bool,
   className: PropTypes.string,
   size: PropTypes.string,

@@ -16,7 +16,9 @@ const NewPatientForm = () => {
   return (
     <Card className="mt-4">
       <Stepper activeStep={step} onChange={(index) => dispatch(setStep(index))} steps={steps} />
-      {[<NewPatientBasicInfo />, <NewPatientDetailedInfo />, <NewPatientVaccines />][step]}
+      {[<NewPatientBasicInfo />,
+        <NewPatientDetailedInfo />,
+        <NewPatientVaccines />][step]}
     </Card>
   );
 };

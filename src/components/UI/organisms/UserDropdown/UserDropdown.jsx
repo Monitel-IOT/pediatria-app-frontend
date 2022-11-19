@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,18 +7,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Avatar from '../../atoms/Avatar/Avatar';
 import DropdownList from '../../molecules/DropdownList/DropdownList';
-import { getUserByFirebaseIdAPI, signOut } from '../../../../thunkAction/auth/authThunk';
+import { signOut } from '../../../../thunkAction/auth/authThunk';
 import Button from '../../atoms/Button/Button';
 
 const UserDropdown = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    nameSurnameLetters, user,
+    nameSurnameLetters,
   } = useSelector((state) => state.authReducer);
-  useEffect(() => {
-    dispatch(getUserByFirebaseIdAPI(user.uid));
-  }, []);
 
   const [isDropdownActive, setisDropdownActive] = useState(false);
   // condicionales para mostrar iniciales del usuario en el avatar

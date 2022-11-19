@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchPatientsById } from '../../thunkAction/patients/patientsThunk';
 
 const validationsForm = (form) => {
   const errors = {};
@@ -68,6 +69,8 @@ const initialState = {
   form: initialFormState,
   errors: true,
   step: 0,
+  error: false,
+  loading: false,
 };
 
 const newPatientFormSlice = createSlice({
@@ -107,6 +110,21 @@ const newPatientFormSlice = createSlice({
     setStep: (state, action) => {
       state.step = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPatientsById.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(fetchPatientsById.fulfilled, (state, action) => {
+      state.form = action.payload.data;
+      state.loading = false;
+      state.error = false;
+    });
+    builder.addCase(fetchPatientsById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
   },
 });
 

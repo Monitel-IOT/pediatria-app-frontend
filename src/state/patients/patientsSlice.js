@@ -17,7 +17,6 @@ const initialState = {
   page: 0,
   toggleSort: true,
   filterPatients: [],
-  patientsAfterDelete: [],
   // newPatient:{},
 };
 
@@ -27,7 +26,7 @@ const patientsSlice = createSlice({
   reducers: {
     deletePatientStateBy: (state, action) => {
       const newPatients = deleteFromArrayId(state.patients, action.payload);
-      state.patientsAfterDelete = newPatients;
+      state.patients = newPatients;
       const pages = flatByPages(newPatients, 10);
       state.resultsByPage = pages;
     },
@@ -61,13 +60,16 @@ const patientsSlice = createSlice({
         state.results = action.payload.data;
         // const newArray = action.payload.data.map(({ DNI, Name, ...keepAttrs }) => keepAttrs);
         // console.log(newArray);
-        const newArray = action.payload.data.filter((ob) => ob.Estate === true).map((patient) => ({
+        const newArray = action.payload.data.filter((ob) => ob.state === true).map((patient) => ({
+          // OJO: código temporal, cambiar por los atributos correctos del model,
+          // este funciona temporalmente debido a que aun hay pacientes con los atributos con
+          // la primera letra en mayusculas
           id: patient.id,
-          nombre: patient.Name,
-          apellidos: patient.LastName,
-          dni: patient.DNI,
-          fechaNacimiento: getDDMMAA(patient.DateBirth),
-          estado: patient.Estate,
+          nombre: patient.name,
+          apellidos: patient.lastname,
+          dni: patient.dni,
+          fechaNacimiento: getDDMMAA(patient.birthDate),
+          estado: patient.state, // solo se cambio state para que funcione el Delete
           fechaCreacion: getDDMMAA(patient.createdAt),
         }));
         state.patients = newArray;
