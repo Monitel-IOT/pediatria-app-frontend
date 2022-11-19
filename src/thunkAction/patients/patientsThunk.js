@@ -15,9 +15,9 @@ import {
 // });
 
 // GET ALL PATIENTS by ID doctor
-export const fetchPatients = createAsyncThunk('patients/getPatients', async (id) => {
-  const res = await getPatientsRequest(id);
-  return res.json();
+export const fetchPatients = createAsyncThunk('patients/getPatients', async (token) => {
+  const res = await getPatientsRequest(token);
+  return res.data;
 });
 
 // GET A PATIENT BY ID
