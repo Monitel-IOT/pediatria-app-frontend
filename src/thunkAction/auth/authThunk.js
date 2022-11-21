@@ -18,7 +18,7 @@ export const signInWithEmailAndPassword = createAsyncThunk('auth/signInWithEmail
 
 export const signOut = createAsyncThunk('auth/signOutStatus', async () => logout());
 
-export const getUserByFirebaseIdAPI = createAsyncThunk('auth/getUserByFirebaseID', async (id) => {
-  const res = await getUserByFirebaseId(id);
-  return res.json();
+export const getUserByFirebaseIdAPI = createAsyncThunk('auth/getUserByFirebaseID', async (user) => {
+  const res = await getUserByFirebaseId(user.firebaseId, user.token);
+  return res.data;
 });

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Routes from '../routes';
 import { getServiceHeaders } from '../services';
 
@@ -9,6 +10,14 @@ const createUser = (user) => fetch(Routes.fetchUser(), {
   body: JSON.stringify(user),
 });
 
-export const getUserByFirebaseId = (id) => fetch(Routes.fetchUserByFirebaseId(id));
+export const getUserByFirebaseId = (firebaseId, token) => axios.get(
+  Routes.fetchUserByFirebaseId(firebaseId),
+  {
+    headers: {
+      ...getServiceHeaders('user'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
 
 export default createUser;

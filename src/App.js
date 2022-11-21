@@ -28,10 +28,10 @@ const App = () => {
       const data = await user.toJSON();
       const token = await auth.currentUser.getIdToken(true);
       // add user & token to state
+      await dispatch(getUserByFirebaseIdAPI({ firebaseId: user.uid, token }));
       await dispatch(addUser({ ...data, token }));
       setLoading(false);
       // Esta linea se añadio para cargar el usuario de la base de datos una sola vez
-      await dispatch(getUserByFirebaseIdAPI(user.uid));
       return dispatch(authorizeUser());
     });
   };
