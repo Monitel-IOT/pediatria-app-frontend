@@ -2,10 +2,13 @@
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faCheckSquare, faCoffee, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheckSquare, faCoffee, faTrashCan, faCog,
+} from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getUserByFirebaseIdAPI } from './thunkAction/auth/authThunk';
 import AppRouter from './routes/AppRouter';
 import { addUser, authorizeUser, unauthorizeUser } from './state/auth/authSlice';
@@ -42,7 +45,11 @@ const App = () => {
 
   return (
     <div>
-      {loading ? <p>loading</p> : <AppRouter />}
+      {loading ? (
+        <div className="flex items-center justify-center h-screen">
+          <FontAwesomeIcon icon={faCog} className="fa-spin text-[4rem] text-blue-main-500" />
+        </div>
+      ) : <AppRouter />}
     </div>
   );
 };

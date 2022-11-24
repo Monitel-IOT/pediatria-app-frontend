@@ -9,16 +9,16 @@ const Wrapper = ({ children }) => {
   return (
     <div>
       <Navbar setToggleMainBar={setToggleMainBar} />
-      <main className="grid grid-cols-[auto_1fr]">
+      <main className="grid grid-cols-[auto_1fr] pt-[5rem]">
         <aside
           className={classNames(
-            'bg-white h-[calc(100vh-5rem)] sm:w-[310px] w-[100vw] shadow-lg transition-all fixed sm:sticky top-[5rem]',
+            'bg-white sm:w-[310px] w-[100vw] h-[calc(100vh-5rem)] shadow-lg transition-all fixed sm:sticky top-[5rem]',
             { 'ml-[-1000px]': toggleMainBar },
           )}
         >
           <MainBar />
         </aside>
-        <section className={classNames('w-[100vw] sm:w-full bg-gray-100 mt-[5rem]')}>
+        <section className={classNames('w-[100vw] sm:w-full bg-gray-100')}>
           {children}
         </section>
       </main>

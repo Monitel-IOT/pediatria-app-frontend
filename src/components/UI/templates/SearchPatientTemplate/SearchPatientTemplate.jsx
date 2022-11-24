@@ -62,9 +62,6 @@ const SearchPatientTemplate = () => {
           </div>
 
           <Card className="mt-4 hidden sm:block">
-            <Typography component="h3" className="mb-2">
-              Lista de Pacientes
-            </Typography>
             {resultsByPage[page] ? (
               <TableList data={{
                 // head: Object.keys(resultsByPage[page][0]),
