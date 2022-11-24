@@ -109,7 +109,7 @@ const DashboardTemplate = () => {
 
   return (
     <Wrapper>
-      <Container className="h-[calc(100vh-5rem)]">
+      <Container className="py-4">
         <PageHeader title="Dashboard" dataPages={dataPages} />
         <Button primary onClick={() => dispatch(updateAppointmentByIdAPI(appointmentObject))}>
           CLICK actualizar appointment con id:

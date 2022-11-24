@@ -12,9 +12,11 @@ const NewPatientTemplate = () => {
     }];
   return (
     <Wrapper>
-      <Container className="py-4">
-        <PageHeader title="Nuevo Paciente" dataPages={dataPages} />
-        <NewPatientForm />
+      <Container className="mb-auto">
+        <div className="h-full">
+          <PageHeader title="Nuevo Paciente" dataPages={dataPages} />
+          <NewPatientForm />
+        </div>
       </Container>
     </Wrapper>
   );
