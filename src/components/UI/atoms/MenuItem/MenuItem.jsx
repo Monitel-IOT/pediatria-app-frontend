@@ -1,27 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Typography from '../Typography/Typography';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 const MenuItem = ({
-  linkTo, children, iconLeft, ...props
+  linkTo, children, iconLeft, className, ...props
 }) => (
-  <div className={`relative bg-white px-0 sm:px-1 ${props.className}`}>
-    <Link to={linkTo} className="flex grid place-items-center text-lg py-6 overflow-hidden h-24 text-gray-700 text-ellipsis rounded hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out">
-      {iconLeft && <span className="px-1.5">{iconLeft}</span>}
-      <Typography component="p" className="px-1.5">
-        {children}
-      </Typography>
-    </Link>
-
-  </div>
+  <NavLink
+    to={linkTo}
+    className={classNames(
+      `flex items-center text-sm px-8 py-2 hover:text-blue-main-500 relative active:text-blue-main-500 transition duration-500 ease-in-out ${className}`,
+      { 'text-blue-main-500 before:content-[""] before:w-[5px] before:absolute before:top-0 before:left-0 before:bottom-0 before:rounded-tr-full before:rounded-br-full before:my-2 before:bg-blue-main-500': props.isActive },
+      { 'text-gray-700': !props.isActive },
+    )}
+  >
+    {iconLeft && <span className="pr-2">{iconLeft}</span>}
+    {children}
+  </NavLink>
 );
+
+MenuItem.defaultProps = {
+  isActive: false,
+};
 
 MenuItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   iconLeft: PropTypes.node,
   className: PropTypes.string,
   linkTo: PropTypes.string,
+  isActive: PropTypes.bool,
 };
 
 export default MenuItem;
