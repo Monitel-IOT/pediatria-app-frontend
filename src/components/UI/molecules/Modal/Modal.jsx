@@ -3,8 +3,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 
-const Modal = ({ children, isOpen, closeModal }) => {
+const Modal = ({
+  children, isOpen, closeModal, showXMark,
+}) => {
   const handleModalContainerClick = (e) => e.stopPropagation();
 
   return ReactDOM.createPortal(
@@ -21,6 +27,8 @@ const Modal = ({ children, isOpen, closeModal }) => {
         className="relative p-5 min-w-[320px] max-w-[480px] min-h-[200px] max-h-[600px] overflow-y-auto bg-white rounded"
         onClick={handleModalContainerClick}
       >
+        {showXMark ? <FontAwesomeIcon icon={faXmark} className="cursor-pointer absolute top-[1rem] right-[1rem]" onClick={closeModal} /> : null}
+
         {children}
       </div>
     </article>,
