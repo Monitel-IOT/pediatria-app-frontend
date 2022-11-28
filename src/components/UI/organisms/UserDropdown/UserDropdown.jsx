@@ -14,7 +14,7 @@ const UserDropdown = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    nameSurnameLetters,
+    nameSurnameLetters, user,
   } = useSelector((state) => state.authReducer);
 
   const [isDropdownActive, setisDropdownActive] = useState(false);
@@ -44,8 +44,8 @@ const UserDropdown = () => {
     <div className="items-center relative">
       {/* <!-- Icon --> */}
       <Button outline size="normal no padding" onClick={() => setisDropdownActive(!isDropdownActive)}>
-        <Avatar>
-          {nameSurnameLetters}
+        <Avatar size="small">
+          {nameSurnameLetters === '' ? user?.email[0] : nameSurnameLetters }
         </Avatar>
       </Button>
 

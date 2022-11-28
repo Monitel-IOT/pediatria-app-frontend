@@ -4,18 +4,18 @@ import Typography from '../../atoms/Typography/Typography';
 import Avatar from '../../atoms/Avatar/Avatar';
 
 const UserCard = ({
-  children, userTypeText, avatarText, ...props
+  children, avatarText, ...props
 }) => (
-  <div className={`border-b-2 border-gray-400 flex items-center justify-center text-lg py-6 overflow-hidden h-24 text-gray-700 text-ellipsis rounded  ${props.className} `}>
-    <Avatar>
+  <div className={`flex items-center text-lg text-gray-700 ${props.className} `}>
+    <Avatar size="medium">
       {avatarText}
     </Avatar>
-    <div>
-      <Typography component="p" className="px-1.5">
-        {userTypeText}
+    <div className="ml-4 w-[82px]">
+      <Typography component="p" className="font-semibold truncate">
+        {props.name}
       </Typography>
-      <Typography component="p" className="font-semibold px-1.5">
-        {children}
+      <Typography component="p">
+        Doctor
       </Typography>
     </div>
   </div>
@@ -25,6 +25,7 @@ const UserCard = ({
 UserCard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   className: PropTypes.string,
+  name: PropTypes.string,
   userTypeText: PropTypes.string,
   avatarText: PropTypes.string,
 };
