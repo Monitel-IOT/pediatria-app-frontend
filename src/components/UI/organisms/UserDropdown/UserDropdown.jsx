@@ -12,7 +12,7 @@ import useModal from '../../../hooks/useModal';
 
 const UserDropdown = () => {
   const {
-    nameSurnameLetters,
+    nameSurnameLetters, user,
   } = useSelector((state) => state.authReducer);
 
   const [isDropdownActive, setisDropdownActive] = useState(false);
