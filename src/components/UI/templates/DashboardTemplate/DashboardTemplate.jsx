@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +11,18 @@ import { updateAppointmentByIdAPI } from '../../../../thunkAction/appointments/a
 import Alert from '../../molecules/Alert/Alert';
 import Modal from '../../molecules/Modal/Modal';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
+import useModal from '../../../hooks/useModal';
 
 const DashboardTemplate = () => {
   const dispatch = useDispatch();
   const {
     patient,
   } = useSelector((state) => state.patientsReducer);
+  const [isOpen, toggle] = useModal();
+
   // const {
   //   user,
   // } = useSelector((state) => state.authReducer);
-  const [isOpen, setIsOpen] = useState(false);
 
   const dataPages = [
     {
@@ -99,14 +101,6 @@ const DashboardTemplate = () => {
     },
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
   return (
     <Wrapper>
       <Container className="py-4">
@@ -157,9 +151,9 @@ const DashboardTemplate = () => {
           </Alert>
         </div>
         <div className="mt-5">
-          <Button primary onClick={openModal}>Open Modal</Button>
-          <Modal isOpen={isOpen} closeModal={closeModal}>
-            <button type="button" className="absolute top-[1rem] right-[1rem]" onClick={closeModal}>
+          <Button primary onClick={toggle}>Open Modal</Button>
+          <Modal isOpen={isOpen} closeModal={toggle}>
+            <button type="button" className="absolute top-[1rem] right-[1rem]" onClick={toggle}>
               X
             </button>
             Hello this is a Modal

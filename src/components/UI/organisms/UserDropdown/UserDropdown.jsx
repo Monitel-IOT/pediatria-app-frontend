@@ -8,6 +8,7 @@ import Avatar from '../../atoms/Avatar/Avatar';
 import DropdownList from '../../molecules/DropdownList/DropdownList';
 import Button from '../../atoms/Button/Button';
 import LogOutModal from '../LogOutModal/LogOutModal';
+import useModal from '../../../hooks/useModal';
 
 const UserDropdown = () => {
   const {
@@ -15,8 +16,7 @@ const UserDropdown = () => {
   } = useSelector((state) => state.authReducer);
 
   const [isDropdownActive, setisDropdownActive] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  // condicionales para mostrar iniciales del usuario en el avatar
+  const [isOpen, setIsOpen] = useModal();
 
   const data = [
     {
