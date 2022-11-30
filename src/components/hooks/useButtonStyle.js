@@ -37,7 +37,7 @@ const useButtonStyle = ({
         return `bg-white text-gray-600 rounded-full font-semibold border border-gray-600 hover:opacity-80 ${handleSize(props.size)}`;
       }
       if (danger) {
-        return 'bg-rose-600 text-white text-sm rounded-full font-semibold hover:opacity-80';
+        return `bg-rose-500 text-white rounded-full sm:font-semibold border border-rose-500 hover:bg-rose-600 hover:opacity-80  $${handleSize(props.size)}`;
       }
       if (disabled) {
         return `bg-gray-600 rounded-full sm:font-semibold text-white cursor-auto ${handleSize(props.size)}`;
