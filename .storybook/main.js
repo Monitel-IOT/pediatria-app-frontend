@@ -9,6 +9,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    "storybook-addon-react-router-v6",
     "@storybook/preset-create-react-app"
   ],
   webpackFinal: async (config) => {

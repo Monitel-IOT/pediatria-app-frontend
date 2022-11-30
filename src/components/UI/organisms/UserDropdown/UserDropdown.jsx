@@ -39,7 +39,7 @@ const UserDropdown = () => {
       <div className="items-center relative">
         <Button outline size="normal no padding" onClick={() => setisDropdownActive(!isDropdownActive)}>
           <Avatar>
-            {nameSurnameLetters}
+            {nameSurnameLetters === '' ? user?.email[0] : nameSurnameLetters}
           </Avatar>
         </Button>
         <div className={`${isDropdownActive ? 'active' : 'hidden'}`}>

@@ -5,14 +5,14 @@ import Navbar from '../../UI/organisms/Navbar/Navbar';
 import MainBar from '../../UI/organisms/MainBar/MainBar';
 
 const Wrapper = ({ children }) => {
-  const [toggleMainBar, setToggleMainBar] = useState(true);
+  const [toggleMainBar, setToggleMainBar] = useState(false);
   return (
     <div>
       <Navbar setToggleMainBar={setToggleMainBar} />
       <main className="grid grid-cols-[auto_1fr] pt-[5rem]">
         <aside
           className={classNames(
-            'bg-white sm:w-[310px] w-[100vw] h-[calc(100vh-5rem)] shadow-lg transition-all fixed sm:sticky top-[5rem]',
+            'bg-white sm:w-[310px] w-[100vw] h-[calc(100vh-5rem)] shadow-lg transition-all duration-200 ease-in-out fixed sm:sticky top-[5rem]',
             { 'ml-[-1000px]': toggleMainBar },
           )}
         >

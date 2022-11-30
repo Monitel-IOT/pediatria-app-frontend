@@ -57,14 +57,6 @@ export const authSlice = createSlice({
       state.user = initialState.user;
     });
     // GET user by FIrebase ID
-    builder.addCase(getUserByFirebaseIdAPI.pending, (state) => {
-      state.loading = true;
-      state.error = false;
-    });
-    builder.addCase(getUserByFirebaseIdAPI.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
-    });
     builder.addCase(getUserByFirebaseIdAPI.fulfilled, (state, action) => {
       state.databaseUser = action.payload;
       // obtener las primeras letras del nombre y apelllido del user
@@ -81,9 +73,6 @@ export const authSlice = createSlice({
         state.databaseUser.data.name = 'user not found';
         state.databaseUser.data.surname = '...';
       }
-
-      state.loading = false;
-      state.error = false;
     });
   },
 });
