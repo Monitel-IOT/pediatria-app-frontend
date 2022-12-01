@@ -1,9 +1,8 @@
 const routes = {
-  home: '/',
+  dashboard: '/',
   login: '/login',
   register: '/registro',
   forgotPassword: '/recuperarContraseña',
-  dashboard: '/dashboard',
   searchPatient: '/searchPatient',
   newPatient: '/nuevo-paciente',
   viewPatient: '/paciente/:idPatient',

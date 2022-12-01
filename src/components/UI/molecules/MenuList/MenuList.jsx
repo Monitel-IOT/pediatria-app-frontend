@@ -26,7 +26,7 @@ const MenuList = () => {
       <MenuItem
         linkTo="/dashboard"
         iconLeft={<FontAwesomeIcon size="lg" icon={faChartColumn} />}
-        isActive={location.pathname === '/dashboard'}
+        isActive={location.pathname === '/'}
       >
         Dashboard
       </MenuItem>

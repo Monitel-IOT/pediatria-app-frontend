@@ -8,5 +8,5 @@ export default {
   component: Measurement,
 };
 
-export const PatientsMeasurement = () => <Measurement icon={<FontAwesomeIcon icon={faUsers} />} text="pacientes" value="20" />;
-export const AppointmentMeasurement = () => <Measurement icon={<FontAwesomeIcon icon={faCalendarCheck} />} text="atenciones" value="14" />;
+export const PatientsMeasurement = () => <Measurement icon={<FontAwesomeIcon icon={faUsers} />} className="max-w-[200px]" text="pacientes" value="20" />;
+export const AppointmentMeasurement = () => <Measurement icon={<FontAwesomeIcon icon={faCalendarCheck} />} className="max-w-[200px]" text="atenciones" value="14" />;

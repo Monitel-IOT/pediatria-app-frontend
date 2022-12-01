@@ -4,7 +4,6 @@ import {
 
 import React from 'react';
 import routes from './routes';
-import HomePage from '../components/pages/HomePage/HomePage';
 import LoginPage from '../components/pages/LoginPage/LoginPage';
 import RegisterPage from '../components/pages/RegisterPage/RegisterPage';
 import PrivateRoutes from './PrivateRoutes';
@@ -14,19 +13,27 @@ import DashboardPage from '../components/pages/DashboardPage/DashboardPage';
 import AppointmentDetailsPage from '../components/pages/AppointmentDetailsPage/AppointmentDetailsPage';
 import ViewPatientPage from '../components/pages/ViewPatientPage/ViewPatientPage';
 import NewAppointmentPage from '../components/pages/NewAppointmentPage/NewAppointmentPage';
+import PublicRoutes from './PublicRoutes';
 
 const AppRouter = () => (
   <HashRouter>
     <Routes>
-      <Route path={routes.login} element={<LoginPage />} />
+      <Route
+        path={routes.login}
+        element={(
+          <PublicRoutes>
+            <LoginPage />
+          </PublicRoutes>
+        )}
+      />
       <Route path={routes.register} element={<RegisterPage />} />
       <Route
-        path={routes.home}
+        path={routes.dashboard}
         element={(
           <PrivateRoutes>
-            <HomePage />
+            <DashboardPage />
           </PrivateRoutes>
-        )}
+          )}
       />
       <Route
         path={routes.searchPatient}
@@ -43,14 +50,6 @@ const AppRouter = () => (
             <NewPatientPage />
           </PrivateRoutes>
         )}
-      />
-      <Route
-        path={routes.dashboard}
-        element={(
-          <PrivateRoutes>
-            <DashboardPage />
-          </PrivateRoutes>
-          )}
       />
       <Route
         path={routes.appointmentDetails}
