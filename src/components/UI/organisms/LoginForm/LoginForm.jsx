@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { handleChange, initialStateForm } from '../../../../state/loginForm/loginFormSlice';
@@ -13,10 +13,9 @@ import Card from '../../../layout/Card/Card';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const { form, errors, isDisabled } = useSelector((state) => state.loginFormReducer);
-  const { error, loading } = useSelector((state) => state.authReducer);
+  const { error, loading, user } = useSelector((state) => state.authReducer);
 
   /* const headerMoleculeObj = {
     title: {
@@ -32,12 +31,11 @@ const LoginForm = () => {
   }; */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(signInWithEmailAndPassword(form));
-    navigate('/');
+    dispatch(signInWithEmailAndPassword(form));
     dispatch(initialStateForm());
   };
 
-  if (loading) {
+  if ((loading || user?.uid) && !location?.state?.message) {
     return (
       <div className="flex items-center justify-center h-screen">
         <FontAwesomeIcon icon={faCog} className="fa-spin text-[4rem] text-blue-main-500" />
