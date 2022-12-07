@@ -2,7 +2,8 @@ import axios from 'axios';
 import Routes from '../routes';
 import { getServiceHeaders } from '../services';
 
-const PATIENTS_URL = 'https://pediatria-dev.herokuapp.com/api/v1/';
+// const PATIENTS_URL = 'https://pediatria-dev.herokuapp.com/api/v1/';
+const PATIENTS_URL = ' https://pediatria-back-dev.azurewebsites.net/api/v1/';
 
 // export const getPatientsRequest = (id) => axios.get(`${PATIENTS_URL}${id}/patients`);
 export const getPatientsRequest = (token) => axios.get(

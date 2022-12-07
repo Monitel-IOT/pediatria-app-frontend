@@ -5,13 +5,13 @@ const environmentRootPaths = {
     backendPediatria: 'http://127.0.0.1:5000/api/v1',
   },
   dev: {
-    backendPediatria: 'https://pediatria-dev.herokuapp.com/api/v1',
+    backendPediatria: 'https://pediatria-back-dev.azurewebsites.net/api/v1',
   },
   qa: {
-    backendPediatria: 'https://pediatria-dev.herokuapp.com/api/v1',
+    backendPediatria: 'https://pediatria-back-dev.azurewebsites.net/api/v1',
   },
   prod: {
-    backendPediatria: 'https://pediatria-dev.herokuapp.com/api/v1',
+    backendPediatria: 'https://pediatria-back-dev.azurewebsites.net/api/v1',
   },
 };
 
