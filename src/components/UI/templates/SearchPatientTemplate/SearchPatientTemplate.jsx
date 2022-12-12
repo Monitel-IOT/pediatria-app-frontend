@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { changePage, orderById, filterBy } from '../../../../state/patients/patientsSlice';
+import { useNavigate } from 'react-router-dom';
+import { changePage, filterBy } from '../../../../state/patients/patientsSlice';
 import Button from '../../atoms/Button/Button';
-import Typography from '../../atoms/Typography/Typography';
 import Pager from '../../molecules/Pager/Pager';
 import Card from '../../../layout/Card/Card';
 import TableList from '../../organisms/TableList/TableList';
@@ -20,11 +20,8 @@ import IconInput from '../../atoms/IconInput/IconInput';
 // };
 
 const SearchPatientTemplate = () => {
-  const {
-    resultsByPage,
-    page,
-    toggleSort,
-  } = useSelector((state) => state.patientsReducer);
+  const { resultsByPage, page } = useSelector((state) => state.patientsReducer);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataPages = [
     {
@@ -38,22 +35,16 @@ const SearchPatientTemplate = () => {
           <section className="lg:flex items-stretch">
             <PageHeader title="Lista de Pacientes" dataPages={dataPages} />
             <div className="mt-2 ml-auto md:flex items-center">
-
               <IconInput
-                iconLeft={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-                placeholder="Busque por nombre..."
+                iconRigth={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+                placeholder="Buscar"
                 type="text"
                 onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
               />
-
-              <Typography component="h4" className="mx-2">
-                Ordenar:
-              </Typography>
-              <Button primary onClick={() => dispatch(orderById())}>
-                {toggleSort ? 'Descendente' : 'Ascendente'}
+              <Button primary uppercase className="ml-2" onClick={() => navigate('/nuevo-paciente')}>
+                Nuevo Paciente
               </Button>
             </div>
-
           </section>
           <div className="sm:hidden">
             {resultsByPage[page]?.map((patient) => (
