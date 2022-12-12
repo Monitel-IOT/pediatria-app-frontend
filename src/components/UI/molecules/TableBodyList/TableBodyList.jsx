@@ -25,7 +25,7 @@ const TableBodyList = ({ data }) => {
   return (
     <tbody>
       {data.map((row) => (
-        <tr key={Math.random()} className="border-t hover:bg-blue-50" onClick={() => navigate(`/paciente/${row.id}`)}>
+        <tr key={row.id} className="border-t hover:bg-blue-50" onClick={() => navigate(`/paciente/${row.id}`)}>
           <Td>{row.dni}</Td>
           <Td>{row.nombre}</Td>
           <Td>{row.apellidos}</Td>

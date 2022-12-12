@@ -7,6 +7,7 @@ import {
 } from '../../utils';
 
 const initialState = {
+  loading: false,
   patient: {},
   results: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -53,10 +54,11 @@ const patientsSlice = createSlice({
     builder
       // GET ALL PATIENTS OF A DOCTOR
       .addCase(fetchPatients.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchPatients.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.results = action.payload.data;
         // const newArray = action.payload.data.map(({ DNI, Name, ...keepAttrs }) => keepAttrs);
         // console.log(newArray);
@@ -79,6 +81,7 @@ const patientsSlice = createSlice({
       })
       .addCase(fetchPatients.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       })
       // GET PATIENT BY ID
