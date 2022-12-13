@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchPatients, addNewPatient, fetchPatientsById, deletePatientsById,
+  fetchPatients, fetchPatientsById, deletePatientsById,
 } from '../../thunkAction/patients/patientsThunk';
 import {
   sortLists, flatByPages, filterSearch, deleteFromArrayId, getDDMMAA,
@@ -46,6 +46,24 @@ const patientsSlice = createSlice({
     },
     changePage: (state, action) => {
       state.page = action.payload - 1;
+    },
+    addNewPatientState: (state, action) => {
+      const newArray = [...state.results, action.payload];
+      const newArrayFilter = newArray.filter((ob) => ob.state === true).map((patient) => ({
+        // OJO: código temporal, cambiar por los atributos correctos del model,
+        // este funciona temporalmente debido a que aun hay pacientes con los atributos con
+        // la primera letra en mayusculas
+        id: patient.id,
+        nombre: patient.name,
+        apellidos: patient.lastname,
+        dni: patient.dni,
+        fechaNacimiento: getDDMMAA(patient.birthDate),
+        estado: patient.state, // solo se cambio state para que funcione el Delete
+        fechaCreacion: getDDMMAA(patient.createdAt),
+      }));
+      state.results = newArray;
+      state.patients = newArrayFilter;
+      state.resultsByPage = flatByPages(newArrayFilter, 10);
     },
     initialState: () => initialState,
 
@@ -106,18 +124,6 @@ const patientsSlice = createSlice({
       .addCase(deletePatientsById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-      })
-      // POST PATIENT
-      .addCase(addNewPatient.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(addNewPatient.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.results.push(action.payload);
-      })
-      .addCase(addNewPatient.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
       });
   },
 });
@@ -131,6 +137,6 @@ export const getPatientByDni = (state, dni) => {
 };
 
 export const {
-  orderById, changePage, filterBy, deletePatientStateBy,
+  orderById, changePage, filterBy, deletePatientStateBy, addNewPatientState,
 } = patientsSlice.actions;
 export default patientsSlice.reducer;
