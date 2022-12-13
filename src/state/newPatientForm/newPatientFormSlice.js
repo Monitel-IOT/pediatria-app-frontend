@@ -67,6 +67,7 @@ const initialFormState = {
 
 const initialState = {
   form: initialFormState,
+  isEdit: false,
   errors: true,
   step: 0,
   error: false,
@@ -111,13 +112,19 @@ const newPatientFormSlice = createSlice({
     setStep: (state, action) => {
       state.step = action.payload;
     },
-    openPatientForm: (state) => {
+    openPatientForm: (state, action) => {
+      if (action.payload) {
+        // get the patient by id
+        state.form = action.payload;
+        state.isEdit = true;
+      }
       state.showPatientForm = true;
     },
     closePatientForm: (state) => {
       state.showPatientForm = false;
       state.form = initialFormState;
       state.step = 0;
+      state.isEdit = false;
     },
   },
   extraReducers: (builder) => {
@@ -125,8 +132,8 @@ const newPatientFormSlice = createSlice({
       state.loading = true;
       state.error = false;
     });
-    builder.addCase(fetchPatientsById.fulfilled, (state, action) => {
-      state.form = action.payload.data;
+    builder.addCase(fetchPatientsById.fulfilled, (state) => {
+      // state.form = action.payload.data;
       state.loading = false;
       state.error = false;
     });

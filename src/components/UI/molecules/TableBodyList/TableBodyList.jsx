@@ -8,6 +8,8 @@ import Td from '../../atoms/Td/Td';
 import IconButton from '../../atoms/IconButton/IconButton';
 import { deletePatientStateBy } from '../../../../state/patients/patientsSlice';
 import { deletePatientsById } from '../../../../thunkAction/patients/patientsThunk';
+import { openPatientForm } from '../../../../state/newPatientForm/newPatientFormSlice';
+import { getDDMMAA } from '../../../../utils';
 
 const TableBodyList = ({ data }) => {
   const dispatch = useDispatch();
@@ -18,24 +20,24 @@ const TableBodyList = ({ data }) => {
     dispatch(deletePatientsById({ id, token: user?.token }));
     dispatch(deletePatientStateBy(id));
   };
-  const handleEditPatient = (e, id) => {
+  const handleEditPatient = (e, patient) => {
     e.stopPropagation();
-    navigate(`/nuevo-paciente/?edit=true&id=${id}`);
+    dispatch(openPatientForm(patient));
   };
   return (
     <tbody>
       {data.map((row) => (
         <tr key={row.id} className="border-t hover:bg-blue-50" onClick={() => navigate(`/paciente/${row.id}`)}>
           <Td>{row.dni}</Td>
-          <Td>{row.nombre}</Td>
-          <Td>{row.apellidos}</Td>
-          <Td>{row.fechaNacimiento}</Td>
+          <Td>{row.name}</Td>
+          <Td>{row.lastname}</Td>
+          <Td>{getDDMMAA(row.birthDate)}</Td>
           <Td>
             <IconButton
               outline="gray"
               className="!px-3 !py-2 mr-2"
               icon={<FontAwesomeIcon icon={faPenNib} />}
-              onClick={(e) => handleEditPatient(e, row.id)}
+              onClick={(e) => handleEditPatient(e, row)}
             />
             <IconButton
               className="!px-3 !py-2"
@@ -55,9 +57,9 @@ TableBodyList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       dni: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      apellidos: PropTypes.string.isRequired,
-      fechaNacimiento: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      lastname: PropTypes.string.isRequired,
+      birthDate: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
