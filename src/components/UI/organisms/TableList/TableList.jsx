@@ -22,9 +22,9 @@ TableList.propTypes = {
     body: PropTypes.arrayOf(
       PropTypes.shape({
         dni: PropTypes.string.isRequired,
-        nombre: PropTypes.string.isRequired,
-        apellidos: PropTypes.string.isRequired,
-        fechaNacimiento: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        lastname: PropTypes.string.isRequired,
+        birthDate: PropTypes.string.isRequired,
       }),
     ).isRequired,
   }),

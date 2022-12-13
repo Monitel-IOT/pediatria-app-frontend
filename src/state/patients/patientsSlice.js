@@ -3,13 +3,12 @@ import {
   fetchPatients, fetchPatientsById, deletePatientsById,
 } from '../../thunkAction/patients/patientsThunk';
 import {
-  sortLists, flatByPages, filterSearch, deleteFromArrayId, getDDMMAA,
+  sortLists, flatByPages, filterSearch, deleteFromArrayId,
 } from '../../utils';
 
 const initialState = {
   loading: false,
   patient: {},
-  results: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
   patients: [],
@@ -48,22 +47,16 @@ const patientsSlice = createSlice({
       state.page = action.payload - 1;
     },
     addNewPatientState: (state, action) => {
-      const newArray = [...state.results, action.payload];
-      const newArrayFilter = newArray.filter((ob) => ob.state === true).map((patient) => ({
-        // OJO: código temporal, cambiar por los atributos correctos del model,
-        // este funciona temporalmente debido a que aun hay pacientes con los atributos con
-        // la primera letra en mayusculas
-        id: patient.id,
-        nombre: patient.name,
-        apellidos: patient.lastname,
-        dni: patient.dni,
-        fechaNacimiento: getDDMMAA(patient.birthDate),
-        estado: patient.state, // solo se cambio state para que funcione el Delete
-        fechaCreacion: getDDMMAA(patient.createdAt),
-      }));
-      state.results = newArray;
-      state.patients = newArrayFilter;
-      state.resultsByPage = flatByPages(newArrayFilter, 10);
+      const newArray = [...state.patients, action.payload];
+      state.patients = newArray;
+      state.resultsByPage = flatByPages(newArray, 10);
+    },
+    updatePatientState: (state, action) => {
+      const newUpdated = state.patients.map(
+        (patient) => (patient.id === action.payload.id ? action.payload : patient),
+      );
+      state.patients = newUpdated;
+      state.resultsByPage = flatByPages(newUpdated, 10);
     },
     initialState: () => initialState,
 
@@ -77,25 +70,12 @@ const patientsSlice = createSlice({
       .addCase(fetchPatients.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.loading = false;
-        state.results = action.payload.data;
         // const newArray = action.payload.data.map(({ DNI, Name, ...keepAttrs }) => keepAttrs);
         // console.log(newArray);
-        const newArray = action.payload.data.filter((ob) => ob.state === true).map((patient) => ({
-          // OJO: código temporal, cambiar por los atributos correctos del model,
-          // este funciona temporalmente debido a que aun hay pacientes con los atributos con
-          // la primera letra en mayusculas
-          id: patient.id,
-          nombre: patient.name,
-          apellidos: patient.lastname,
-          dni: patient.dni,
-          fechaNacimiento: getDDMMAA(patient.birthDate),
-          estado: patient.state, // solo se cambio state para que funcione el Delete
-          fechaCreacion: getDDMMAA(patient.createdAt),
-        }));
-        state.patients = newArray;
-        state.sortedResults = newArray;
-        state.filterPatients = newArray;
-        state.resultsByPage = flatByPages(newArray, 10);
+        state.patients = action.payload.data;
+        state.sortedResults = action.payload.data;
+        state.filterPatients = action.payload.data;
+        state.resultsByPage = flatByPages(action.payload.data, 10);
       })
       .addCase(fetchPatients.rejected, (state, action) => {
         state.status = 'failed';
@@ -137,6 +117,6 @@ export const getPatientByDni = (state, dni) => {
 };
 
 export const {
-  orderById, changePage, filterBy, deletePatientStateBy, addNewPatientState,
+  orderById, changePage, filterBy, deletePatientStateBy, addNewPatientState, updatePatientState,
 } = patientsSlice.actions;
 export default patientsSlice.reducer;

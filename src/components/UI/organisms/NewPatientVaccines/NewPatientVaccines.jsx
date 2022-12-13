@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import {
   closePatientForm,
   // eslint-disable-next-line import/named
@@ -11,22 +11,31 @@ import Button from '../../atoms/Button/Button';
 import CheckBox from '../../atoms/CheckBox/CheckBox';
 // import { postPatientRequest } from '../../../../api/patients/patientsRequest';
 import { addNewPatient, fetchEditPatientsById } from '../../../../thunkAction/patients/patientsThunk';
-import { addNewPatientState } from '../../../../state/patients/patientsSlice';
+import { addNewPatientState, updatePatientState } from '../../../../state/patients/patientsSlice';
 
 const NewPatientVaccines = () => {
-  const { form, step } = useSelector((state) => state.newPatientFormReducer);
+  const { form, step, isEdit } = useSelector((state) => state.newPatientFormReducer);
   const { user } = useSelector((state) => state.authReducer);
   const { loading } = useSelector((state) => state.createPatientReducer);
+  const { updatePatientLoading } = useSelector((state) => state.updatePatientReducer);
   const dispatch = useDispatch();
 
-  const [searchParams] = useSearchParams();
-  const edit = searchParams.get('edit');
-  const idPatient = searchParams.get('id');
+  // const [searchParams] = useSearchParams();
+  // const edit = searchParams.get('edit');
+  // const idPatient = searchParams.get('id');
 
   const handleRegister = () => {
     dispatch(addNewPatient({ form, token: user?.token }))
       .then((res) => {
         dispatch(addNewPatientState(res.payload.data));
+        dispatch(closePatientForm());
+      });
+  };
+
+  const handleEditButton = () => {
+    dispatch(fetchEditPatientsById({ idPatient: form.id, form, token: user?.token }))
+      .then((res) => {
+        dispatch(updatePatientState(res.payload.data));
         dispatch(closePatientForm());
       });
   };
@@ -122,17 +131,15 @@ const NewPatientVaccines = () => {
           >
             Atrás
           </Button>
-          {(edit === 'true')
+          { isEdit
             ? (
               <Button
                 primary
                 disabled={false}
-                onClick={
-            () => dispatch(fetchEditPatientsById({ idPatient, form, token: user?.token }))
-          }
+                onClick={handleEditButton}
                 className="ml-2"
               >
-                Editar paciente
+                {updatePatientLoading ? 'cargando...' : 'Editar Paciente'}
               </Button>
             )
             : (

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faChartColumn, faMagnifyingGlass, faPlusSquare, // faUser, faGear,
+  faChartColumn, faMagnifyingGlass, // faUser, faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router-dom';
 import MenuItem from '../../atoms/MenuItem/MenuItem';
@@ -37,13 +37,13 @@ const MenuList = () => {
       >
         Mis Pacientes
       </MenuItem>
-      <MenuItem
+      {/*       <MenuItem
         linkTo="/nuevo-paciente"
         iconLeft={<FontAwesomeIcon size="lg" icon={faPlusSquare} />}
         isActive={location.pathname === '/nuevo-paciente'}
       >
         Nuevo paciente
-      </MenuItem>
+      </MenuItem> */}
       {/* <MenuItem linkTo="/perfil/:id" iconLeft={<FontAwesomeIcon size="xl"
     icon={faUser} />}>Perfil</MenuItem>
     <MenuItem linkTo="/" iconLeft={<FontAwesomeIcon size="xl"
