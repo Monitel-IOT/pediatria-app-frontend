@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = ({
-  children, isOpen, closeModal, showXMark,
+  children, isOpen, closeModal, showXMark, className,
 }) => {
   const handleModalContainerClick = (e) => e.stopPropagation();
 
@@ -21,10 +21,9 @@ const Modal = ({
           { hidden: !isOpen, flex: isOpen },
         )
       }
-      onClick={closeModal}
     >
       <div
-        className="relative p-5 min-w-[320px] max-w-[480px] min-h-[200px] max-h-[600px] overflow-y-auto bg-white rounded"
+        className={`flex items-center relative p-5 min-w-[320px] max-w-[1000px] min-h-[200px] max-h-[800px] overflow-y-auto bg-white rounded ${className}`}
         onClick={handleModalContainerClick}
       >
         {showXMark ? <FontAwesomeIcon icon={faXmark} className="cursor-pointer absolute top-[1rem] right-[1rem]" onClick={closeModal} /> : null}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  closePatientForm,
   handleChange, nextStep, prevStep,
 } from '../../../../state/newPatientForm/newPatientFormSlice';
 import Button from '../../atoms/Button/Button';
@@ -63,24 +64,32 @@ const NewPatientDetailedInfo = () => {
           checked={form.supplementaryFeeding}
         />
       </form>
-      <div>
+      <div className="flex items-center justify-between mt-4">
         <Button
-          primary={!(step === 0)}
-          disabled={(step === 0)}
-          onClick={() => dispatch(prevStep())}
+          danger
+          onClick={() => dispatch(closePatientForm())}
         >
-          Atrás
+          Cancelar
         </Button>
-        <Button
+        <div>
+          <Button
+            primary={!(step === 0)}
+            disabled={(step === 0)}
+            onClick={() => dispatch(prevStep())}
+          >
+            Atrás
+          </Button>
+          <Button
           // eslint-disable-next-line max-len
-          primary={!(errors.name || errors.lastname || errors.birthDate || errors.gender) && (form.name.length !== 0 && form.lastname.length !== 0 && form.birthDate.length !== 0 && form.gender.length !== 0)}
+            primary={!(errors.name || errors.lastname || errors.birthDate || errors.gender) && (form.name.length !== 0 && form.lastname.length !== 0 && form.birthDate.length !== 0 && form.gender.length !== 0)}
           // eslint-disable-next-line max-len
-          disabled={(errors.name || errors.lastname || errors.birthDate || errors.gender) || (form.name.length === 0 || form.lastname.length === 0 || form.birthDate.length === 0 || form.gender.length === 0)}
-          onClick={() => dispatch(nextStep(3))}
-          className="ml-2"
-        >
-          Siguiente
-        </Button>
+            disabled={(errors.name || errors.lastname || errors.birthDate || errors.gender) || (form.name.length === 0 || form.lastname.length === 0 || form.birthDate.length === 0 || form.gender.length === 0)}
+            onClick={() => dispatch(nextStep(3))}
+            className="ml-2"
+          >
+            Siguiente
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ const initialFormState = {
   birthWeight: '',
   childBirth: '',
   apgar: '',
-  supplementaryFeeding: '',
+  supplementaryFeeding: false,
   lactation: '',
   gestation: '',
   vaccines: [],
@@ -71,6 +71,7 @@ const initialState = {
   step: 0,
   error: false,
   loading: false,
+  showPatientForm: false,
 };
 
 const newPatientFormSlice = createSlice({
@@ -84,11 +85,11 @@ const newPatientFormSlice = createSlice({
     },
     handleVaccines: (state, action) => {
       const { name, value } = action.payload;
-      const obj = { Nombre: name };
+      const obj = { name };
       if (value) {
         state.form.vaccines.push(obj);
       } else {
-        const newVaccinesArray = state.form.vaccines.filter((item) => item.Nombre !== name);
+        const newVaccinesArray = state.form.vaccines.filter((item) => item.name !== name);
         state.form = { ...state.form, vaccines: newVaccinesArray };
       }
     },
@@ -110,6 +111,14 @@ const newPatientFormSlice = createSlice({
     setStep: (state, action) => {
       state.step = action.payload;
     },
+    openPatientForm: (state) => {
+      state.showPatientForm = true;
+    },
+    closePatientForm: (state) => {
+      state.showPatientForm = false;
+      state.form = initialFormState;
+      state.step = 0;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPatientsById.pending, (state) => {
@@ -129,6 +138,13 @@ const newPatientFormSlice = createSlice({
 });
 
 export const {
-  handleChange, handleVaccines, prevStep, nextStep, setStep, handleBlur,
+  handleChange,
+  handleVaccines,
+  prevStep,
+  nextStep,
+  setStep,
+  handleBlur,
+  openPatientForm,
+  closePatientForm,
 } = newPatientFormSlice.actions;
 export default newPatientFormSlice.reducer;
