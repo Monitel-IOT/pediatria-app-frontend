@@ -47,7 +47,7 @@ const SearchPatientTemplate = () => {
                 iconRigth={<FontAwesomeIcon icon={faMagnifyingGlass} />}
                 placeholder="Buscar"
                 type="text"
-                onChange={(e) => dispatch(filterBy([e.target.value, ['nombre']]))}
+                onChange={(e) => dispatch(filterBy([e.target.value, ['name']]))}
               />
               <Button
                 primary

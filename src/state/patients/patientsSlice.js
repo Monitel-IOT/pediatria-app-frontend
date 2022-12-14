@@ -32,9 +32,13 @@ const patientsSlice = createSlice({
     },
     filterBy: (state, action) => {
       const filteredPatients = filterSearch(state.patients, action.payload[0], action.payload[1]);
-      const pages = flatByPages(filteredPatients, 10);
-      state.filterPatients = filteredPatients;
-      state.resultsByPage = pages;
+      if (filteredPatients.length >= 1) {
+        const pages = flatByPages(filteredPatients, 10);
+        state.filterPatients = filteredPatients;
+        state.resultsByPage = pages;
+      } else {
+        state.resultsByPage = flatByPages(state.patients, 10);
+      }
     },
     orderById: (state) => {
       const sortedResults = sortLists('nombre', state.patients, state.toggleSort);
