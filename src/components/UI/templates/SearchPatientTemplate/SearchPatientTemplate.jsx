@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCog } from '@fortawesome/free-solid-svg-icons';
-import { changePage, filterBy } from '../../../../state/patients/patientsSlice';
+import { changePage, closeDeleteModal, filterBy } from '../../../../state/patients/patientsSlice';
 import Button from '../../atoms/Button/Button';
 import Pager from '../../molecules/Pager/Pager';
 import Card from '../../../layout/Card/Card';
@@ -17,6 +17,7 @@ import EmptySection from '../../organisms/EmptySection/EmptySection';
 import Modal from '../../molecules/Modal/Modal';
 import NewPatientForm from '../../organisms/NewPatientForm/NewPatientForm';
 import { closePatientForm, openPatientForm } from '../../../../state/newPatientForm/newPatientFormSlice';
+import PatientDelete from '../../organisms/PatientDelete/PatientDelete';
 
 // const data = {
 //   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
@@ -24,7 +25,9 @@ import { closePatientForm, openPatientForm } from '../../../../state/newPatientF
 // };
 
 const SearchPatientTemplate = () => {
-  const { resultsByPage, page, loading } = useSelector((state) => state.patientsReducer);
+  const {
+    resultsByPage, page, loading, showDeleteModal,
+  } = useSelector((state) => state.patientsReducer);
   const { showPatientForm } = useSelector((state) => state.newPatientFormReducer);
   const dispatch = useDispatch();
   const dataPages = [
@@ -37,6 +40,9 @@ const SearchPatientTemplate = () => {
       <Container>
         <Modal isOpen={showPatientForm} closeModal={() => dispatch(closePatientForm())} className="!w-[900px]">
           <NewPatientForm />
+        </Modal>
+        <Modal isOpen={showDeleteModal} closeModal={() => dispatch(closeDeleteModal())} className="" showXMark>
+          <PatientDelete />
         </Modal>
         <main className="py-4 bg-gray-100">
           <section className="lg:flex items-stretch">

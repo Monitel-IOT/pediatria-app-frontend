@@ -9,6 +9,7 @@ import loginFormReducer from './loginForm/loginFormSlice';
 import appointmentsReducer from './appointments/appointmentsSlice';
 import createPatientReducer from './patients/createPatientSlice';
 import updatePatientReducer from './patients/updatePatientSlice';
+import deletePatientReducer from './patients/deletePatientSlice';
 
 export default configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export default configureStore({
     createPatientReducer,
     newAppointmentFormReducer,
     updatePatientReducer,
+    deletePatientReducer,
   },
 });

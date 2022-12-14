@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchPatients, fetchPatientsById, deletePatientsById,
+  fetchPatients, fetchPatientsById,
 } from '../../thunkAction/patients/patientsThunk';
 import {
   sortLists, flatByPages, filterSearch, deleteFromArrayId,
@@ -17,6 +17,8 @@ const initialState = {
   page: 0,
   toggleSort: true,
   filterPatients: [],
+  showDeleteModal: false,
+  patientIdToDelete: '',
   // newPatient:{},
 };
 
@@ -62,6 +64,14 @@ const patientsSlice = createSlice({
       state.patients = newUpdated;
       state.resultsByPage = flatByPages(newUpdated, 10);
     },
+    openDeleteModal: (state, action) => {
+      state.showDeleteModal = true;
+      state.patientIdToDelete = action.payload;
+    },
+    closeDeleteModal: (state) => {
+      state.showDeleteModal = false;
+      state.patientIdToDelete = '';
+    },
     initialState: () => initialState,
 
   },
@@ -97,17 +107,6 @@ const patientsSlice = createSlice({
       .addCase(fetchPatientsById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-      })
-      // DELETE PATIENT BY ID
-      .addCase(deletePatientsById.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(deletePatientsById.fulfilled, (state) => {
-        state.status = 'succeeded';
-      })
-      .addCase(deletePatientsById.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
       });
   },
 });
@@ -121,6 +120,13 @@ export const getPatientByDni = (state, dni) => {
 };
 
 export const {
-  orderById, changePage, filterBy, deletePatientStateBy, addNewPatientState, updatePatientState,
+  orderById,
+  changePage,
+  filterBy,
+  deletePatientStateBy,
+  addNewPatientState,
+  updatePatientState,
+  closeDeleteModal,
+  openDeleteModal,
 } = patientsSlice.actions;
 export default patientsSlice.reducer;
