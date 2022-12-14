@@ -26,7 +26,7 @@ const Modal = ({
         className={`flex items-center relative p-5 min-w-[320px] max-w-[1000px] min-h-[200px] max-h-[800px] overflow-y-auto bg-white rounded ${className}`}
         onClick={handleModalContainerClick}
       >
-        {showXMark ? <FontAwesomeIcon icon={faXmark} className="cursor-pointer absolute top-[1rem] right-[1rem]" onClick={closeModal} /> : null}
+        {showXMark ? <FontAwesomeIcon icon={faXmark} className="cursor-pointer text-xl text-gray-600 hover:text-rose-500 absolute top-[1rem] right-[1rem]" onClick={closeModal} /> : null}
 
         {children}
       </div>

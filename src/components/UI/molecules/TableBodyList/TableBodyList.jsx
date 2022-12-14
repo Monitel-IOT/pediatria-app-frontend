@@ -2,23 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenNib } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Td from '../../atoms/Td/Td';
 import IconButton from '../../atoms/IconButton/IconButton';
-import { deletePatientStateBy } from '../../../../state/patients/patientsSlice';
-import { deletePatientsById } from '../../../../thunkAction/patients/patientsThunk';
+import { openDeleteModal } from '../../../../state/patients/patientsSlice';
 import { openPatientForm } from '../../../../state/newPatientForm/newPatientFormSlice';
 import { getDDMMAA } from '../../../../utils';
 
 const TableBodyList = ({ data }) => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.authReducer);
   const navigate = useNavigate();
-  const handleDeletePatient = (e, id) => {
+  const handleDeletePatient = (e, patientId) => {
     e.stopPropagation();
-    dispatch(deletePatientsById({ id, token: user?.token }));
-    dispatch(deletePatientStateBy(id));
+    dispatch(openDeleteModal(patientId));
   };
   const handleEditPatient = (e, patient) => {
     e.stopPropagation();
