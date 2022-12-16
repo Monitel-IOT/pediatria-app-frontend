@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchPatients, fetchPatientsById,
-} from '../../thunkAction/patients/patientsThunk';
+import { fetchPatients } from '../../thunkAction/patients/patientsThunk';
 import {
   sortLists, flatByPages, filterSearch, deleteFromArrayId,
 } from '../../utils';
@@ -57,6 +55,9 @@ const patientsSlice = createSlice({
       state.patients = newArray;
       state.resultsByPage = flatByPages(newArray, 10);
     },
+    getPatientState: (state, action) => {
+      state.patient = action.payload;
+    },
     updatePatientState: (state, action) => {
       const newUpdated = state.patients.map(
         (patient) => (patient.id === action.payload.id ? action.payload : patient),
@@ -95,19 +96,8 @@ const patientsSlice = createSlice({
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
-      })
-      // GET PATIENT BY ID
-      .addCase(fetchPatientsById.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchPatientsById.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.patient = action.payload.data;
-      })
-      .addCase(fetchPatientsById.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
       });
+    // GET PATIENT BY ID
   },
 });
 
@@ -128,5 +118,6 @@ export const {
   updatePatientState,
   closeDeleteModal,
   openDeleteModal,
+  getPatientState,
 } = patientsSlice.actions;
 export default patientsSlice.reducer;

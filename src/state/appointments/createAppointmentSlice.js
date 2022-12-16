@@ -3,8 +3,8 @@ import { addNewAppointment } from '../../thunkAction/appointments/appointmentsTh
 
 const initialState = {
   response: null,
-  loading: false,
-  error: null,
+  createAppointmentloading: false,
+  createAppointmentError: null,
 };
 
 export const createAppointmentSlice = createSlice({
@@ -13,17 +13,17 @@ export const createAppointmentSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(addNewAppointment.pending, (state) => {
-      state.loading = true;
-      state.error = false;
+      state.createAppointmentloading = true;
+      state.createAppointmentError = false;
     });
     builder.addCase(addNewAppointment.fulfilled, (state, action) => {
       state.response = action.payload;
-      state.loading = false;
-      state.error = false;
+      state.createAppointmentloading = false;
+      state.createAppointmentError = false;
     });
     builder.addCase(addNewAppointment.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
+      state.createAppointmentloading = false;
+      state.createAppointmentError = action.error;
     });
   },
 });

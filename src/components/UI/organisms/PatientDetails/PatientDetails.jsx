@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Typography from '../../atoms/Typography/Typography';
 import Card from '../../../layout/Card/Card';
-import Button from '../../atoms/Button/Button';
+import { getDDMMAA } from '../../../../utils';
 
 const PatientDetails = () => {
   const { patient } = useSelector((state) => state.patientsReducer);
@@ -30,7 +29,7 @@ const PatientDetails = () => {
               Fecha de creación.:
             </Typography>
             <Typography component="h6" className="ml-1">
-              {patient.createdAt}
+              {getDDMMAA(patient.createdAt)}
             </Typography>
           </div>
         </div>
@@ -48,7 +47,7 @@ const PatientDetails = () => {
               Fecha de Nacimiento:
             </Typography>
             <Typography component="h6" className="ml-1">
-              {patient.birthDate}
+              {getDDMMAA(patient.birthDate)}
             </Typography>
           </div>
           <div className="flex items-center justify-between">
@@ -114,13 +113,6 @@ const PatientDetails = () => {
             </Typography>
           </div>
         </div>
-        <Button
-          primary
-        >
-          <Link to={`/nuevo-paciente/?edit=true&id=${patient.id}`}>
-            Editar paciente
-          </Link>
-        </Button>
       </Card>
     </div>
   );
