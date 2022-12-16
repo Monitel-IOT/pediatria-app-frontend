@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  deleteAppointmentByIdAPI, getAppointmentByIdAPI, getAppointmentsAPI, updateAppointmentByIdAPI,
+  deleteAppointmentByIdAPI, getAppointmentByIdAPI, updateAppointmentByIdAPI,
 } from '../../thunkAction/appointments/appointmentsThunk';
 
 const initialState = {
   appointments: [],
   appointment: null,
+  showAppointmentForm: false,
   loading: false,
   error: null,
 };
@@ -14,6 +15,21 @@ export const appointmentsSlice = createSlice({
   name: 'appointments',
   initialState,
   reducers: {
+    // form create appointment states
+    openAppointnmentForm: (state) => {
+      state.showAppointmentForm = true;
+    },
+    closeAppointnmentForm: (state) => {
+      state.showAppointmentForm = false;
+    },
+    // api states
+    getAllAppointmentsState: (state, action) => {
+      state.appointments = action.payload;
+    },
+    addNewAppointmentState: (state, action) => {
+      const newArray = [...state.patients, action.payload];
+      state.appointments = newArray;
+    },
     appointmentsInitialState: () => initialState,
   },
   extraReducers: (builder) => {
@@ -32,19 +48,6 @@ export const appointmentsSlice = createSlice({
       state.error = action.error;
     });
     // get
-    builder.addCase(getAppointmentsAPI.pending, (state) => {
-      state.loading = true;
-      state.error = false;
-    });
-    builder.addCase(getAppointmentsAPI.fulfilled, (state, action) => {
-      state.appointments = action.payload.data;
-      state.loading = false;
-      state.error = false;
-    });
-    builder.addCase(getAppointmentsAPI.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
-    });
     // delete
     builder.addCase(deleteAppointmentByIdAPI.pending, (state) => {
       state.loading = true;
@@ -74,5 +77,11 @@ export const appointmentsSlice = createSlice({
   },
 });
 
-export const { appointmentsInitialState } = appointmentsSlice.actions;
+export const {
+  appointmentsInitialState,
+  getAllAppointmentsState,
+  openAppointnmentForm,
+  closeAppointnmentForm,
+  addNewAppointmentState,
+} = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;
