@@ -29,7 +29,7 @@ const PatientDetails = () => {
               Fecha de creación.:
             </Typography>
             <Typography component="h6" className="ml-1">
-              {getDDMMAA(patient.createdAt)}
+              {patient?.createdAt && getDDMMAA(patient.createdAt)}
             </Typography>
           </div>
         </div>
@@ -47,7 +47,7 @@ const PatientDetails = () => {
               Fecha de Nacimiento:
             </Typography>
             <Typography component="h6" className="ml-1">
-              {getDDMMAA(patient.birthDate)}
+              {patient?.birthDate && getDDMMAA(patient.birthDate)}
             </Typography>
           </div>
           <div className="flex items-center justify-between">
