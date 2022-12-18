@@ -18,23 +18,25 @@ import Modal from '../../molecules/Modal/Modal';
 import NewPatientForm from '../../organisms/NewPatientForm/NewPatientForm';
 import { closePatientForm, openPatientForm } from '../../../../state/newPatientForm/newPatientFormSlice';
 import PatientDelete from '../../organisms/PatientDelete/PatientDelete';
-
-// const data = {
-//   head: ['DNI', 'Nombre', 'Apellidos', 'Fecha de Nacimiento'],
-//   body: [],
-// };
+import ResponseModal from '../../organisms/ResponseModal/ResponseModal';
+import { closeResponseModal } from '../../../../state/ui/uiSlice';
 
 const SearchPatientTemplate = () => {
   const {
     resultsByPage, page, loading, showDeleteModal,
   } = useSelector((state) => state.patientsReducer);
   const { showPatientForm } = useSelector((state) => state.newPatientFormReducer);
+  const { showResponseModal } = useSelector((state) => state.uiReducer);
+  const { loading: loading_, error } = useSelector((state) => state.createPatientReducer);
+
   const dispatch = useDispatch();
+
   const dataPages = [
     {
       link: '/searchPatient',
       text: 'Lista de Pacientes',
     }];
+
   return (
     <Wrapper>
       <Container>
@@ -44,6 +46,14 @@ const SearchPatientTemplate = () => {
         <Modal isOpen={showDeleteModal} closeModal={() => dispatch(closeDeleteModal())} className="" showXMark>
           <PatientDelete />
         </Modal>
+        <ResponseModal
+          isOpen={showResponseModal}
+          onClose={() => dispatch(closeResponseModal())}
+          status={!(loading_ && error)}
+          onSuccessMessage="El paciente fue creado exitosamente"
+          onErrorMessage="Ocurrió un error vuelva a intentarlo de nuevo"
+          onError={() => dispatch(openPatientForm())}
+        />
         <main className="py-4 bg-gray-100">
           <section className="lg:flex items-stretch">
             <PageHeader title="Lista de Pacientes" dataPages={dataPages} />

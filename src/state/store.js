@@ -12,6 +12,7 @@ import updatePatientReducer from './patients/updatePatientSlice';
 import deletePatientReducer from './patients/deletePatientSlice';
 import getPatientReducer from './patients/getPatientSlice';
 import getAllAppointmentsReducer from './appointments/getAllAppointmentsSlice';
+import uiReducer from './ui/uiSlice';
 
 export default configureStore({
   reducer: {
@@ -28,5 +29,6 @@ export default configureStore({
     deletePatientReducer,
     getPatientReducer,
     getAllAppointmentsReducer,
+    uiReducer,
   },
 });
