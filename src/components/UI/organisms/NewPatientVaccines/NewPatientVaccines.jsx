@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useSearchParams } from 'react-router-dom';
 import {
   closePatientForm,
   // eslint-disable-next-line import/named
@@ -9,11 +8,8 @@ import {
 import { checkInArrayByName } from '../../../../utils';
 import Button from '../../atoms/Button/Button';
 import CheckBox from '../../atoms/CheckBox/CheckBox';
-// import { postPatientRequest } from '../../../../api/patients/patientsRequest';
 import { addNewPatient, fetchEditPatientsById } from '../../../../thunkAction/patients/patientsThunk';
 import { addNewPatientState, updatePatientState } from '../../../../state/patients/patientsSlice';
-// import useModal from '../../../hooks/useModal';
-// import ResponseModal from '../ResponseModal/ResponseModal';
 import { openResponseModal } from '../../../../state/ui/uiSlice';
 
 const NewPatientVaccines = () => {
@@ -21,36 +17,15 @@ const NewPatientVaccines = () => {
   const { user } = useSelector((state) => state.authReducer);
   const { loading } = useSelector((state) => state.createPatientReducer);
   const { updatePatientLoading } = useSelector((state) => state.updatePatientReducer);
-  // const { showResponseModal } = useSelector((state) => state.uiReducer);
-  // console.log(showResponseModal);
 
-  // console.log(showResponseModal);
-  // console.log()
   const dispatch = useDispatch();
-  // const [isOpen, setIsOpen] = useModal();
-  // const [searchParams] = useSearchParams();
-  // const edit = searchParams.get('edit');
-  // const idPatient = searchParams.get('id');
 
   const handleRegister = () => {
     dispatch(addNewPatient({ form, token: user?.token }))
       .then((res) => {
         dispatch(addNewPatientState(res.payload.data));
         dispatch(closePatientForm());
-        // setIsOpen(true);
-        // console.log(showResponseModal);
         dispatch(openResponseModal());
-        // console.log(showResponseModal);
-
-        // if (!(loading && error)) {
-        //   setIsOpen(true);
-        //   console.log(isOpen);
-        // }
-
-        // console.log(res);
-        // console.log(loading);
-        // console.log(error);
-        // console.log(!(loading && error));
       });
   };
 
@@ -176,15 +151,6 @@ const NewPatientVaccines = () => {
             )}
         </div>
       </div>
-      {/* <ResponseModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        status={!(loading && error)}
-        onSuccessMessage="El paciente fue registrado exitosamente"
-        onErrorMessage="Ocurrió un error que impidió que se registre el paciente"
-        onSuccess={() => {}}
-        onError={() => {}}
-      /> */}
     </div>
   );
 };

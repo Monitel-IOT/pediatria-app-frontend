@@ -19,7 +19,7 @@ export const appointmentsSlice = createSlice({
     openAppointnmentForm: (state) => {
       state.showAppointmentForm = true;
     },
-    closeAppointnmentForm: (state) => {
+    closeAppointmentForm: (state) => {
       state.showAppointmentForm = false;
     },
     // api states
@@ -81,7 +81,7 @@ export const {
   appointmentsInitialState,
   getAllAppointmentsState,
   openAppointnmentForm,
-  closeAppointnmentForm,
+  closeAppointmentForm,
   addNewAppointmentState,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;
