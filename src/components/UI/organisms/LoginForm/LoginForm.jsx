@@ -15,20 +15,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { form, errors, isDisabled } = useSelector((state) => state.loginFormReducer);
-  const { error, loading, user } = useSelector((state) => state.authReducer);
+  const { loading, user } = useSelector((state) => state.authReducer);
 
-  /* const headerMoleculeObj = {
-    title: {
-      text: 'Its great to see you!',
-      size: '2xl',
-      color: 'grey-main',
-    },
-    subtitle: {
-      text: 'Login here',
-      size: 'base',
-      color: 'blue-main',
-    },
-  }; */
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(signInWithEmailAndPassword(form));
@@ -76,8 +64,9 @@ const LoginForm = () => {
               ))}
               error={errors.password}
             />
-            { error && <div className="text-red-500 pb-2">{error.code}</div> }
-            { location?.state?.message && <div className="text-green-500 pb-2">{location.state.message}</div> }
+            {/* { error && <div className="text-red-500 pb-2">{error.code}</div> } */}
+            {/* { location?.state?.message &&
+              <div className="text-green-500 pb-2">{location.state.message}</div> } */}
             <div className="flex items-center justify-between flex-wrap">
               <RouteLink to="/forgotPassword">¿Olvidaste tu contraseña?</RouteLink>
               <Button
