@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
 
 import { prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
@@ -8,12 +9,21 @@ import Label from '../../atoms/Label/Label';
 import Radio from '../../atoms/Radio/Radio';
 import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
+import { addNewAppointmentState } from '../../../../state/appointments/appointmentsSlice';
 
 const CurrentIllnessForm = () => {
-  const { form } = useSelector((state) => state.newAppointmentFormReducer);
-  const { user, databaseUser } = useSelector((state) => state.authReducer);
-
+  const { idPatient } = useParams();
   const dispatch = useDispatch();
+  const { form } = useSelector((state) => state.newAppointmentFormReducer);
+  const { user } = useSelector((state) => state.authReducer);
+
+  const handleNewAppointment = () => {
+    dispatch(addNewAppointment({ newAppointment: form, patientId: idPatient, token: user?.token }))
+      .then((res) => {
+        dispatch(addNewAppointmentState(res.payload.data));
+      });
+  };
+
   return (
     <div>
       <form className="grid sm:grid-cols-2 gap-8">
@@ -55,7 +65,7 @@ const CurrentIllnessForm = () => {
           primary
           className="ml-2"
           // eslint-disable-next-line max-len
-          onClick={() => dispatch(addNewAppointment({ newAppointment: form, patientId: databaseUser?.data?.id, token: user?.token }))}
+          onClick={handleNewAppointment}
         >
           Terminar
         </Button>

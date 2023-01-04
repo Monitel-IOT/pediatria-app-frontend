@@ -27,7 +27,7 @@ export const appointmentsSlice = createSlice({
       state.appointments = action.payload;
     },
     addNewAppointmentState: (state, action) => {
-      const newArray = [...state.patients, action.payload];
+      const newArray = [...state.appointments, action.payload];
       state.appointments = newArray;
     },
     appointmentsInitialState: () => initialState,

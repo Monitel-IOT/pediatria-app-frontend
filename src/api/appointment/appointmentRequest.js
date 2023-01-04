@@ -47,7 +47,7 @@ export const updateAppointmentById = (newAppointment, id) => {
 
 export const createAppointmentRequest = (object) => {
   const { newAppointment, patientId, token } = object;
-  axios.post(
+  return axios.post(
     Routes.postAppointment(patientId),
     newAppointment,
     {
