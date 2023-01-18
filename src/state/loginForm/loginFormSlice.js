@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { handleLoginMessages } from '../../utils/authMessages/authMessages';
 
 const validationsForm = (form) => {
   const errors = {};
@@ -33,6 +34,11 @@ const initialState = {
   form: initialFormState,
   errors: true,
   isDisabled: true,
+  // alerts ui
+  showLoginAlert: false,
+  typeLoginAlert: '',
+  loginAlertMessage: '',
+  loginAlertAnimation: 'hidden',
 };
 
 const loginFormSlice = createSlice({
@@ -50,9 +56,21 @@ const loginFormSlice = createSlice({
       state.form = { ...state.form, [name]: value };
       state.errors = validationsForm(state.form);
     },
+    openLoginAlert: (state, action) => {
+      state.loginAlertMessage = handleLoginMessages(action.payload.message);
+      state.typeLoginAlert = action.payload.type;
+      state.showLoginAlert = true;
+      state.loginAlertAnimation = 'animate__fadeInDown';
+    },
+    closeLoginAlert: (state) => {
+      state.showLoginAlert = false;
+      state.loginAlertAnimation = 'animate__fadeOutUp';
+    },
     initialStateForm: () => initialState,
   },
 });
 
-export const { handleChange, handleBlur, initialStateForm } = loginFormSlice.actions;
+export const {
+  handleChange, handleBlur, initialStateForm, openLoginAlert, closeLoginAlert,
+} = loginFormSlice.actions;
 export default loginFormSlice.reducer;

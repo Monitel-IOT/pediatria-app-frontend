@@ -17,7 +17,7 @@ const Alert = ({ type, ...props }) => (
     <Typography component="h6">
       {props.children}
     </Typography>
-    <FontAwesomeIcon onClick={props.onClose} icon={faXmark} className="text-2xl cursor-pointer" />
+    <FontAwesomeIcon onClick={props.onClose} icon={faXmark} className="text-2xl cursor-pointer pl-4" />
   </div>
 );
 

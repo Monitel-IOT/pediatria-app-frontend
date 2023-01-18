@@ -7,7 +7,8 @@ const initialState = {
   databaseUser: [],
   user: null,
   loading: false,
-  error: null,
+  loginError: false,
+  registerError: null,
   isUserAuthorized: false,
   nameSurnameLetters: '',
 };
@@ -25,33 +26,34 @@ export const authSlice = createSlice({
     unauthorizeUser: (state) => {
       state.isUserAuthorized = false;
     },
+    initialStateAuth: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(signUpWithEmailAndPassword.fulfilled, (state, action) => {
       state.user = action.payload;
       state.loading = false;
-      state.error = false;
+      state.registerError = false;
     });
     builder.addCase(signUpWithEmailAndPassword.pending, (state) => {
       state.loading = true;
-      state.error = false;
+      state.registerError = false;
     });
     builder.addCase(signUpWithEmailAndPassword.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.registerError = action.error;
     });
     builder.addCase(signInWithEmailAndPassword.fulfilled, (state, action) => {
       state.user = action.payload;
       state.loading = false;
-      state.error = false;
+      state.loginError = false;
     });
     builder.addCase(signInWithEmailAndPassword.pending, (state) => {
       state.loading = true;
-      state.error = false;
+      state.loginError = false;
     });
     builder.addCase(signInWithEmailAndPassword.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.loginError = action.error;
     });
     builder.addCase(signOut.fulfilled, (state) => {
       state.user = initialState.user;
@@ -77,5 +79,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { addUser, authorizeUser, unauthorizeUser } = authSlice.actions;
+export const {
+  addUser, authorizeUser, unauthorizeUser,
+} = authSlice.actions;
 export default authSlice.reducer;
