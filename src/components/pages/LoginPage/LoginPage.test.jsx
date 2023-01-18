@@ -5,7 +5,7 @@ describe('Login page', () => {
   describe('layout', () => {
     it('has title', () => {
       render(<LoginPage />);
-      const title = screen.getByText('Login Page');
+      const title = screen.getByText('Es genial verte!');
       expect(title).toBeInTheDocument();
     });
   });

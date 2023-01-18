@@ -24,7 +24,7 @@ const HomeTemplate = () => {
           <Typography component="h1">
             Hello,
             {' '}
-            {user.email}
+            {user?.email}
           </Typography>
           <div className="ml-auto">
             <Button primary onClick={handleSignOut}>Cerrar Sesion</Button>
