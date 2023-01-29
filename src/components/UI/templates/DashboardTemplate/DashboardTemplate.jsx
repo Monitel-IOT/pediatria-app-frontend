@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 // eslint-disable-next-line import/no-unresolved
 import { Bar } from 'react-chartjs-2';
+import Creatable from 'react-select/creatable';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Container from '../../../layout/Container/Container';
 import PageHeader from '../../organisms/PageHeader/PageHeader';
@@ -66,10 +67,26 @@ const DashboardTemplate = () => {
       link: '/dashboard',
       text: 'Dashboard',
     }];
+  const [selectedOption, setSelectedOption] = useState('');
 
+  const optionsSelect = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+  console.log(selectedOption);
   return (
     <Wrapper>
       <Container className="py-4">
+        <Creatable
+          isMulti
+          placeholder="Seleccione o agregue"
+          options={optionsSelect}
+          className="basic-multi-select"
+          noOptionsMessage={() => 'name not found'}
+          onChange={(choice) => setSelectedOption(choice)}
+        />
+
         <PageHeader title="Dashboard" dataPages={dataPages} />
         <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-5 md:grid-cols-4">
           <Bar options={options} data={data} />
