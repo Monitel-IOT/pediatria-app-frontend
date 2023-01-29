@@ -10,7 +10,7 @@ const FormInput = ({ label, ...props }) => {
     }
   };
   return (
-    <div className="flex flex-col mb-3">
+    <div className={`flex flex-col mb-3 ${props.className}`}>
       <Label htmlFor={label} className="mb-1">{label}</Label>
       <Input
         id={label}
@@ -41,6 +41,7 @@ FormInput.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   errorMessage: PropTypes.string,
   r: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default FormInput;
