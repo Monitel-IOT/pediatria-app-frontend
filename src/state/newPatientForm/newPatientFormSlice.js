@@ -123,6 +123,7 @@ const newPatientFormSlice = createSlice({
     closePatientForm: (state) => {
       state.showPatientForm = false;
       state.form = initialFormState;
+      state.errors = true;
       state.step = 0;
       state.isEdit = false;
     },
