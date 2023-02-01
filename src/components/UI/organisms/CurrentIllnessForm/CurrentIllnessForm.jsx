@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import Creatable from 'react-select/creatable';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
 
 import { prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
@@ -16,6 +17,13 @@ const CurrentIllnessForm = () => {
   const dispatch = useDispatch();
   const { form } = useSelector((state) => state.newAppointmentFormReducer);
   const { user } = useSelector((state) => state.authReducer);
+  const [selectedOption, setSelectedOption] = useState('');
+  const optionsSelect = [
+    { value: 'd1', label: 'Diagnostico 1' },
+    { value: 'd2', label: 'Diagnostico 2' },
+    { value: 'd3', label: 'Diagnostico 3' },
+    { value: 'd4', label: 'Diagnostico dhgfh dfdjkdgjgdfkghdgdgndfgjdfhla 4, Diagnostico 4 Diagnostico 4Diagnostico 4' },
+  ];
 
   const handleNewAppointment = () => {
     dispatch(addNewAppointment({ newAppointment: form, patientId: idPatient, token: user?.token }))
@@ -30,21 +38,49 @@ const CurrentIllnessForm = () => {
         <div>
           <Label>Relato y Examen Medico</Label>
           <TextArea className="h-20" placeholder="Escriba aqui..." />
-          <Label>Signos y síntomas</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <Label>Diagnóstico Prolongado</Label>
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsSelect}
+            className="basic-multi-select"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => setSelectedOption(choice)}
+          />
           <Label>Diagnóstico</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsSelect}
+            className="basic-multi-select"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => setSelectedOption(choice)}
+          />
           <FormInput
             type="text"
-            label="T.E"
-            name="TE"
+            label="Tiempo de Enfermedad"
+            name="sickTime"
           />
         </div>
         <div>
           <Label>Exámenes Auxiliares</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsSelect}
+            className="basic-multi-select"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => setSelectedOption(choice)}
+          />
           <Label>Tratamiento</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsSelect}
+            className="basic-multi-select"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => setSelectedOption(choice)}
+          />
           <Label>Reevaluación</Label>
           <TextArea className="h-20" placeholder="Escriba aqui..." />
           <div>
@@ -53,6 +89,7 @@ const CurrentIllnessForm = () => {
             <Radio className="mr-3" name="treatment" label="No" value="Masculino" />
           </div>
         </div>
+        <div>{selectedOption[0]?.value}</div>
       </form>
       <div className="mt-2">
         <Button

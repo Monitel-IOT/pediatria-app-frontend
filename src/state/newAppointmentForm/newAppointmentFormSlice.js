@@ -2,65 +2,75 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const validationsForm = (form) => {
   const errors = {};
-  const regexDni = /[0-9]{8}$/;
+  // const regexDni = /[0-9]{8}$/;
   const regexText = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
 
-  if (!regexDni.test(form.dni.trim())) {
-    errors.dni = "El campo 'DNI/Código' solo acepta números de 8 dígitos";
-  }
+  // if (!regexDni.test(form.dni.trim())) {
+  //   errors.dni = "El campo 'DNI/Código' solo acepta números de 8 dígitos";
+  // }
 
-  if (!form.name.trim()) {
-    errors.name = "El campo 'Nombre' es requerido.";
-  } else if (!regexText.test(form.name.trim())) {
-    errors.name = "El campo 'Nombre' solo acepta letras y espacios en blanco.";
-  }
+  // if (!form.name.trim()) {
+  //   errors.name = "El campo 'Nombre' es requerido.";
+  // } else if (!regexText.test(form.name.trim())) {
+  //   errors.name = "El campo 'Nombre' solo acepta letras y espacios en blanco.";
+  // }
 
-  if (!form.lastname.trim()) {
-    errors.lastname = "El campo 'Apellidos' es requerido.";
-  } else if (!regexText.test(form.lastname.trim())) {
-    errors.lastname = "El campo 'Apellidos' solo acepta letras y espacios en blanco";
-  }
+  // if (!form.lastname.trim()) {
+  //   errors.lastname = "El campo 'Apellidos' es requerido.";
+  // } else if (!regexText.test(form.lastname.trim())) {
+  //   errors.lastname = "El campo 'Apellidos' solo acepta letras y espacios en blanco";
+  // }
 
-  if (!form.birthDate.trim()) {
-    errors.birthDate = "El campo 'Fecha de nacimiento' es requerido.";
-  }
+  // if (!form.birthDate.trim()) {
+  //   errors.birthDate = "El campo 'Fecha de nacimiento' es requerido.";
+  // }
 
-  if (!form.gender.trim()) {
-    errors.gender = "El campo 'Género' es requerido.";
-  }
+  // if (!form.gender.trim()) {
+  //   errors.gender = "El campo 'Género' es requerido.";
+  // }
 
-  if (!regexText.test(form.childBirth.trim())) {
-    errors.childBirth = "El campo 'Nacimiento' solo acepta letras y espacios en blanco";
-  }
+  // if (!regexText.test(form.childBirth.trim())) {
+  //   errors.childBirth = "El campo 'Nacimiento' solo acepta letras y espacios en blanco";
+  // }
 
-  if (!regexText.test(form.apgar.trim())) {
-    errors.apgar = "El campo 'Apgar' solo acepta letras y espacios en blanco";
-  }
+  // if (!regexText.test(form.apgar.trim())) {
+  //   errors.apgar = "El campo 'Apgar' solo acepta letras y espacios en blanco";
+  // }
 
-  if (!regexText.test(form.lactation.trim())) {
-    errors.lactation = "El campo 'Lactancia' solo acepta letras y espacios en blanco";
-  }
+  // if (!regexText.test(form.lactation.trim())) {
+  //   errors.lactation = "El campo 'Lactancia' solo acepta letras y espacios en blanco";
+  // }
 
-  if (!regexText.test(form.gestation.trim())) {
-    errors.gestation = "El campo 'Gestación' solo acepta letras y espacios en blanco";
+  // if (!regexText.test(form.gestation.trim())) {
+  //   errors.gestation = "El campo 'Gestación' solo acepta letras y espacios en blanco";
+  // }
+
+  if (!form.PC.trim()) {
+    errors.PC = "El campo 'PC' es requerido.";
+  } else if (!regexText.test(form.weight.trim())) {
+    errors.PC = "El campo 'PC' solo acepta letras y espacios en blanco";
   }
 
   return errors;
 };
 
 const initialFormState = {
-  dni: '',
-  name: '',
-  lastname: '',
-  birthDate: '',
-  gender: '',
-  birthWeight: '',
-  childBirth: '',
-  apgar: '',
-  supplementaryFeeding: '',
-  lactation: '',
-  gestation: '',
-  vaccines: [],
+  weight: '',
+  height: '',
+  PC: '',
+  IMC: '',
+  FR: '',
+  FC: '',
+  saturacion: '',
+  temperature: '',
+  prolongedDiagnoses: '',
+  diagnoses: '',
+  longTreatments: false, // no i-select
+  treatments: '',
+  auxiliaryExams: '',
+  reevaluation: '', // no i-select
+  sickTime: '', // no i-select
+  story: '', // no i-select
   state: true,
 };
 
