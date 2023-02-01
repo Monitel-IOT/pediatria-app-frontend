@@ -71,6 +71,7 @@ const initialFormState = {
   reevaluation: '', // no i-select
   sickTime: '', // no i-select
   story: '', // no i-select
+  selectedTreatments: [],
   state: true,
 };
 

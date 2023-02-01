@@ -13,6 +13,7 @@ import deletePatientReducer from './patients/deletePatientSlice';
 import getPatientReducer from './patients/getPatientSlice';
 import getAllAppointmentsReducer from './appointments/getAllAppointmentsSlice';
 import createAppointmentReducer from './appointments/createAppointmentSlice';
+import { treatmentApi } from '../api/appointment/treatmentRequest';
 import uiReducer from './ui/uiSlice';
 
 export default configureStore({
@@ -32,5 +33,7 @@ export default configureStore({
     getAllAppointmentsReducer,
     createAppointmentReducer,
     uiReducer,
+    [treatmentApi.reducerPath]: treatmentApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(treatmentApi.middleware),
 });
