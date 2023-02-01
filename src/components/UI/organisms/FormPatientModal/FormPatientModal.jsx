@@ -11,14 +11,15 @@ const FormPatientModal = () => {
   const dispatch = useDispatch();
 
   const steps = ['Información Básica del Paciente', 'Información detallada del paciente', 'Vacunas'];
-
   return (
     <div>
       <Stepper activeStep={step} onChange={(index) => dispatch(setStep(index))} steps={steps} />
       {[<NewPatientBasicInfo />,
         <NewPatientDetailedInfo />,
         <NewPatientVaccines />][step]}
+      <div>{step}</div>
     </div>
+
   );
 };
 
