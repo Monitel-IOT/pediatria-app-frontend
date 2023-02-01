@@ -1,4 +1,4 @@
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -48,7 +48,17 @@ const AppointmentCard = ({ data }) => (
         </div>
       </div>
       <div className=" sm:px-4 flex justify-center sm:flex-col sm:items-center">
-        <IconButton outline="green" icon={<FontAwesomeIcon icon={faEye} />} />
+        <IconButton
+          outline="gray"
+          className="!px-4 !py-0.5 my-1"
+          icon={<FontAwesomeIcon icon={faPenNib} />}
+        />
+        <IconButton
+          className="!px-4 !py-0.5 my-1"
+          outline="danger"
+          size="normal no padding"
+          icon={<FontAwesomeIcon size="lg" icon={faTrash} />}
+        />
       </div>
     </div>
   </Card>
