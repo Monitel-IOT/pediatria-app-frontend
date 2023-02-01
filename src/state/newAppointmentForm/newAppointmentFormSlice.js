@@ -63,11 +63,11 @@ const initialFormState = {
   FC: '',
   saturacion: '',
   temperature: '',
-  prolongedDiagnoses: '',
-  diagnoses: '',
-  longTreatments: false, // no i-select
-  treatments: '',
-  auxiliaryExams: '',
+  // prolongedDiagnoses: '',
+  // diagnoses: '',
+  // longTreatments: false, // no i-select
+  // treatments: '',
+  // auxiliaryExams: '',
   reevaluation: '', // no i-select
   sickTime: '', // no i-select
   story: '', // no i-select
