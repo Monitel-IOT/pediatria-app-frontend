@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAppointnmentForm } from '../../../../state/appointments/appointmentsSlice';
+import { openAppointmentForm } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Card from '../../../layout/Card/Card';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
@@ -21,7 +21,7 @@ const AppointmentList = () => {
           primary
           uppercase
           className="ml-2"
-          onClick={() => dispatch(openAppointnmentForm())}
+          onClick={() => dispatch(openAppointmentForm())}
         >
           Nueva Atención
         </Button>

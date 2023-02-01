@@ -4,7 +4,7 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
-import { openAppointnmentForm } from '../../../../state/appointments/appointmentsSlice';
+import { openAppointmentForm } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 
 const EmptyAppointments = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const EmptyAppointments = () => {
         primary
         uppercase
         className="ml-2"
-        onClick={() => dispatch(openAppointnmentForm())}
+        onClick={() => dispatch(openAppointmentForm())}
       >
         Nueva Atención
       </Button>

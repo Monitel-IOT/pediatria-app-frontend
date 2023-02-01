@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import Creatable from 'react-select/creatable';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
 
-import { prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
+import { prevStep, handleChange } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Button from '../../atoms/Button/Button';
 import Label from '../../atoms/Label/Label';
 import Radio from '../../atoms/Radio/Radio';
@@ -31,13 +31,18 @@ const CurrentIllnessForm = () => {
         dispatch(addNewAppointmentState(res.payload.data));
       });
   };
-
   return (
     <div>
       <form className="grid sm:grid-cols-2 gap-8">
         <div>
           <Label>Relato y Examen Medico</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <TextArea
+            className="h-20"
+            placeholder="Escriba aqui..."
+            name="story"
+            value={form.story}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+          />
           <Label>Diagnóstico Prolongado</Label>
           <Creatable
             isMulti
@@ -60,6 +65,8 @@ const CurrentIllnessForm = () => {
             type="text"
             label="Tiempo de Enfermedad"
             name="sickTime"
+            value={form.sickTime}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
           />
         </div>
         <div>
@@ -82,11 +89,31 @@ const CurrentIllnessForm = () => {
             onChange={(choice) => setSelectedOption(choice)}
           />
           <Label>Reevaluación</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <TextArea
+            className="h-20"
+            placeholder="Escriba aqui..."
+            name="reevaluation"
+            value={form.reevaluation}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+          />
           <div>
             <Label className="mr-5">Tratamiento a largo plazo</Label>
-            <Radio className="mr-3" name="treatment" label="Si" value="Femenino" />
-            <Radio className="mr-3" name="treatment" label="No" value="Masculino" />
+            <Radio
+              className="mr-3"
+              name="longTreatments"
+              label="Si"
+              value
+              // eslint-disable-next-line max-len
+              onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+            />
+            <Radio
+              className="mr-3"
+              name="longTreatments"
+              label="No"
+              value={false}
+              // eslint-disable-next-line max-len
+              onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+            />
           </div>
         </div>
         <div>{selectedOption[0]?.value}</div>

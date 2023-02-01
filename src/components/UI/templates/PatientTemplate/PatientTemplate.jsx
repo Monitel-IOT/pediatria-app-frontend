@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAppointnmentForm, closeAppointmentForm } from '../../../../state/appointments/appointmentsSlice';
+import { openAppointmentForm, closeAppointmentForm } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Container from '../../../layout/Container/Container';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Modal from '../../molecules/Modal/Modal';
@@ -14,8 +14,8 @@ import ResponseModal from '../../organisms/ResponseModal/ResponseModal';
 const PatientTemplate = () => {
   const { getPatientLoading } = useSelector((state) => state.getPatientReducer);
   const { getAllAppointmentsLoading } = useSelector((state) => state.getAllAppointmentsReducer);
-  const { showAppointmentForm } = useSelector((state) => state.appointmentsReducer);
   const { showResponseModal } = useSelector((state) => state.uiReducer);
+  const { showAppointmentForm } = useSelector((state) => state.newAppointmentFormReducer);
   const {
     createAppointmentLoading,
     createAppointmentError,
@@ -44,7 +44,7 @@ const PatientTemplate = () => {
           status={!(createAppointmentLoading && createAppointmentError)}
           onSuccessMessage="La atención fue creada exitosamente"
           onErrorMessage="Ocurrió un error vuelva a intentarlo de nuevo"
-          onError={() => dispatch(openAppointnmentForm())}
+          onError={() => dispatch(openAppointmentForm())}
         />
         <PageHeader title="Paciente" dataPages={dataPages} />
         <div>

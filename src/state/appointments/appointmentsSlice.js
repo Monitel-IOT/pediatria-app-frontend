@@ -6,7 +6,6 @@ import {
 const initialState = {
   appointments: [],
   appointment: null,
-  showAppointmentForm: false,
   loading: false,
   error: null,
 };
@@ -15,13 +14,6 @@ export const appointmentsSlice = createSlice({
   name: 'appointments',
   initialState,
   reducers: {
-    // form create appointment states
-    openAppointnmentForm: (state) => {
-      state.showAppointmentForm = true;
-    },
-    closeAppointmentForm: (state) => {
-      state.showAppointmentForm = false;
-    },
     // api states
     getAllAppointmentsState: (state, action) => {
       state.appointments = action.payload;
@@ -80,8 +72,6 @@ export const appointmentsSlice = createSlice({
 export const {
   appointmentsInitialState,
   getAllAppointmentsState,
-  openAppointnmentForm,
-  closeAppointmentForm,
   addNewAppointmentState,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;
