@@ -37,7 +37,15 @@ const services = {
       'Content-Type': 'application/json',
     },
   },
+  treatment: {
+    endpoint: `${environmentRootPaths[environment].backendPediatria}/treatment`,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  },
 };
 
+export const getRootPath = () => environmentRootPaths[environment].backendPediatria;
 export const getServiceEndpointService = (service) => services[service].endpoint;
 export const getServiceHeaders = (service) => services[service].headers;

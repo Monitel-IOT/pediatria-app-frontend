@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Creatable from 'react-select/creatable';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
 
-import { prevStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
+import { handleChange, prevStep, setStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Button from '../../atoms/Button/Button';
 import Label from '../../atoms/Label/Label';
 import Radio from '../../atoms/Radio/Radio';
 import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
-import { addNewAppointmentState } from '../../../../state/appointments/appointmentsSlice';
+import { addNewAppointmentState, closeAppointmentForm } from '../../../../state/appointments/appointmentsSlice';
+import { useAddTreatmentMutation, useGetAllTreatmentsQuery } from '../../../../api/appointment/treatmentRequest';
 
 const CurrentIllnessForm = () => {
   const { idPatient } = useParams();
@@ -24,11 +25,30 @@ const CurrentIllnessForm = () => {
     { value: 'd3', label: 'Diagnostico 3' },
     { value: 'd4', label: 'Diagnostico dhgfh dfdjkdgjgdfkghdgdgndfgjdfhla 4, Diagnostico 4 Diagnostico 4Diagnostico 4' },
   ];
+  const { data: treatments } = useGetAllTreatmentsQuery();
+  const [addTreatment] = useAddTreatmentMutation();
+
+  const optionsTreatments = useMemo(() => treatments?.data?.map(
+    ({ nameTreatment }) => ({ value: nameTreatment, label: nameTreatment }),
+  ));
+
+  /*   const optionsSelect = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ]; */
 
   const handleNewAppointment = () => {
+    addTreatment(
+      form?.selectedTreatments?.map(
+        ({ value }) => ({ nameTreatment: value }),
+      )[0],
+    );
     dispatch(addNewAppointment({ newAppointment: form, patientId: idPatient, token: user?.token }))
       .then((res) => {
         dispatch(addNewAppointmentState(res.payload.data));
+        dispatch(closeAppointmentForm());
+        dispatch(setStep(0));
       });
   };
 
@@ -80,6 +100,16 @@ const CurrentIllnessForm = () => {
             className="basic-multi-select"
             noOptionsMessage={() => 'name not found'}
             onChange={(choice) => setSelectedOption(choice)}
+          />
+          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <Label>Tratamientos</Label>
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsTreatments}
+            className="basic-multi-select my-2"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => dispatch(handleChange({ name: 'selectedTreatments', value: choice }))}
           />
           <Label>Reevaluación</Label>
           <TextArea className="h-20" placeholder="Escriba aqui..." />
