@@ -30,7 +30,7 @@ export const updateAppointmentByIdAPI = createAsyncThunk('appointments/updateApp
   return res.json();
 });
 
-export const addNewAppointment = createAsyncThunk('patients/addNewAppointment', async (appointment, patientId, token) => {
-  const response = await createAppointmentRequest(appointment, patientId, token);
+export const addNewAppointment = createAsyncThunk('patients/addNewAppointment', async (appointment) => {
+  const response = await createAppointmentRequest(appointment);
   return response.data;
 });

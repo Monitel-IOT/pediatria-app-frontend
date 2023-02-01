@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAppointnmentForm, closeAppointmentForm } from '../../../../state/appointments/appointmentsSlice';
 import Container from '../../../layout/Container/Container';
 import Wrapper from '../../../layout/Wrapper/Wrapper';
 import Modal from '../../molecules/Modal/Modal';
@@ -10,11 +9,12 @@ import PageHeader from '../../organisms/PageHeader/PageHeader';
 import PatientDetails from '../../organisms/PatientDetails/PatientDetails';
 import { closeResponseModal } from '../../../../state/ui/uiSlice';
 import ResponseModal from '../../organisms/ResponseModal/ResponseModal';
+import { closeAppointmentForm, openAppointnmentForm } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 
 const PatientTemplate = () => {
   const { getPatientLoading } = useSelector((state) => state.getPatientReducer);
   const { getAllAppointmentsLoading } = useSelector((state) => state.getAllAppointmentsReducer);
-  const { showAppointmentForm } = useSelector((state) => state.appointmentsReducer);
+  const { showAppointmentForm } = useSelector((state) => state.newAppointmentFormReducer);
   const { showResponseModal } = useSelector((state) => state.uiReducer);
   const {
     createAppointmentLoading,

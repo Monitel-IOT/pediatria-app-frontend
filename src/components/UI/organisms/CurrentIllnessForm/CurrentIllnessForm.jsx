@@ -4,13 +4,15 @@ import { useParams } from 'react-router';
 import Creatable from 'react-select/creatable';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
 
-import { handleChange, prevStep, setStep } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
+import {
+  closeAppointmentForm, handleChange, prevStep, setStep,
+} from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 import Button from '../../atoms/Button/Button';
 import Label from '../../atoms/Label/Label';
 import Radio from '../../atoms/Radio/Radio';
 import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
-import { addNewAppointmentState, closeAppointmentForm } from '../../../../state/appointments/appointmentsSlice';
+import { addNewAppointmentState } from '../../../../state/appointments/appointmentsSlice';
 import { useAddTreatmentMutation, useGetAllTreatmentsQuery } from '../../../../api/appointment/treatmentRequest';
 
 const CurrentIllnessForm = () => {
@@ -84,15 +86,6 @@ const CurrentIllnessForm = () => {
         </div>
         <div>
           <Label>Exámenes Auxiliares</Label>
-          <Creatable
-            isMulti
-            placeholder="Seleccione o agregue"
-            options={optionsSelect}
-            className="basic-multi-select"
-            noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => setSelectedOption(choice)}
-          />
-          <Label>Tratamiento</Label>
           <Creatable
             isMulti
             placeholder="Seleccione o agregue"

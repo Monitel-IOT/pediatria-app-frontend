@@ -63,11 +63,11 @@ const initialFormState = {
   FC: '',
   saturacion: '',
   temperature: '',
-  prolongedDiagnoses: '',
-  diagnoses: '',
-  longTreatments: false, // no i-select
-  treatments: '',
-  auxiliaryExams: '',
+  prolongedDiagnoses: [],
+  diagnoses: [],
+  longTreatments: [], // no i-select
+  treatments: [],
+  auxiliaryExams: [],
   reevaluation: '', // no i-select
   sickTime: '', // no i-select
   story: '', // no i-select
@@ -79,6 +79,7 @@ const initialState = {
   form: initialFormState,
   errors: true,
   step: 0,
+  showAppointmentForm: false,
 };
 
 const newAppointmentFormSlice = createSlice({
@@ -108,10 +109,19 @@ const newAppointmentFormSlice = createSlice({
     setStep: (state, action) => {
       state.step = action.payload;
     },
+    // form create appointment states
+    openAppointnmentForm: (state) => {
+      state.showAppointmentForm = true;
+    },
+    closeAppointmentForm: (state) => {
+      state.showAppointmentForm = false;
+      state.form = initialFormState;
+      state.step = 0;
+    },
   },
 });
 
 export const {
-  handleChange, prevStep, nextStep, setStep, handleBlur,
+  handleChange, prevStep, nextStep, setStep, handleBlur, openAppointnmentForm, closeAppointmentForm,
 } = newAppointmentFormSlice.actions;
 export default newAppointmentFormSlice.reducer;

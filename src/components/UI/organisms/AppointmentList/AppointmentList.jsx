@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAppointnmentForm } from '../../../../state/appointments/appointmentsSlice';
 import Card from '../../../layout/Card/Card';
 import Button from '../../atoms/Button/Button';
 import Typography from '../../atoms/Typography/Typography';
 import AppointmentCard from '../AppointmentCard/AppointmentCard';
 import EmptyAppointments from '../EmptyAppointments/EmptyAppointments';
+import { openAppointnmentForm } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
 
 const AppointmentList = () => {
   const { appointments } = useSelector((state) => state.appointmentsReducer);
