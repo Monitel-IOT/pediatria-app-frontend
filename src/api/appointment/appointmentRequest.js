@@ -14,12 +14,11 @@ export const getAppointmentsByPatientId = (idPatient, token) => axios.get(
   },
 );
 
-export const deleteAppointmentById = (id) => {
-  const endpoint = Routes.fetchAppointmentById(id);
-  // const csrfToken = Cookies.get('csrftoken');
+export const deleteAppointmentById = (idAppointment, token) => {
+  const endpoint = Routes.fetchAppointmentById(idAppointment);
   const headers = {
     'Content-Type': 'application/json',
-    // 'X-CSRFToken': csrfToken,
+    Authorization: `Bearer ${token}`,
   };
   const requestOptions = {
     method: 'DELETE',
