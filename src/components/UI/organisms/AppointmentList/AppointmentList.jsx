@@ -38,6 +38,7 @@ const AppointmentList = () => {
                 createdAt: appointment.createdAt,
                 diagnosis: appointment.diagnosis,
                 treatment: appointment.treatment,
+                idAppointment: appointment.id,
               }}
             />
           ))
