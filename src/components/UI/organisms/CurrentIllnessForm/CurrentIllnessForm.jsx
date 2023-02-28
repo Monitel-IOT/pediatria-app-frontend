@@ -14,6 +14,7 @@ import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
 import { addNewAppointmentState } from '../../../../state/appointments/appointmentsSlice';
 import { useAddTreatmentMutation, useGetAllTreatmentsQuery } from '../../../../api/appointment/treatmentRequest';
+import { useGetAllProlongedDiagnosisQuery } from '../../../../api/appointment/prolongedDiagnosisRequest';
 
 const CurrentIllnessForm = () => {
   const { idPatient } = useParams();
@@ -27,11 +28,20 @@ const CurrentIllnessForm = () => {
     { value: 'd3', label: 'Diagnostico 3' },
     { value: 'd4', label: 'Diagnostico dhgfh dfdjkdgjgdfkghdgdgndfgjdfhla 4, Diagnostico 4 Diagnostico 4Diagnostico 4' },
   ];
+  const { data: prolongedDiagnoses } = useGetAllProlongedDiagnosisQuery();
+
   const { data: treatments } = useGetAllTreatmentsQuery();
   const [addTreatment] = useAddTreatmentMutation();
 
   const optionsTreatments = useMemo(() => treatments?.data?.map(
     ({ nameTreatment }) => ({ value: nameTreatment, label: nameTreatment }),
+  ));
+
+  const optionsProlongedDiagnoses = useMemo(() => prolongedDiagnoses?.data?.map(
+    ({ nameProlongedDiagnosis }) => ({
+      value: nameProlongedDiagnosis,
+      label: nameProlongedDiagnosis,
+    }),
   ));
 
   /*   const optionsSelect = [
@@ -64,10 +74,13 @@ const CurrentIllnessForm = () => {
           <Creatable
             isMulti
             placeholder="Seleccione o agregue"
-            options={optionsSelect}
+            options={optionsProlongedDiagnoses}
             className="basic-multi-select"
             noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => setSelectedOption(choice)}
+            onChange={(choice) => dispatch(handleChange({
+              name: 'prolongedDiagnoses',
+              value: choice?.map(({ value }) => ({ nameProlongedDiagnosis: value })),
+            }))}
           />
           <Label>Diagnóstico</Label>
           <Creatable

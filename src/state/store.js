@@ -14,6 +14,7 @@ import getPatientReducer from './patients/getPatientSlice';
 import getAllAppointmentsReducer from './appointments/getAllAppointmentsSlice';
 import createAppointmentReducer from './appointments/createAppointmentSlice';
 import { treatmentApi } from '../api/appointment/treatmentRequest';
+import { prolongedDiagnosisRequestApi } from '../api/appointment/prolongedDiagnosisRequest';
 import uiReducer from './ui/uiSlice';
 
 export default configureStore({
@@ -34,6 +35,11 @@ export default configureStore({
     createAppointmentReducer,
     uiReducer,
     [treatmentApi.reducerPath]: treatmentApi.reducer,
+    [prolongedDiagnosisRequestApi.reducerPath]: prolongedDiagnosisRequestApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(treatmentApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    .concat(
+      treatmentApi.middleware,
+      prolongedDiagnosisRequestApi.middleware,
+    ),
 });
