@@ -15,17 +15,17 @@ const VitalFunctions = () => {
         <FormInput
           type="number"
           label="FR"
-          name="FR"
+          name="fRespiratory"
           addon="x/min"
-          value={form.FR}
+          value={form.fRespiratory}
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
         />
         <FormInput
           type="number"
           label="FC"
-          name="FC"
+          name="fCardiac"
           addon="x/min"
-          value={form.FC}
+          value={form.fCardiac}
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
         />
         <FormInput
@@ -55,9 +55,9 @@ const VitalFunctions = () => {
         </Button>
         <Button
           // eslint-disable-next-line max-len
-          primary={(form.FR.length !== 0 && form.FC.length !== 0 && form.saturacion.length !== 0 && form.temperature.length !== 0)}
+          primary={(form.fRespiratory.length !== 0 && form.fCardiac.length !== 0 && form.saturacion.length !== 0 && form.temperature.length !== 0)}
           // eslint-disable-next-line max-len
-          disabled={(form.FR.length === 0 || form.FC.length === 0 || form.saturacion.length === 0 || form.temperature.length === 0)}
+          disabled={(form.fRespiratory.length === 0 || form.fCardiac.length === 0 || form.saturacion.length === 0 || form.temperature.length === 0)}
           onClick={() => dispatch(nextStep(3))}
           className="ml-2"
         >

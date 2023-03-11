@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Creatable from 'react-select/creatable';
 import { addNewAppointment } from '../../../../thunkAction/appointments/appointmentsThunk';
-
 import {
   closeAppointmentForm, handleChange, prevStep, setStep,
 } from '../../../../state/newAppointmentForm/newAppointmentFormSlice';
@@ -13,36 +12,34 @@ import Radio from '../../atoms/Radio/Radio';
 import TextArea from '../../atoms/TextArea/TextArea';
 import FormInput from '../../molecules/FormInput';
 import { addNewAppointmentState } from '../../../../state/appointments/appointmentsSlice';
-import { useAddTreatmentMutation, useGetAllTreatmentsQuery } from '../../../../api/appointment/treatmentRequest';
-import { useGetAllProlongedDiagnosisQuery } from '../../../../api/appointment/prolongedDiagnosisRequest';
+import {
+  selectAuxiliaryExam,
+  selectOptionsDiagnosis,
+  selectSymptoms,
+  selectTreatments,
+  useGetAllAuxiliaryExamQuery,
+  useGetAllDiagnosisQuery,
+  useGetAllSymptomsQuery,
+  useGetAllTreatmentSelectQuery,
+} from '../../../../api/appointment/prolongedDiagnosisRequest';
 
 const CurrentIllnessForm = () => {
   const { idPatient } = useParams();
   const dispatch = useDispatch();
   const { form } = useSelector((state) => state.newAppointmentFormReducer);
   const { user } = useSelector((state) => state.authReducer);
-  const [selectedOption, setSelectedOption] = useState('');
-  const optionsSelect = [
-    { value: 'd1', label: 'Diagnostico 1' },
-    { value: 'd2', label: 'Diagnostico 2' },
-    { value: 'd3', label: 'Diagnostico 3' },
-    { value: 'd4', label: 'Diagnostico dhgfh dfdjkdgjgdfkghdgdgndfgjdfhla 4, Diagnostico 4 Diagnostico 4Diagnostico 4' },
-  ];
-  const { data: prolongedDiagnoses } = useGetAllProlongedDiagnosisQuery();
 
-  const { data: treatments } = useGetAllTreatmentsQuery();
-  const [addTreatment] = useAddTreatmentMutation();
+  useGetAllDiagnosisQuery(undefined, { refetchOnMountOrArgChange: true });
+  const optionsDiagnoses = useSelector(selectOptionsDiagnosis);
 
-  const optionsTreatments = useMemo(() => treatments?.data?.map(
-    ({ nameTreatment }) => ({ value: nameTreatment, label: nameTreatment }),
-  ));
+  useGetAllTreatmentSelectQuery(undefined, { refetchOnMountOrArgChange: true });
+  const optionsTreatments = useSelector(selectTreatments);
 
-  const optionsProlongedDiagnoses = useMemo(() => prolongedDiagnoses?.data?.map(
-    ({ nameProlongedDiagnosis }) => ({
-      value: nameProlongedDiagnosis,
-      label: nameProlongedDiagnosis,
-    }),
-  ));
+  useGetAllAuxiliaryExamQuery(undefined, { refetchOnMountOrArgChange: true });
+  const optionsAuxiliaryExam = useSelector(selectAuxiliaryExam);
+
+  useGetAllSymptomsQuery(undefined, { refetchOnMountOrArgChange: true });
+  const optionsSymptoms = useSelector(selectSymptoms);
 
   /*   const optionsSelect = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -51,11 +48,6 @@ const CurrentIllnessForm = () => {
   ]; */
 
   const handleNewAppointment = () => {
-    addTreatment(
-      form?.selectedTreatments?.map(
-        ({ value }) => ({ nameTreatment: value }),
-      )[0],
-    );
     dispatch(addNewAppointment({ newAppointment: form, patientId: idPatient, token: user?.token }))
       .then((res) => {
         dispatch(addNewAppointmentState(res.payload.data));
@@ -68,29 +60,32 @@ const CurrentIllnessForm = () => {
     <div>
       <form className="grid sm:grid-cols-2 gap-8">
         <div>
-          <Label>Relato y Examen Medico</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
-          <Label>Diagnóstico Prolongado</Label>
-          <Creatable
-            isMulti
-            placeholder="Seleccione o agregue"
-            options={optionsProlongedDiagnoses}
-            className="basic-multi-select"
-            noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => dispatch(handleChange({
-              name: 'prolongedDiagnoses',
-              value: choice?.map(({ value }) => ({ nameProlongedDiagnosis: value })),
-            }))}
-          />
           <Label>Diagnóstico</Label>
           <Creatable
             isMulti
             placeholder="Seleccione o agregue"
-            options={optionsSelect}
-            className="basic-multi-select"
+            options={optionsDiagnoses}
+            className="basic-multi-select my-2"
             noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => setSelectedOption(choice)}
+            onChange={(choice) => dispatch(handleChange({
+              name: 'diagnoses',
+              value: choice?.map(({ value }) => ({ diagnosisName: value, id: '' })),
+            }))}
           />
+          <Label>Exámenes Auxiliares</Label>
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsAuxiliaryExam}
+            className="basic-multi-select my-2"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => dispatch(handleChange({
+              name: 'auxiliaryExams',
+              value: choice?.map(({ value }) => ({ nameAuxiliaryExam: value, id: '' })),
+            }))}
+          />
+          <Label>Relato y Examen Medico</Label>
+          <TextArea className="h-20" placeholder="Escriba aqui..." />
           <FormInput
             type="text"
             label="Tiempo de Enfermedad"
@@ -98,16 +93,6 @@ const CurrentIllnessForm = () => {
           />
         </div>
         <div>
-          <Label>Exámenes Auxiliares</Label>
-          <Creatable
-            isMulti
-            placeholder="Seleccione o agregue"
-            options={optionsSelect}
-            className="basic-multi-select"
-            noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => setSelectedOption(choice)}
-          />
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
           <Label>Tratamientos</Label>
           <Creatable
             isMulti
@@ -115,7 +100,22 @@ const CurrentIllnessForm = () => {
             options={optionsTreatments}
             className="basic-multi-select my-2"
             noOptionsMessage={() => 'name not found'}
-            onChange={(choice) => dispatch(handleChange({ name: 'selectedTreatments', value: choice }))}
+            onChange={(choice) => dispatch(handleChange({
+              name: 'treatments',
+              value: choice?.map(({ value }) => ({ nameTreatment: value, id: '' })),
+            }))}
+          />
+          <Label>Sintomas</Label>
+          <Creatable
+            isMulti
+            placeholder="Seleccione o agregue"
+            options={optionsSymptoms}
+            className="basic-multi-select my-2"
+            noOptionsMessage={() => 'name not found'}
+            onChange={(choice) => dispatch(handleChange({
+              name: 'symptoms',
+              value: choice?.map(({ value }) => ({ symptomName: value, id: '' })),
+            }))}
           />
           <Label>Reevaluación</Label>
           <TextArea className="h-20" placeholder="Escriba aqui..." />
@@ -125,7 +125,6 @@ const CurrentIllnessForm = () => {
             <Radio className="mr-3" name="treatment" label="No" value="Masculino" />
           </div>
         </div>
-        <div>{selectedOption[0]?.value}</div>
       </form>
       <div className="mt-2">
         <Button

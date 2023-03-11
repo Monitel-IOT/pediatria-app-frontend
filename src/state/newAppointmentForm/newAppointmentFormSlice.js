@@ -45,10 +45,10 @@ const validationsForm = (form) => {
   //   errors.gestation = "El campo 'Gestación' solo acepta letras y espacios en blanco";
   // }
 
-  if (!form.PC.trim()) {
-    errors.PC = "El campo 'PC' es requerido.";
+  if (!form.brainPerimeter.trim()) {
+    errors.brainPerimeter = "El campo 'PC' es requerido.";
   } else if (!regexText.test(form.weight.trim())) {
-    errors.PC = "El campo 'PC' solo acepta letras y espacios en blanco";
+    errors.brainPerimeter = "El campo 'PC' solo acepta letras y espacios en blanco";
   }
 
   return errors;
@@ -56,21 +56,24 @@ const validationsForm = (form) => {
 
 const initialFormState = {
   weight: '',
-  height: '',
-  PC: '',
-  IMC: '',
-  FR: '',
-  FC: '',
+  percentileWeight: '',
+  size: '',
+  heightPercentile: '',
+  brainPerimeter: '',
+  bodyMassIndex: '',
+  percentilMC: '',
+  fRespiratory: '',
+  fCardiac: '',
   saturacion: '',
   temperature: '',
-  prolongedDiagnoses: [],
+  sickTime: '',
+  story: '',
+  reevaluation: '',
   diagnoses: [],
-  longTreatments: [], // no i-select
+  longTreatments: [], // no va
   treatments: [],
   auxiliaryExams: [],
-  reevaluation: '', // no i-select
-  sickTime: '', // no i-select
-  story: '', // no i-select
+  symptoms: [],
   selectedTreatments: [],
   state: true,
 };

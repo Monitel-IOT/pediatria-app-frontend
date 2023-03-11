@@ -24,27 +24,27 @@ const AnthropromedicalMeasures = () => {
         <FormInput
           type="number"
           label="Talla"
-          name="height"
+          name="size"
           addon="cm"
           placeholder="Talla..."
-          value={form.height}
+          value={form.size}
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
         />
         <FormInput
           type="number"
           label="PC"
-          name="PC"
+          name="brainPerimeter"
           addon="cm"
           placeholder="PC..."
-          value={form.PC}
+          value={form.brainPerimeter}
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
         />
         <FormInput
           type="number"
           label="IMC (Indice de Masa Corporal)"
-          name="IMC"
+          name="bodyMassIndex"
           placeholder="IMC..."
-          value={form.IMC}
+          value={form.bodyMassIndex}
           onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
         />
       </form>
@@ -58,9 +58,9 @@ const AnthropromedicalMeasures = () => {
         </Button>
         <Button
           // eslint-disable-next-line max-len
-          primary={(form.weight.length !== 0 && form.height.length !== 0 && form.PC.length !== 0 && form.IMC.length !== 0)}
+          primary={(form.weight.length !== 0 && form.size.length !== 0 && form.brainPerimeter.length !== 0 && form.bodyMassIndex.length !== 0)}
           // eslint-disable-next-line max-len
-          disabled={(form.weight.length === 0 || form.height.length === 0 || form.PC.length === 0 || form.IMC.length === 0)}
+          disabled={(form.weight.length === 0 || form.size.length === 0 || form.brainPerimeter.length === 0 || form.bodyMassIndex.length === 0)}
           onClick={() => dispatch(nextStep(3))}
           className="ml-2"
         >
