@@ -85,11 +85,19 @@ const CurrentIllnessForm = () => {
             }))}
           />
           <Label>Relato y Examen Medico</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <TextArea
+            className="h-20"
+            placeholder="Escriba aqui..."
+            name="story"
+            value={form.story}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+          />
           <FormInput
             type="text"
             label="Tiempo de Enfermedad"
             name="sickTime"
+            value={form.sickTime}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
           />
         </div>
         <div>
@@ -118,7 +126,13 @@ const CurrentIllnessForm = () => {
             }))}
           />
           <Label>Reevaluación</Label>
-          <TextArea className="h-20" placeholder="Escriba aqui..." />
+          <TextArea
+            className="h-20"
+            placeholder="Escriba aqui..."
+            name="reevaluation"
+            value={form.reevaluation}
+            onChange={(e) => dispatch(handleChange({ name: e.target.name, value: e.target.value }))}
+          />
           <div>
             <Label className="mr-5">Tratamiento a largo plazo</Label>
             <Radio className="mr-3" name="treatment" label="Si" value="Femenino" />
