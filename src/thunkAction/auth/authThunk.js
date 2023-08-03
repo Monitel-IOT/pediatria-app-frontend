@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { signIn, logout } from '../../api/auth/authRequest';
-import createUser, { getUserByFirebaseId } from '../../api/user/userRequest';
+import createUser from '../../api/user/userRequest';
 
 export const signUpWithEmailAndPassword = createAsyncThunk('auth/signUpWithEmailAndPassword', async (user) => {
   const response = await createUser({
@@ -17,8 +17,3 @@ export const signInWithEmailAndPassword = createAsyncThunk('auth/signInWithEmail
 });
 
 export const signOut = createAsyncThunk('auth/signOutStatus', async () => logout());
-
-export const getUserByFirebaseIdAPI = createAsyncThunk('auth/getUserByFirebaseID', async (user) => {
-  const res = await getUserByFirebaseId(user.firebaseId, user.token);
-  return res.data;
-});

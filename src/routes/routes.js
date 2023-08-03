@@ -8,7 +8,7 @@ const routes = {
   viewPatient: '/paciente/:idPatient',
   newAppointment: '/nueva-atencion',
   appointmentDetails: '/paciente/:idPatient/atencion/:idAppointment',
-  viewProfile: '/perfil/:id',
+  viewProfile: '/perfil',
   editProfile: '/perfil/edit/:id',
 };
 

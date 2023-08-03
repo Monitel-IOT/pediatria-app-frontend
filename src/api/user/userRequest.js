@@ -20,4 +20,15 @@ export const getUserByFirebaseId = (firebaseId, token) => axios.get(
   },
 );
 
+export const editUserByIdRequest = (id, body, token) => axios.put(
+  Routes.fetchUser(id),
+  body,
+  {
+    headers: {
+      ...getServiceHeaders('user'),
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
+
 export default createUser;

@@ -20,7 +20,7 @@ const UserDropdown = () => {
 
   const data = [
     {
-      link: '/',
+      link: '/perfil',
       text: 'Ver perfil',
       icon: <FontAwesomeIcon size="lg" icon={faUser} />,
     },

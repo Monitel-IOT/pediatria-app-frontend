@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword, getUserByFirebaseIdAPI,
+  signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword,
 } from '../../thunkAction/auth/authThunk';
+import { getUserByFirebaseIdAPI } from '../../thunkAction/profile/profileThunk';
 
 const initialState = {
   databaseUser: [],

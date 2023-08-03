@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getUserByFirebaseIdAPI } from './thunkAction/auth/authThunk';
+import { getUserByFirebaseIdAPI } from './thunkAction/profile/profileThunk';
 import AppRouter from './routes/AppRouter';
 import { addUser, authorizeUser, unauthorizeUser } from './state/auth/authSlice';
 import { auth } from './config/firebase/firebase.config';
