@@ -11,6 +11,7 @@ import createPatientReducer from './patients/createPatientSlice';
 import updatePatientReducer from './patients/updatePatientSlice';
 import deletePatientReducer from './patients/deletePatientSlice';
 import getPatientReducer from './patients/getPatientSlice';
+import updateProfileReducer from './profile/updateProfileSlice';
 import getAllAppointmentsReducer from './appointments/getAllAppointmentsSlice';
 import createAppointmentReducer from './appointments/createAppointmentSlice';
 import { treatmentApi } from '../api/appointment/treatmentRequest';
@@ -34,6 +35,7 @@ export default configureStore({
     getAllAppointmentsReducer,
     createAppointmentReducer,
     uiReducer,
+    updateProfileReducer,
     [treatmentApi.reducerPath]: treatmentApi.reducer,
     [prolongedDiagnosisRequestApi.reducerPath]: prolongedDiagnosisRequestApi.reducer,
   },
