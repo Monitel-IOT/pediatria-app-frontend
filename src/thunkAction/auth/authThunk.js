@@ -4,9 +4,12 @@ import createUser from '../../api/user/userRequest';
 
 export const signUpWithEmailAndPassword = createAsyncThunk('auth/signUpWithEmailAndPassword', async (user) => {
   const response = await createUser({
-    name: 'John',
+    name: user.name,
     email: user.email,
     password: user.password,
+    surname: 'editar-apellido',
+    dni: 'editar-dni',
+    phone: '000000000',
   });
   return response.json();
 });
