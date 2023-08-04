@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   signOut, signUpWithEmailAndPassword, signInWithEmailAndPassword,
 } from '../../thunkAction/auth/authThunk';
-import { getUserByFirebaseIdAPI } from '../../thunkAction/profile/profileThunk';
+import { fetchEditUsersById, getUserByFirebaseIdAPI } from '../../thunkAction/profile/profileThunk';
 
 const initialState = {
   databaseUser: [],
@@ -12,6 +12,8 @@ const initialState = {
   registerError: null,
   isUserAuthorized: false,
   nameSurnameLetters: '',
+  updateProfileLoading: false,
+  updateProfileError: false,
 };
 
 export const authSlice = createSlice({
@@ -28,6 +30,11 @@ export const authSlice = createSlice({
       state.isUserAuthorized = false;
     },
     initialStateAuth: () => initialState,
+    // UPDATE method
+    handleChange: (state, action) => {
+      const { name, value } = action.payload;
+      state.databaseUser.data = { ...state.databaseUser.data, [name]: value };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(signUpWithEmailAndPassword.fulfilled, (state, action) => {
@@ -77,10 +84,25 @@ export const authSlice = createSlice({
         state.databaseUser.data.surname = '...';
       }
     });
+
+    // UPDATE user
+    builder.addCase(fetchEditUsersById.pending, (state) => {
+      state.updateProfileLoading = true;
+      state.updateProfileError = false;
+    });
+    builder.addCase(fetchEditUsersById.fulfilled, (state, action) => {
+      state.databaseUser = action.payload;
+      state.updateProfileLoading = false;
+      state.updateProfileError = false;
+    });
+    builder.addCase(fetchEditUsersById.rejected, (state, action) => {
+      state.updateProfileLoading = false;
+      state.updateProfileError = action.error;
+    });
   },
 });
 
 export const {
-  addUser, authorizeUser, unauthorizeUser,
+  addUser, authorizeUser, unauthorizeUser, handleChange,
 } = authSlice.actions;
 export default authSlice.reducer;

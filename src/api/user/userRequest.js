@@ -21,7 +21,7 @@ export const getUserByFirebaseId = (firebaseId, token) => axios.get(
 );
 
 export const editUserByIdRequest = (id, body, token) => axios.put(
-  Routes.fetchUser(id),
+  Routes.fetchUserUpdate(id),
   body,
   {
     headers: {
